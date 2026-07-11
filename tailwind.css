@@ -1111,3 +1111,33 @@ html.locale-settle :is(h1, h2, h3, p, li, a, button) {
 .poster-strip:hover .ticker-track {
   animation-play-state: paused;
 }
+
+/* ---- process pipeline rail: a pulse travels between the step cards ---- */
+.process-rail {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 233, 217, 0.12) 0%,
+    rgba(255, 233, 217, 0.12) 46%,
+    #fe7f2d 50%,
+    rgba(255, 233, 217, 0.12) 54%,
+    rgba(255, 233, 217, 0.12) 100%
+  );
+  background-size: 300% 100%;
+  animation: rail-sweep 6s linear infinite;
+}
+
+@keyframes rail-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-rail {
+    animation: none;
+    background: rgba(255, 233, 217, 0.12);
+  }
+}
