@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# licensed font packages (web subsets live in static/fonts)
+fonts/
+# original image masters (web versions live in static/img)
+originals-projects/
+originals-img/
+.screen-graph.json

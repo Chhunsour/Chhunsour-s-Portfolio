@@ -21,6 +21,8 @@ const bottomImages = [
   { src: "/img/dsc09823-2-1.webp", alt: "Event photograph detail" },
 ];
 
+const mobileGalleryImages = [...topImages, ...bottomImages];
+
 const smoothstep = (start: number, end: number, value: number) => {
   const progress = Math.min(1, Math.max(0, (value - start) / (end - start)));
   return progress * progress * (3 - 2 * progress);
@@ -148,11 +150,90 @@ export const PhotographyReflectionSection = (): JSX.Element => {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="photography-reflection-title"
-      className="photography-story relative h-[300svh] w-full"
-    >
+    <>
+      <section
+        aria-labelledby="photography-reflection-title-mobile"
+        className="relative overflow-hidden px-5 py-16 sm:px-10 sm:py-20 desk:hidden"
+      >
+        <p className="eyebrow">{t("photo.label")}</p>
+
+        <div className="mt-7 grid grid-cols-[minmax(0,1fr)_108px] items-end gap-5 sm:grid-cols-[minmax(0,1fr)_150px] sm:gap-8">
+          <div>
+            <h2
+              id="photography-reflection-title-mobile"
+              className="[font-family:'WisnuMan-Regular',Helvetica] text-[39px] font-normal leading-[1.03] tracking-[-0.025em] text-[#ffe9d9] sm:text-[54px]"
+            >
+              {t("photo.heading.before")}
+              <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+                {t("photo.heading.accent")}
+              </span>
+              {t("global.period")}
+            </h2>
+          </div>
+
+          <figure className="m-0">
+            <img
+              className="aspect-[4/5] w-full object-cover"
+              alt="Sour holding a camera and composing a photograph"
+              src="/img/untitled-67-1.webp"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        <div className="mt-7 border-l border-[#fe7f2d]/70 pl-5">
+          <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[27px] font-normal leading-[1.15] tracking-[-0.015em] text-[#ffe9d9] sm:text-[34px]">
+            {t("photo.reflection.before")}
+            <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+              {t("photo.reflection.accent")}
+            </span>
+            {t("global.period")}
+          </p>
+          <p className="mt-3 [font-family:'WisnuMan-Regular',Helvetica] text-[16px] leading-[1.5] text-[#ffe9d9]/60 sm:text-[18px]">
+            {t("photo.note")}
+          </p>
+        </div>
+
+        <div className="mt-10 flex items-end justify-between gap-5">
+          <p className="[font-family:'OTTERO-Regular',Helvetica] text-[10px] tracking-[2.5px] text-[#fe7f2d]">
+            {t("photo.selected")}
+          </p>
+          <p className="[font-family:'OTTERO-Regular',Helvetica] text-[9px] tracking-[2px] text-[#ffe9d9]/35">
+            {t("photo.swipe")}
+          </p>
+        </div>
+
+        <div
+          className="mobile-photo-rail -mx-5 mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-4 sm:-mx-10 sm:gap-4 sm:px-10"
+          role="list"
+          aria-label="Selected photography gallery"
+        >
+          {mobileGalleryImages.map((image, index) => (
+            <figure
+              key={image.src}
+              className={`m-0 min-w-[42vw] snap-center sm:min-w-[30vw] ${
+                index === 0 ? "ml-0" : ""
+              }`}
+              role="listitem"
+            >
+              <img
+                className="aspect-[2/3] w-full object-cover"
+                alt={image.alt}
+                src={image.src}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section
+        ref={sectionRef}
+        aria-labelledby="photography-reflection-title"
+        className="photography-story relative hidden h-[300svh] w-full desk:block"
+      >
       <div className="photography-story-sticky sticky top-0 h-[100svh] w-full overflow-hidden">
         <div
           ref={narrativeRef}
@@ -253,6 +334,7 @@ export const PhotographyReflectionSection = (): JSX.Element => {
           <span className="h-7 w-px bg-gradient-to-b from-[#fe7f2d] to-transparent" />
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };

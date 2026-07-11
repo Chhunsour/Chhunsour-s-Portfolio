@@ -154,12 +154,12 @@ export const DevelopmentJourneySection = (): JSX.Element => {
             <div
               key={index}
               aria-hidden={index !== active}
-              className={`pointer-events-none absolute inset-x-5 sm:inset-x-10 md:inset-x-12 desk:inset-x-[110px] transition-all duration-500 ease-out ${
+              className={`pointer-events-none absolute inset-x-5 sm:inset-x-10 md:inset-x-12 desk:inset-x-[110px] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] ${
                 index === active
                   ? "translate-y-0 opacity-100"
                   : index < active
-                    ? "-translate-y-12 opacity-0"
-                    : "translate-y-12 opacity-0"
+                    ? "-translate-y-8 opacity-0"
+                    : "translate-y-8 opacity-0"
               }`}
             >
               {index === 0 ? (
