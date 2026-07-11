@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Cal+Sans:400");
-
 @font-face {
   font-family: "Kantumruy Pro";
   src: url("/fonts/KantumruyPro.ttf") format("truetype");
@@ -451,6 +449,14 @@
   color-scheme: dark;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+html.lenis {
+  scroll-behavior: auto;
+}
+
 body {
   background-color: #272727;
   /* safety net: decorative drift/overlap must never create sideways scroll */
@@ -694,6 +700,13 @@ html[data-locale="zh"] #contact-heading span {
 
 .reveal.reveal-complete {
   will-change: auto;
+}
+
+/* Keep continuous galleries composited only while they are near the viewport. */
+main > section:not(.motion-active)
+  :is(.strip-track, .fall-track, .cycle-item, .drift-a, .drift-b),
+main > .ticker:not(.motion-active) .ticker-track {
+  animation-play-state: paused !important;
 }
 
 @media (max-width: 767px) {
@@ -998,34 +1011,6 @@ html[data-locale="zh"] #contact-heading span {
 ::selection {
   background: #fe7f2d;
   color: #272727;
-}
-
-/* ---- hero scroll cue ---- */
-.scroll-cue-line {
-  width: 2px;
-  height: 34px;
-  background: linear-gradient(to bottom, #fe7f2d, transparent);
-  animation: scroll-cue 1.8s ease-in-out infinite;
-}
-
-@keyframes scroll-cue {
-  0% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(12px);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-cue-line {
-    animation: none;
-  }
 }
 
 /* ---- Pinned photography story ---- */

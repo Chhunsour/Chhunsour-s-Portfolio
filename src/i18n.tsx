@@ -413,7 +413,7 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [locale, setLocale] = useState<Locale>(() => {
     const saved = localStorage.getItem("portfolio-locale");
-    return saved === "km" || saved === "zh" ? saved : "en";
+    return saved === "km" ? saved : "en";
   });
 
   useEffect(() => {
@@ -457,7 +457,6 @@ export const LanguageSwitcher = () => {
   const options: { value: Locale; label: string; title: string }[] = [
     { value: "en", label: "EN", title: "English" },
     { value: "km", label: "ខ្មែរ", title: "ភាសាខ្មែរ" },
-    { value: "zh", label: "中文", title: "中文" },
   ];
 
   return (

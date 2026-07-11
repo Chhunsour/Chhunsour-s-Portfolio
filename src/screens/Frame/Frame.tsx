@@ -113,16 +113,33 @@ export const Frame = (): JSX.Element => {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // Native touch scrolling is already smooth and cheaper on mobile.
     if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       autoRaf: true,
       anchors: true,
       smoothWheel: true,
-      lerp: 0.065,
-      wheelMultiplier: 0.72,
+      lerp: 0.11,
+      wheelMultiplier: 0.85,
     });
+
     return () => lenis.destroy();
+  }, []);
+
+  useEffect(() => {
+    const regions = Array.from(
+      document.querySelectorAll<HTMLElement>("main > section, main > .ticker"),
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          entry.target.classList.toggle("motion-active", entry.isIntersecting);
+        }
+      },
+      { rootMargin: "45% 0px" },
+    );
+    regions.forEach((region) => observer.observe(region));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {

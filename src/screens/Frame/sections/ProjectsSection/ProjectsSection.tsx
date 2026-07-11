@@ -13,6 +13,17 @@ const wordpressSites = [
   "typhonnow.com",
 ];
 
+const PROJECT_IMAGE_SIZES: Record<string, [number, number]> = {
+  "/img/projects/workflow-dashboard.webp": [6208, 3108],
+  "/img/projects/workflow-tasks.webp": [6400, 3172],
+  "/img/projects/konstructz-desktop.webp": [6344, 3108],
+  "/img/projects/konstructz-mobile.webp": [3080, 6400],
+  "/img/projects/workflow-cms-product.webp": [6400, 3172],
+  "/img/projects/workflow-cms-blog.webp": [6400, 3172],
+  "/img/projects/payway-desktop.webp": [7680, 4800],
+  "/img/projects/payway-checkout.webp": [7680, 4800],
+};
+
 // small tech logos for the project labels
 const TECH_ICONS: Record<string, JSX.Element> = {
   vue: (
@@ -92,7 +103,10 @@ const TECH_ICONS: Record<string, JSX.Element> = {
       alt=""
       aria-hidden="true"
       src="/img/favicons/aba-payway.png"
+      width={64}
+      height={64}
       loading="lazy"
+      decoding="async"
     />
   ),
 };
@@ -133,30 +147,36 @@ const Browser = ({
   url: string;
   compact?: boolean;
   className?: string;
-}): JSX.Element => (
-  <div
-    className={`${className} overflow-hidden rounded-lg border border-[#ffe9d9]/15 bg-[#1e1e1e] shadow-[0_24px_60px_rgba(0,0,0,0.38)]`}
-  >
-    <div className="flex items-center gap-2 border-b border-[#ffe9d9]/10 px-5 py-3">
-      <span className="h-3 w-3 rounded-full bg-[#fe7f2d]" />
-      <span className="h-3 w-3 rounded-full bg-[#ffe9d9]/30" />
-      <span className="h-3 w-3 rounded-full bg-[#ffe9d9]/30" />
-      <span className="ml-4 rounded bg-[#272727] px-4 py-1 font-mono text-[12px] text-[#ffe9d9]/50">
-        {url}
-      </span>
+}): JSX.Element => {
+  const [width, height] = PROJECT_IMAGE_SIZES[src] ?? [1600, 900];
+  return (
+    <div
+      className={`${className} overflow-hidden rounded-lg border border-[#ffe9d9]/15 bg-[#1e1e1e] shadow-[0_24px_60px_rgba(0,0,0,0.38)]`}
+    >
+      <div className="flex items-center gap-2 border-b border-[#ffe9d9]/10 px-5 py-3">
+        <span className="h-3 w-3 rounded-full bg-[#fe7f2d]" />
+        <span className="h-3 w-3 rounded-full bg-[#ffe9d9]/30" />
+        <span className="h-3 w-3 rounded-full bg-[#ffe9d9]/30" />
+        <span className="ml-4 rounded bg-[#272727] px-4 py-1 font-mono text-[12px] text-[#ffe9d9]/50">
+          {url}
+        </span>
+      </div>
+      <img
+        className={
+          compact
+            ? "block aspect-[16/10] w-full object-cover object-top"
+            : "block w-full"
+        }
+        alt={alt}
+        src={src}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+      />
     </div>
-    <img
-      className={
-        compact
-          ? "block aspect-[16/10] w-full object-cover object-top"
-          : "block w-full"
-      }
-      alt={alt}
-      src={src}
-      loading="lazy"
-    />
-  </div>
-);
+  );
+};
 
 /* Slide timing (i * 6s) is coupled to the 18s cycle-fade keyframes. */
 const CycleBrowser = ({
@@ -188,7 +208,10 @@ const CycleBrowser = ({
           className="cycle-item col-start-1 row-start-1 block h-full w-full object-cover object-top"
           alt={slide.alt}
           src={slide.src}
+          width={PROJECT_IMAGE_SIZES[slide.src]?.[0] ?? 1600}
+          height={PROJECT_IMAGE_SIZES[slide.src]?.[1] ?? 900}
           loading="lazy"
+          decoding="async"
           style={{ animationDelay: `${i * 6}s` }}
         />
       ))}
@@ -390,7 +413,10 @@ export const ProjectsSection = (): JSX.Element => {
                 className="absolute -bottom-1 right-3 w-[86px] sm:right-6 sm:w-[120px] desk:-bottom-4 desk:right-7 desk:w-[142px]"
                 alt="Konstructz on mobile"
                 src="/img/projects/konstructz-mobile.webp"
+                width={3080}
+                height={6400}
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <p className="max-w-[75%] [font-family:'OTTERO-Regular',Helvetica] text-[10px] leading-[1.8] tracking-[2.5px] text-[#ffe9d9]/40 sm:text-xs desk:max-w-none">
@@ -475,7 +501,10 @@ export const ProjectsSection = (): JSX.Element => {
                   alt=""
                   aria-hidden="true"
                   src={`/img/favicons/${site}.png`}
+                  width={24}
+                  height={24}
                   loading="lazy"
+                  decoding="async"
                 />
                 {site.toUpperCase()} ↗
               </a>
