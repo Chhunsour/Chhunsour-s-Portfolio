@@ -135,6 +135,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "contact.body": "Have a project in mind—or want to talk about design, code, or cameras?",
     "contact.hello": "SAY HELLO",
     "contact.credit": "© 2026 — DESIGNED & BUILT BY CHHUNSOUR",
+    "contact.backTop": "BACK TO TOP",
   },
   km: {
     "global.talk": "មកនិយាយគ្នា",
@@ -261,6 +262,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "contact.body": "មានគម្រោងចង់ធ្វើ ឬគ្រាន់តែចង់និយាយអំពីការរចនា កូដ និងការថតរូប?",
     "contact.hello": "និយាយជាមួយខ្ញុំ",
     "contact.credit": "© 2026 — រចនា និងបង្កើតដោយ CHHUNSOUR",
+    "contact.backTop": "ត្រឡប់ទៅខាងលើ",
   },
   zh: {
     "global.talk": "聊一聊",
@@ -387,6 +389,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "contact.body": "有项目想法，或者想聊设计、代码与摄影？",
     "contact.hello": "和我聊聊",
     "contact.credit": "© 2026 — 由 CHHUNSOUR 设计与开发",
+    "contact.backTop": "返回顶部",
   },
 };
 
