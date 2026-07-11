@@ -1091,23 +1091,6 @@ html.locale-settle :is(h1, h2, h3, p, li, a, button) {
 }
 
 /* ---- graphic-design poster shelf ---- */
-.poster-strip {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 7%,
-    black 93%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 7%,
-    black 93%,
-    transparent
-  );
-}
-
 .poster-strip:hover .ticker-track {
   animation-play-state: paused;
 }
