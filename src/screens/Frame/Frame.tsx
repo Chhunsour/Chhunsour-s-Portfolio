@@ -244,8 +244,8 @@ export const Frame = (): JSX.Element => {
           />
         </a>
         <a
-          href="mailto:justharuki38@gmail.com"
-          className="bg-[#fe7f2d] px-5 py-3 sm:px-7 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#272727] transition-all duration-300 hover:scale-105 hover:bg-[#ffe9d9]"
+          href="mailto:sengchhunsour@gmail.com"
+          className="bg-[#fe7f2d] px-5 py-3 sm:px-7 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#272727] transition-all duration-300 hover:scale-105 hover:bg-[#ffe9d9] active:scale-95"
         >
           LET&apos;S TALK
         </a>

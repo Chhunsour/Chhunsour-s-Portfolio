@@ -20,7 +20,7 @@ export const DevelopmentEraSection = (): JSX.Element => {
   return (
     <section
       aria-labelledby="development-era-heading"
-      className="relative flex w-full flex-col items-stretch gap-12 overflow-hidden px-5 py-20 sm:px-10 desk:w-[1440px] desk:flex-row desk:items-center desk:gap-20 desk:px-[110px] desk:py-36"
+      className="relative flex w-full flex-col items-stretch gap-10 overflow-hidden px-5 py-16 sm:px-10 desk:w-[1440px] desk:flex-row desk:items-center desk:gap-20 desk:px-[110px] desk:py-36"
     >
       <div className="w-full desk:w-[560px] desk:shrink-0">
         <p className="eyebrow">06 — THE NEXT CHAPTER</p>

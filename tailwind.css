@@ -612,6 +612,24 @@ body {
   }
 }
 
+/* ---- Auto-scrolling photo strips (mobile galleries) ---- */
+.strip {
+  overflow: hidden;
+}
+
+.strip-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ticker-scroll var(--strip-duration, 35s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strip-track {
+    animation: none;
+  }
+}
+
 @media (max-width: 767px) {
   .ticker-item {
     min-height: 52px;

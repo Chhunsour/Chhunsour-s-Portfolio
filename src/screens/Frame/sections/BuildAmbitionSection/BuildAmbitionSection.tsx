@@ -59,32 +59,34 @@ export const BuildAmbitionSection = (): JSX.Element => {
       className="relative w-full overflow-hidden desk:h-[1024px] desk:w-[1440px]"
     >
       {/* ---- mobile / tablet: swipeable photo strips ---- */}
-      <div className="flex flex-col gap-6 py-20 desk:hidden">
+      <div className="flex flex-col gap-4 py-16 desk:hidden">
         <div className="overflow-x-auto px-5 sm:px-10">
           <img
-            className="h-[190px] w-auto max-w-none"
+            className="h-[160px] w-auto max-w-none"
             alt="Photography collage row"
             src="/img/group-8761.webp"
             loading="lazy"
             decoding="async"
           />
         </div>
-        <div
-          className="flex gap-3 overflow-x-auto px-5 sm:px-10"
-          role="list"
-          aria-label="Photography thumbnails"
-        >
-          {bottomImages.map((image) => (
-            <img
-              key={`m-${image.src}`}
-              className="h-[210px] shrink-0 object-cover"
-              alt={image.alt}
-              src={image.src}
-              loading="lazy"
-              decoding="async"
-              role="listitem"
-            />
-          ))}
+        <div className="strip" aria-label="Photography thumbnails">
+          <div className="strip-track [--strip-duration:40s] [animation-direction:reverse]">
+            {[0, 1].map((group) => (
+              <div key={group} className="flex gap-3 pr-3">
+                {bottomImages.map((image) => (
+                  <img
+                    key={`m-${group}-${image.src}`}
+                    className="h-[180px] shrink-0 object-cover"
+                    alt={group === 0 ? image.alt : ""}
+                    aria-hidden={group === 1 ? "true" : undefined}
+                    src={image.src}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
         <p className="px-5 pt-4 text-center [font-family:'Rafles-Regular',Helvetica] text-[26px] font-normal leading-[1.45] tracking-[0] sm:px-10 sm:text-[32px] md:mx-auto md:max-w-[680px]">
           <span className="text-[#fe7f2d]">Photography</span>

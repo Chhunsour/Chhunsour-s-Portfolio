@@ -37,7 +37,7 @@ export const ProjectsSection = (): JSX.Element => {
   return (
     <section
       aria-labelledby="projects-heading"
-      className="relative w-full overflow-hidden px-5 py-20 sm:px-10 desk:w-[1440px] desk:px-[110px] desk:py-36"
+      className="relative w-full overflow-hidden px-5 py-16 sm:px-10 desk:w-[1440px] desk:px-[110px] desk:py-36"
     >
       <p className="eyebrow">08 — REAL WORK</p>
       <h2
@@ -52,7 +52,7 @@ export const ProjectsSection = (): JSX.Element => {
       </h2>
 
       {/* ── Project 01: Website Department Workflow ───────────────── */}
-      <div className="mt-20 desk:mt-36">
+      <div className="mt-14 desk:mt-36">
         <div className="flex flex-col gap-5 desk:flex-row desk:items-end desk:justify-between">
           <div>
             <p className="[font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[4px] text-[#fe7f2d]">
@@ -97,7 +97,7 @@ export const ProjectsSection = (): JSX.Element => {
       </div>
 
       {/* ── Project 02: Konstructz ────────────────────────────────── */}
-      <div className="mt-24 desk:mt-44">
+      <div className="mt-16 desk:mt-44">
         <div className="flex flex-col items-start gap-6 desk:flex-row desk:items-end desk:justify-between">
           <div>
             <p className="[font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[4px] text-[#fe7f2d]">
@@ -111,7 +111,7 @@ export const ProjectsSection = (): JSX.Element => {
             href="https://konstructz.com"
             target="_blank"
             rel="noreferrer"
-            className="mb-2 shrink-0 border border-[#fe7f2d] px-7 py-4 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#fe7f2d] transition-colors duration-300 hover:bg-[#fe7f2d] hover:text-[#272727]"
+            className="mb-2 shrink-0 border border-[#fe7f2d] px-7 py-4 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#fe7f2d] transition-all duration-300 hover:bg-[#fe7f2d] hover:text-[#272727] active:scale-95"
           >
             VISIT KONSTRUCTZ.COM
           </a>
@@ -142,7 +142,7 @@ export const ProjectsSection = (): JSX.Element => {
             loading="lazy"
           />
         </div>
-        <p className="mt-20 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[4px] text-[#ffe9d9]/45 desk:mt-28">
+        <p className="mt-14 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[4px] text-[#ffe9d9]/45 desk:mt-28">
           BEHIND THE SCENES — PRODUCTS &amp; BLOGS, MANAGED FROM MY WORKFLOW
           CMS
         </p>
@@ -161,7 +161,7 @@ export const ProjectsSection = (): JSX.Element => {
       </div>
 
       {/* ── Project 03: Darila Official ───────────────────────────── */}
-      <div className="mt-24 flex flex-col gap-10 desk:mt-52 desk:flex-row desk:items-start desk:gap-16">
+      <div className="mt-16 flex flex-col gap-8 desk:mt-52 desk:flex-row desk:items-start desk:gap-16">
         <div className="relative min-w-0 flex-1 pb-16 desk:pb-24">
           <Browser
             src="/img/projects/payway-desktop.webp"
@@ -199,7 +199,7 @@ export const ProjectsSection = (): JSX.Element => {
             href="https://darilaofficial.com"
             target="_blank"
             rel="noreferrer"
-            className="mt-8 inline-block border border-[#fe7f2d] px-7 py-4 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#fe7f2d] transition-colors duration-300 hover:bg-[#fe7f2d] hover:text-[#272727]"
+            className="mt-8 inline-block border border-[#fe7f2d] px-7 py-4 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#fe7f2d] transition-all duration-300 hover:bg-[#fe7f2d] hover:text-[#272727] active:scale-95"
           >
             VISIT DARILAOFFICIAL.COM
           </a>
@@ -207,7 +207,7 @@ export const ProjectsSection = (): JSX.Element => {
       </div>
 
       {/* ── …and ten more ─────────────────────────────────────────── */}
-      <div className="mt-24 desk:mt-52">
+      <div className="mt-16 desk:mt-52">
         <h3 className="[font-family:'WisnuMan-Regular',Helvetica] text-[40px] leading-[1.1] tracking-[0] sm:text-[52px] desk:text-[66px]">
           <span className="text-[#ffe9d9]">…and </span>
           <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">

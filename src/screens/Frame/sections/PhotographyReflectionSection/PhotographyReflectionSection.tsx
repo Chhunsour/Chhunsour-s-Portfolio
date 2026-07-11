@@ -37,7 +37,7 @@ export const PhotographyReflectionSection = (): JSX.Element => {
       className="relative w-full overflow-hidden desk:mt-[87px] desk:h-[1024px] desk:w-[1440px]"
     >
       {/* ---- mobile / tablet ---- */}
-      <div className="flex flex-col gap-8 px-5 py-20 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
+      <div className="flex flex-col gap-6 px-5 py-16 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
         <p className="eyebrow">04 — PHOTOGRAPHY</p>
         <h2 className="[font-family:'WisnuMan-Regular',Helvetica] text-[42px] font-normal leading-[1.15] text-transparent sm:text-[56px]">
           {headingParts.map((part, index) => (
@@ -48,7 +48,7 @@ export const PhotographyReflectionSection = (): JSX.Element => {
         </h2>
         <figure className="m-0">
           <img
-            className="w-full max-w-[420px] aspect-[0.89] object-cover"
+            className="w-full max-w-[320px] aspect-[0.89] object-cover"
             alt="Portrait photograph"
             src="/img/untitled-67-1.webp"
             loading="lazy"

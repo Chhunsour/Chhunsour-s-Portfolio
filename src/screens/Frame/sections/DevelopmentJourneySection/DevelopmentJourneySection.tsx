@@ -126,7 +126,7 @@ export const DevelopmentJourneySection = (): JSX.Element => {
   return (
     <section aria-label="Development journey" className="relative w-full desk:w-[1440px]">
       {/* tall track: scrolling through it drives the pinned showcase */}
-      <div ref={wrapRef} className="relative h-[600vh]">
+      <div ref={wrapRef} className="relative h-[400vh] desk:h-[600vh]">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <p className="eyebrow absolute left-5 top-10 sm:left-10 md:left-12 desk:left-[110px] desk:top-16">
             07 — THE JOURNEY

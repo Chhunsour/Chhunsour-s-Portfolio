@@ -43,7 +43,8 @@ export const DeveloperOriginSection = (): JSX.Element => {
       className="relative w-full overflow-hidden desk:h-[1024px] desk:w-[1440px]"
     >
       {/* ---- mobile / tablet ---- */}
-      <div className="flex flex-col gap-8 px-5 py-20 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
+      <div className="flex flex-col gap-6 px-5 py-16 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
+        <p className="eyebrow">01 — THE ORIGIN</p>
         <h2 className="[font-family:'WisnuMan-Regular',Helvetica] text-[42px] font-normal leading-[1.15] sm:text-[56px]">
           {headingParts.map((part, index) => (
             <span key={`m-heading-part-${index}`} className={part.className}>
@@ -52,11 +53,10 @@ export const DeveloperOriginSection = (): JSX.Element => {
           ))}
         </h2>
         <img
-          className="w-full max-w-[465px] aspect-[0.86] object-cover"
+          className="w-full max-w-[320px] aspect-[0.86] object-cover"
           alt="Portrait representing the start in graphic design"
           src="/img/image-53.webp"
         />
-        <p className="eyebrow">01 — THE ORIGIN</p>
         <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[20px] font-normal leading-[1.6] sm:text-[24px]">
           {bodyParts.map((part, index) => (
             <span key={`m-body-part-${index}`} className={part.className}>

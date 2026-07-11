@@ -147,7 +147,8 @@ export const PhotographyPerspectiveSection = (): JSX.Element => {
       </h2>
 
       {/* ---- mobile / tablet ---- */}
-      <div className="flex flex-col gap-8 px-5 py-20 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
+      <div className="flex flex-col gap-6 py-16 desk:hidden">
+        <div className="flex flex-col gap-6 px-5 sm:px-10 md:mx-auto md:w-full md:max-w-[760px]">
         <p className="eyebrow">03 — SELECTED WORK</p>
         <p className="[font-family:'WisnuMan-Regular',Helvetica] font-normal text-[34px] tracking-[0] leading-[1.25] sm:text-[42px]">
           <span className="text-[#ffe9d9]">Everything I make starts with </span>
@@ -166,11 +167,12 @@ export const PhotographyPerspectiveSection = (): JSX.Element => {
           </span>
           <span className="text-[#ffe9d9]/90">, and web work.</span>
         </p>
-        <div className="flex flex-col gap-3">
+        </div>
+        <div className="flex gap-3 overflow-x-auto px-5 sm:px-10">
           {centerColumnImages.map((image) => (
             <img
               key={`m-${image.src}`}
-              className="w-full object-cover"
+              className="h-[180px] shrink-0 object-cover"
               alt={image.alt}
               src={image.src}
               loading="lazy"
@@ -178,19 +180,27 @@ export const PhotographyPerspectiveSection = (): JSX.Element => {
             />
           ))}
         </div>
-        <div className="grid grid-cols-3 gap-3">
-          {mobileTiles.map((image) => (
-            <img
-              key={`m-${image.src}`}
-              className="aspect-square w-full object-cover"
-              alt={image.alt}
-              src={image.src}
-              loading="lazy"
-              decoding="async"
-            />
-          ))}
+        <div className="strip" aria-hidden="true">
+          <div className="strip-track [--strip-duration:45s]">
+            {[0, 1].map((group) => (
+              <div key={group} className="flex gap-3 pr-3">
+                {mobileTiles.map((image) => (
+                  <img
+                    key={`m-${group}-${image.src}`}
+                    className="h-[110px] w-[110px] shrink-0 object-cover"
+                    alt=""
+                    src={image.src}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-        <SeeMoreLink />
+        <div className="px-5 sm:px-10 md:mx-auto md:w-full md:max-w-[760px]">
+          <SeeMoreLink />
+        </div>
       </div>
 
       {/* ---- desktop (1440px canvas, unchanged) ---- */}

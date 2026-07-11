@@ -51,7 +51,7 @@ export const FullProductionSection = (): JSX.Element => {
       className="relative w-full overflow-hidden desk:h-[1024px] desk:w-[1440px]"
     >
       {/* ---- mobile / tablet: vertical workflow ---- */}
-      <div className="flex flex-col items-center gap-10 px-5 py-20 text-center sm:px-10 desk:hidden">
+      <div className="flex flex-col items-center gap-8 px-5 py-16 text-center sm:px-10 desk:hidden">
         <p className="eyebrow eyebrow-center">05 — DEVELOPMENT</p>
         <h2 className="[font-family:'WisnuMan-Regular',Helvetica] text-[36px] font-normal leading-[1.2] text-transparent sm:text-[50px] md:max-w-[680px]">
           <span className="text-[#ffe9d9]">But I wanted to do more than </span>
@@ -64,18 +64,18 @@ export const FullProductionSection = (): JSX.Element => {
           </span>
           <span className="text-[#ffe9d9]"> it.</span>
         </h2>
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex max-w-[560px] flex-wrap items-center justify-center gap-x-4 gap-y-3">
           {workflowSteps.map((step, index) => (
-            <div key={`m-${step.label}`} className="flex flex-col items-center gap-5">
+            <div key={`m-${step.label}`} className="flex items-center gap-4">
               {index > 0 && (
                 <img
-                  className="h-7 w-[22px]"
+                  className="h-[16px] w-5"
                   alt=""
                   aria-hidden="true"
-                  src="/img/arrow-9.svg"
+                  src="/img/arrow-8.svg"
                 />
               )}
-              <div className="[font-family:'WisnuMan-Regular',Helvetica] text-[28px] font-normal text-[#ffe9d9] sm:text-[34px]">
+              <div className="[font-family:'WisnuMan-Regular',Helvetica] text-[22px] font-normal text-[#ffe9d9] sm:text-[26px]">
                 {step.label}
               </div>
             </div>

@@ -26,7 +26,8 @@ export const VisualCommunicationSection = (): JSX.Element => {
       className="relative w-full overflow-hidden desk:h-[1024px] desk:w-[1440px]"
     >
       {/* ---- mobile / tablet ---- */}
-      <div className="flex flex-col gap-8 px-5 py-20 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
+      <div className="flex flex-col gap-6 px-5 py-16 sm:px-10 md:mx-auto md:max-w-[760px] desk:hidden">
+        <p className="eyebrow">02 — GRAPHIC DESIGN</p>
         <h2 className="[font-family:'WisnuMan-Regular',Helvetica] text-[38px] font-normal leading-[1.2] sm:text-[52px]">
           <span className="text-[#ffe9d9]">Before I became a </span>
           <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
@@ -40,7 +41,6 @@ export const VisualCommunicationSection = (): JSX.Element => {
           </span>
           <span className="text-[#ffe9d9]">.</span>
         </h2>
-        <p className="eyebrow">02 — GRAPHIC DESIGN</p>
         <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[20px] font-normal leading-[1.6] sm:text-[24px]">
           <span className="text-[#ffe9d9]/90">
             It began with posters — learning how{" "}
