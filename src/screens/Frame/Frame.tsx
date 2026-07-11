@@ -68,7 +68,35 @@ const MARCHING_SEGMENTS: Record<number, [number, number][]> = {
 
 export const Frame = (): JSX.Element => {
   const topoRef = useRef<HTMLCanvasElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const { t } = useI18n();
+
+  useEffect(() => {
+    let frame = 0;
+    const updateProgress = () => {
+      frame = 0;
+      const maxScroll = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1,
+      );
+      const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      }
+    };
+    const requestUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -248,7 +276,16 @@ export const Frame = (): JSX.Element => {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-gradient-to-b from-[#272727] from-45% via-[#272727]/75 to-transparent px-5 pb-6 pt-4 sm:px-8 desk:bg-none desk:px-12 desk:py-6">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-px bg-[#ffe9d9]/15"
+      >
+        <div
+          ref={progressRef}
+          className="h-full origin-left scale-x-0 bg-[#fe7f2d] shadow-[0_0_12px_rgba(254,127,45,0.7)] will-change-transform"
+        />
+      </div>
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-transparent px-5 pb-6 pt-4 sm:px-8 desk:px-12 desk:py-6">
         <a
           href="#portfolio-hero"
           aria-label="Back to top"

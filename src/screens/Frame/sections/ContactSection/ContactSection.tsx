@@ -1,3 +1,5 @@
+import { useI18n } from "../../../../i18n";
+
 const socialLinks = [
   {
     label: "GITHUB",
@@ -23,6 +25,15 @@ const socialLinks = [
 
 export const ContactSection = (): JSX.Element => {
   const { t } = useI18n();
+  const backToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  };
+
   return (
     <section
       aria-labelledby="contact-heading"
@@ -90,7 +101,22 @@ export const ContactSection = (): JSX.Element => {
       <p className="mt-10 text-center [font-family:'OTTERO-Regular',Helvetica] text-sm font-normal tracking-[3px] text-[#ffe9d9]/40 desk:mt-20">
         {t("contact.credit")}
       </p>
+      <button
+        type="button"
+        onClick={backToTop}
+        className="group mt-2 flex items-center gap-4 border border-[#ffe9d9]/20 px-6 py-4 text-[#ffe9d9]/70 transition-all duration-300 hover:border-[#fe7f2d]/70 hover:text-[#fe7f2d] active:scale-95 desk:mt-4"
+        aria-label={t("contact.backTop")}
+      >
+        <span
+          aria-hidden="true"
+          className="text-xl transition-transform duration-300 group-hover:-translate-y-1"
+        >
+          ↑
+        </span>
+        <span className="[font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[3px] sm:text-sm">
+          {t("contact.backTop")}
+        </span>
+      </button>
     </section>
   );
 };
-import { useI18n } from "../../../../i18n";
