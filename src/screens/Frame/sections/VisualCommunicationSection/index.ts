@@ -1,0 +1,1 @@
+export { VisualCommunicationSection } from "./VisualCommunicationSection";

@@ -1,0 +1,12 @@
+/* Webfont: OTTERO-Black */@font-face {
+    font-family: 'tgl30sansserifthinBlack';
+    src: url('OTTERO-Black.eot'); /* IE9 Compat Modes */
+    src: url('OTTERO-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('OTTERO-Black.woff') format('woff'), /* Modern Browsers */
+         url('OTTERO-Black.woff2') format('woff2'), /* Modern Browsers */
+         url('OTTERO-Black.ttf') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

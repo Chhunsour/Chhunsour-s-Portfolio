@@ -1,0 +1,12 @@
+/* Webfont: OTTERO-Light */@font-face {
+    font-family: 'tgl30sansserifthinLight';
+    src: url('OTTERO-Light.eot'); /* IE9 Compat Modes */
+    src: url('OTTERO-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('OTTERO-Light.woff') format('woff'), /* Modern Browsers */
+         url('OTTERO-Light.woff2') format('woff2'), /* Modern Browsers */
+         url('OTTERO-Light.ttf') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

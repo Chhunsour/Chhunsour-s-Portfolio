@@ -1,0 +1,713 @@
+@import url("https://fonts.googleapis.com/css?family=Cal+Sans:400");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button,
+  input,
+  select,
+  textarea {
+    @apply appearance-none bg-transparent border-0 outline-none;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .all-unset {
+    all: unset;
+  }
+}
+
+:root {
+  --apple-com-semantic-emphasis-font-family: "SF Pro", Helvetica;
+  --apple-com-semantic-emphasis-font-size: 12px;
+  --apple-com-semantic-emphasis-font-style: normal;
+  --apple-com-semantic-emphasis-font-weight: 400;
+  --apple-com-semantic-emphasis-letter-spacing: -0.11999999731779099px;
+  --apple-com-semantic-emphasis-line-height: 16px;
+  --apple-com-semantic-heading-2-font-family: "SF Pro", Helvetica;
+  --apple-com-semantic-heading-2-font-size: 56px;
+  --apple-com-semantic-heading-2-font-style: normal;
+  --apple-com-semantic-heading-2-font-weight: 400;
+  --apple-com-semantic-heading-2-letter-spacing: -0.2800000011920929px;
+  --apple-com-semantic-heading-2-line-height: 60px;
+  --apple-com-semantic-heading-3-font-family: "SF Pro", Helvetica;
+  --apple-com-semantic-heading-3-font-size: 40px;
+  --apple-com-semantic-heading-3-font-style: normal;
+  --apple-com-semantic-heading-3-font-weight: 400;
+  --apple-com-semantic-heading-3-letter-spacing: 0px;
+  --apple-com-semantic-heading-3-line-height: 44px;
+  --apple-com-semantic-item-font-family: "SF Pro", Helvetica;
+  --apple-com-semantic-item-font-size: 12px;
+  --apple-com-semantic-item-font-style: italic;
+  --apple-com-semantic-item-font-weight: 400;
+  --apple-com-semantic-item-letter-spacing: -0.11999999731779099px;
+  --apple-com-semantic-item-line-height: 16px;
+  --apple-com-semantic-link-font-family: "SF Pro", Helvetica;
+  --apple-com-semantic-link-font-size: 20.799999237060547px;
+  --apple-com-semantic-link-font-style: normal;
+  --apple-com-semantic-link-font-weight: 700;
+  --apple-com-semantic-link-letter-spacing: 0.23100000619888306px;
+  --apple-com-semantic-link-line-height: 25px;
+  --apple-com-SF-pro-regular-font-family: "SF Pro", Helvetica;
+  --apple-com-SF-pro-regular-font-size: 28px;
+  --apple-com-SF-pro-regular-font-style: normal;
+  --apple-com-SF-pro-regular-font-weight: 400;
+  --apple-com-SF-pro-regular-letter-spacing: 0.19599999487400055px;
+  --apple-com-SF-pro-regular-line-height: 32px;
+  --apple-com-SF-pro-regular-underline-font-family: "SF Pro", Helvetica;
+  --apple-com-SF-pro-regular-underline-font-size: 12px;
+  --apple-com-SF-pro-regular-underline-font-style: normal;
+  --apple-com-SF-pro-regular-underline-font-weight: 400;
+  --apple-com-SF-pro-regular-underline-letter-spacing: -0.11999999731779099px;
+  --apple-com-SF-pro-regular-underline-line-height: 16px;
+  --landonorris-com-arial-bold-font-family: "Arial", Helvetica;
+  --landonorris-com-arial-bold-font-size: 34.20000076293945px;
+  --landonorris-com-arial-bold-font-style: normal;
+  --landonorris-com-arial-bold-font-weight: 700;
+  --landonorris-com-arial-bold-letter-spacing: 0.8889999985694885px;
+  --landonorris-com-arial-bold-line-height: 36.97999954223633px;
+  --landonorris-com-mona-sans-black-upper-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-black-upper-font-size: 14.5px;
+  --landonorris-com-mona-sans-black-upper-font-style: normal;
+  --landonorris-com-mona-sans-black-upper-font-weight: 900;
+  --landonorris-com-mona-sans-black-upper-letter-spacing: -0.17800000309944153px;
+  --landonorris-com-mona-sans-black-upper-line-height: 20px;
+  --landonorris-com-mona-sans-bold-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-bold-font-size: 16px;
+  --landonorris-com-mona-sans-bold-font-style: normal;
+  --landonorris-com-mona-sans-bold-font-weight: 700;
+  --landonorris-com-mona-sans-bold-letter-spacing: 0px;
+  --landonorris-com-mona-sans-bold-line-height: 20px;
+  --landonorris-com-mona-sans-bold-upper-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-bold-upper-font-size: 127.30000305175781px;
+  --landonorris-com-mona-sans-bold-upper-font-style: normal;
+  --landonorris-com-mona-sans-bold-upper-font-weight: 700;
+  --landonorris-com-mona-sans-bold-upper-letter-spacing: -1.1109999418258667px;
+  --landonorris-com-mona-sans-bold-upper-line-height: 127px;
+  --landonorris-com-mona-sans-extrabold-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-extrabold-font-size: 13.300000190734863px;
+  --landonorris-com-mona-sans-extrabold-font-style: normal;
+  --landonorris-com-mona-sans-extrabold-font-weight: 800;
+  --landonorris-com-mona-sans-extrabold-letter-spacing: 0px;
+  --landonorris-com-mona-sans-extrabold-line-height: 16.670000076293945px;
+  --landonorris-com-mona-sans-medium-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-medium-font-size: 22.200000762939453px;
+  --landonorris-com-mona-sans-medium-font-style: normal;
+  --landonorris-com-mona-sans-medium-font-weight: 500;
+  --landonorris-com-mona-sans-medium-letter-spacing: -0.22200000286102295px;
+  --landonorris-com-mona-sans-medium-line-height: 27.780000686645508px;
+  --landonorris-com-mona-sans-regular-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-regular-font-size: 26.700000762939453px;
+  --landonorris-com-mona-sans-regular-font-style: normal;
+  --landonorris-com-mona-sans-regular-font-weight: 400;
+  --landonorris-com-mona-sans-regular-letter-spacing: 0px;
+  --landonorris-com-mona-sans-regular-line-height: 26.670000076293945px;
+  --landonorris-com-mona-sans-semibold-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-mona-sans-semibold-font-size: 16px;
+  --landonorris-com-mona-sans-semibold-font-style: normal;
+  --landonorris-com-mona-sans-semibold-font-weight: 600;
+  --landonorris-com-mona-sans-semibold-letter-spacing: 0px;
+  --landonorris-com-mona-sans-semibold-line-height: 20px;
+  --landonorris-com-semantic-heading-2-upper-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-semantic-heading-2-upper-font-size: 112.4000015258789px;
+  --landonorris-com-semantic-heading-2-upper-font-style: normal;
+  --landonorris-com-semantic-heading-2-upper-font-weight: 800;
+  --landonorris-com-semantic-heading-2-upper-letter-spacing: -4.443999767303467px;
+  --landonorris-com-semantic-heading-2-upper-line-height: 101.55000305175781px;
+  --landonorris-com-semantic-link-upper-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-semantic-link-upper-font-size: 27.600000381469727px;
+  --landonorris-com-semantic-link-upper-font-style: normal;
+  --landonorris-com-semantic-link-upper-font-weight: 800;
+  --landonorris-com-semantic-link-upper-letter-spacing: 0px;
+  --landonorris-com-semantic-link-upper-line-height: 33.33000183105469px;
+  --landonorris-com-semantic-strong-font-family: "Mona Sans", Helvetica;
+  --landonorris-com-semantic-strong-font-size: 22.200000762939453px;
+  --landonorris-com-semantic-strong-font-style: normal;
+  --landonorris-com-semantic-strong-font-weight: 500;
+  --landonorris-com-semantic-strong-letter-spacing: -0.22200000286102295px;
+  --landonorris-com-semantic-strong-line-height: 27.780000686645508px;
+  --landonorris-com-semantic-strong-upper-font-family: "Arial", Helvetica;
+  --landonorris-com-semantic-strong-upper-font-size: 137.8000030517578px;
+  --landonorris-com-semantic-strong-upper-font-style: normal;
+  --landonorris-com-semantic-strong-upper-font-weight: 700;
+  --landonorris-com-semantic-strong-upper-letter-spacing: -3.3329999446868896px;
+  --landonorris-com-semantic-strong-upper-line-height: 121.7300033569336px;
+  --typhonmachinery-com-afacad-bold-font-family: "Afacad", Helvetica;
+  --typhonmachinery-com-afacad-bold-font-size: 20px;
+  --typhonmachinery-com-afacad-bold-font-style: normal;
+  --typhonmachinery-com-afacad-bold-font-weight: 700;
+  --typhonmachinery-com-afacad-bold-letter-spacing: 0px;
+  --typhonmachinery-com-afacad-bold-line-height: 25px;
+  --typhonmachinery-com-afacad-bold-upper-font-family: "Afacad", Helvetica;
+  --typhonmachinery-com-afacad-bold-upper-font-size: 34px;
+  --typhonmachinery-com-afacad-bold-upper-font-style: normal;
+  --typhonmachinery-com-afacad-bold-upper-font-weight: 700;
+  --typhonmachinery-com-afacad-bold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-afacad-bold-upper-line-height: 34px;
+  --typhonmachinery-com-afacad-medium-font-family: "Afacad", Helvetica;
+  --typhonmachinery-com-afacad-medium-font-size: 17px;
+  --typhonmachinery-com-afacad-medium-font-style: normal;
+  --typhonmachinery-com-afacad-medium-font-weight: 500;
+  --typhonmachinery-com-afacad-medium-letter-spacing: 0px;
+  --typhonmachinery-com-afacad-medium-line-height: 23.290000915527344px;
+  --typhonmachinery-com-afacad-regular-font-family: "Afacad", Helvetica;
+  --typhonmachinery-com-afacad-regular-font-size: 17px;
+  --typhonmachinery-com-afacad-regular-font-style: normal;
+  --typhonmachinery-com-afacad-regular-font-weight: 400;
+  --typhonmachinery-com-afacad-regular-letter-spacing: 0px;
+  --typhonmachinery-com-afacad-regular-line-height: 17px;
+  --typhonmachinery-com-afacad-semibold-font-family: "Afacad", Helvetica;
+  --typhonmachinery-com-afacad-semibold-font-size: 23px;
+  --typhonmachinery-com-afacad-semibold-font-style: normal;
+  --typhonmachinery-com-afacad-semibold-font-weight: 600;
+  --typhonmachinery-com-afacad-semibold-letter-spacing: 0px;
+  --typhonmachinery-com-afacad-semibold-line-height: 24.3799991607666px;
+  --typhonmachinery-com-afacad-semibold-upper-font-family: "Afacad", Helvetica;
+  --typhonmachinery-com-afacad-semibold-upper-font-size: 39px;
+  --typhonmachinery-com-afacad-semibold-upper-font-style: normal;
+  --typhonmachinery-com-afacad-semibold-upper-font-weight: 600;
+  --typhonmachinery-com-afacad-semibold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-afacad-semibold-upper-line-height: 39px;
+  --typhonmachinery-com-alata-regular-upper-font-family: "Alata", Helvetica;
+  --typhonmachinery-com-alata-regular-upper-font-size: 18px;
+  --typhonmachinery-com-alata-regular-upper-font-style: normal;
+  --typhonmachinery-com-alata-regular-upper-font-weight: 400;
+  --typhonmachinery-com-alata-regular-upper-letter-spacing: 0px;
+  --typhonmachinery-com-alata-regular-upper-line-height: 41px;
+  --typhonmachinery-com-bebas-neue-regular-upper-font-family: "Bebas Neue", Helvetica;
+  --typhonmachinery-com-bebas-neue-regular-upper-font-size: 45px;
+  --typhonmachinery-com-bebas-neue-regular-upper-font-style: normal;
+  --typhonmachinery-com-bebas-neue-regular-upper-font-weight: 400;
+  --typhonmachinery-com-bebas-neue-regular-upper-letter-spacing: 1px;
+  --typhonmachinery-com-bebas-neue-regular-upper-line-height: 55px;
+  --typhonmachinery-com-font-awesome-5-brands-regular-font-family: "Font Awesome 5 Brands", Helvetica;
+  --typhonmachinery-com-font-awesome-5-brands-regular-font-size: 50px;
+  --typhonmachinery-com-font-awesome-5-brands-regular-font-style: normal;
+  --typhonmachinery-com-font-awesome-5-brands-regular-font-weight: 400;
+  --typhonmachinery-com-font-awesome-5-brands-regular-letter-spacing: 0px;
+  --typhonmachinery-com-font-awesome-5-brands-regular-line-height: 50px;
+  --typhonmachinery-com-font-awesome-5-free-regular-font-family: "Font Awesome 5 Free", Helvetica;
+  --typhonmachinery-com-font-awesome-5-free-regular-font-size: 19px;
+  --typhonmachinery-com-font-awesome-5-free-regular-font-style: normal;
+  --typhonmachinery-com-font-awesome-5-free-regular-font-weight: 400;
+  --typhonmachinery-com-font-awesome-5-free-regular-letter-spacing: 0px;
+  --typhonmachinery-com-font-awesome-5-free-regular-line-height: 19px;
+  --typhonmachinery-com-jost-bold-lower-font-family: "Jost", Helvetica;
+  --typhonmachinery-com-jost-bold-lower-font-size: 12px;
+  --typhonmachinery-com-jost-bold-lower-font-style: normal;
+  --typhonmachinery-com-jost-bold-lower-font-weight: 700;
+  --typhonmachinery-com-jost-bold-lower-letter-spacing: 0px;
+  --typhonmachinery-com-jost-bold-lower-line-height: 15px;
+  --typhonmachinery-com-jost-medium-font-family: "Jost", Helvetica;
+  --typhonmachinery-com-jost-medium-font-size: 13px;
+  --typhonmachinery-com-jost-medium-font-style: normal;
+  --typhonmachinery-com-jost-medium-font-weight: 500;
+  --typhonmachinery-com-jost-medium-letter-spacing: 0px;
+  --typhonmachinery-com-jost-medium-line-height: 15px;
+  --typhonmachinery-com-jost-regular-font-family: "Jost", Helvetica;
+  --typhonmachinery-com-jost-regular-font-size: 20px;
+  --typhonmachinery-com-jost-regular-font-style: normal;
+  --typhonmachinery-com-jost-regular-font-weight: 400;
+  --typhonmachinery-com-jost-regular-letter-spacing: 0px;
+  --typhonmachinery-com-jost-regular-line-height: 27.399999618530273px;
+  --typhonmachinery-com-jost-semibold-font-family: "Jost", Helvetica;
+  --typhonmachinery-com-jost-semibold-font-size: 37px;
+  --typhonmachinery-com-jost-semibold-font-style: normal;
+  --typhonmachinery-com-jost-semibold-font-weight: 600;
+  --typhonmachinery-com-jost-semibold-letter-spacing: 0px;
+  --typhonmachinery-com-jost-semibold-line-height: 50.689998626708984px;
+  --typhonmachinery-com-lato-bold-upper-font-family: "Lato", Helvetica;
+  --typhonmachinery-com-lato-bold-upper-font-size: 15px;
+  --typhonmachinery-com-lato-bold-upper-font-style: normal;
+  --typhonmachinery-com-lato-bold-upper-font-weight: 700;
+  --typhonmachinery-com-lato-bold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-lato-bold-upper-line-height: 15px;
+  --typhonmachinery-com-montserrat-black-upper-font-family: "Montserrat", Helvetica;
+  --typhonmachinery-com-montserrat-black-upper-font-size: 60.79999923706055px;
+  --typhonmachinery-com-montserrat-black-upper-font-style: normal;
+  --typhonmachinery-com-montserrat-black-upper-font-weight: 900;
+  --typhonmachinery-com-montserrat-black-upper-letter-spacing: 0.800000011920929px;
+  --typhonmachinery-com-montserrat-black-upper-line-height: 64px;
+  --typhonmachinery-com-montserrat-extrabold-font-family: "Montserrat", Helvetica;
+  --typhonmachinery-com-montserrat-extrabold-font-size: 14px;
+  --typhonmachinery-com-montserrat-extrabold-font-style: normal;
+  --typhonmachinery-com-montserrat-extrabold-font-weight: 800;
+  --typhonmachinery-com-montserrat-extrabold-letter-spacing: 0px;
+  --typhonmachinery-com-montserrat-extrabold-line-height: 14.5600004196167px;
+  --typhonmachinery-com-montserrat-extrabold-upper-font-family: "Montserrat", Helvetica;
+  --typhonmachinery-com-montserrat-extrabold-upper-font-size: 41px;
+  --typhonmachinery-com-montserrat-extrabold-upper-font-style: normal;
+  --typhonmachinery-com-montserrat-extrabold-upper-font-weight: 800;
+  --typhonmachinery-com-montserrat-extrabold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-montserrat-extrabold-upper-line-height: 42.63999938964844px;
+  --typhonmachinery-com-montserrat-semibold-font-family: "Montserrat", Helvetica;
+  --typhonmachinery-com-montserrat-semibold-font-size: 25.600000381469727px;
+  --typhonmachinery-com-montserrat-semibold-font-style: normal;
+  --typhonmachinery-com-montserrat-semibold-font-weight: 600;
+  --typhonmachinery-com-montserrat-semibold-letter-spacing: 0.800000011920929px;
+  --typhonmachinery-com-montserrat-semibold-line-height: 73.5999984741211px;
+  --typhonmachinery-com-montserrat-semibold-upper-font-family: "Montserrat", Helvetica;
+  --typhonmachinery-com-montserrat-semibold-upper-font-size: 25.600000381469727px;
+  --typhonmachinery-com-montserrat-semibold-upper-font-style: normal;
+  --typhonmachinery-com-montserrat-semibold-upper-font-weight: 600;
+  --typhonmachinery-com-montserrat-semibold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-montserrat-semibold-upper-line-height: 41.599998474121094px;
+  --typhonmachinery-com-open-sans-semibold-font-family: "Open Sans", Helvetica;
+  --typhonmachinery-com-open-sans-semibold-font-size: 18px;
+  --typhonmachinery-com-open-sans-semibold-font-style: normal;
+  --typhonmachinery-com-open-sans-semibold-font-weight: 600;
+  --typhonmachinery-com-open-sans-semibold-letter-spacing: 0px;
+  --typhonmachinery-com-open-sans-semibold-line-height: 24.65999984741211px;
+  --typhonmachinery-com-oswald-bold-upper-font-family: "Oswald", Helvetica;
+  --typhonmachinery-com-oswald-bold-upper-font-size: 24px;
+  --typhonmachinery-com-oswald-bold-upper-font-style: normal;
+  --typhonmachinery-com-oswald-bold-upper-font-weight: 700;
+  --typhonmachinery-com-oswald-bold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-oswald-bold-upper-line-height: 24px;
+  --typhonmachinery-com-poppins-bold-font-family: "Poppins", Helvetica;
+  --typhonmachinery-com-poppins-bold-font-size: 24px;
+  --typhonmachinery-com-poppins-bold-font-style: normal;
+  --typhonmachinery-com-poppins-bold-font-weight: 700;
+  --typhonmachinery-com-poppins-bold-letter-spacing: 0px;
+  --typhonmachinery-com-poppins-bold-line-height: 32px;
+  --typhonmachinery-com-poppins-medium-font-family: "Poppins", Helvetica;
+  --typhonmachinery-com-poppins-medium-font-size: 20.799999237060547px;
+  --typhonmachinery-com-poppins-medium-font-style: normal;
+  --typhonmachinery-com-poppins-medium-font-weight: 500;
+  --typhonmachinery-com-poppins-medium-letter-spacing: 0.800000011920929px;
+  --typhonmachinery-com-poppins-medium-line-height: 44.79999923706055px;
+  --typhonmachinery-com-poppins-regular-font-family: "Poppins", Helvetica;
+  --typhonmachinery-com-poppins-regular-font-size: 25px;
+  --typhonmachinery-com-poppins-regular-font-style: normal;
+  --typhonmachinery-com-poppins-regular-font-weight: 400;
+  --typhonmachinery-com-poppins-regular-letter-spacing: 0px;
+  --typhonmachinery-com-poppins-regular-line-height: 32px;
+  --typhonmachinery-com-poppins-regular-underline-font-family: "Poppins", Helvetica;
+  --typhonmachinery-com-poppins-regular-underline-font-size: 13.5px;
+  --typhonmachinery-com-poppins-regular-underline-font-style: normal;
+  --typhonmachinery-com-poppins-regular-underline-font-weight: 400;
+  --typhonmachinery-com-poppins-regular-underline-letter-spacing: 0px;
+  --typhonmachinery-com-poppins-regular-underline-line-height: 18.899999618530273px;
+  --typhonmachinery-com-poppins-semibold-font-family: "Poppins", Helvetica;
+  --typhonmachinery-com-poppins-semibold-font-size: 24px;
+  --typhonmachinery-com-poppins-semibold-font-style: normal;
+  --typhonmachinery-com-poppins-semibold-font-weight: 600;
+  --typhonmachinery-com-poppins-semibold-letter-spacing: 0px;
+  --typhonmachinery-com-poppins-semibold-line-height: 33.599998474121094px;
+  --typhonmachinery-com-roboto-bold-upper-font-family: "Roboto", Helvetica;
+  --typhonmachinery-com-roboto-bold-upper-font-size: 16px;
+  --typhonmachinery-com-roboto-bold-upper-font-style: normal;
+  --typhonmachinery-com-roboto-bold-upper-font-weight: 700;
+  --typhonmachinery-com-roboto-bold-upper-letter-spacing: 0px;
+  --typhonmachinery-com-roboto-bold-upper-line-height: 21.920000076293945px;
+  --typhonmachinery-com-roboto-regular-font-family: "Roboto", Helvetica;
+  --typhonmachinery-com-roboto-regular-font-size: 16px;
+  --typhonmachinery-com-roboto-regular-font-style: normal;
+  --typhonmachinery-com-roboto-regular-font-weight: 400;
+  --typhonmachinery-com-roboto-regular-letter-spacing: 0px;
+  --typhonmachinery-com-roboto-regular-line-height: 16px;
+  --typhonmachinery-com-roboto-regular-upper-font-family: "Roboto", Helvetica;
+  --typhonmachinery-com-roboto-regular-upper-font-size: 12px;
+  --typhonmachinery-com-roboto-regular-upper-font-style: normal;
+  --typhonmachinery-com-roboto-regular-upper-font-weight: 400;
+  --typhonmachinery-com-roboto-regular-upper-letter-spacing: 0px;
+  --typhonmachinery-com-roboto-regular-upper-line-height: 15.600000381469727px;
+}
+
+:root {
+  --animate-spin: spin 1s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s var(--animation-delay, 0s) ease forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 1s var(--animation-delay, 0s) ease forwards;
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 8s infinite;
+}
+
+.animate-spin {
+  animation: var(--animate-spin);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes image-glow {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
+  }
+
+  10% {
+    opacity: 0.7;
+    animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
+  }
+
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  90%,
+  to {
+    background-position: calc(-100% - var(--shimmer-width)) 0;
+  }
+
+  30%,
+  60% {
+    background-position: calc(100% + var(--shimmer-width)) 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+/* ============================================================
+   Portfolio polish: livery background, reveals, ticker, hovers
+   ============================================================ */
+
+body {
+  background-color: #272727;
+  /* safety net: decorative drift/overlap must never create sideways scroll */
+  overflow-x: clip;
+}
+
+/* ---- Livery background (fixed, behind everything) ---- */
+.livery {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* live topographic contour canvas (drawn in Frame.tsx) */
+.livery-topo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* deep blue haze, top center (was a blurred shape inside the hero) */
+.livery-glow-blue {
+  position: absolute;
+  top: -55%;
+  left: 50%;
+  width: 1300px;
+  height: 1200px;
+  transform: translateX(-55%);
+  background: radial-gradient(
+    ellipse,
+    rgba(35, 61, 77, 0.95),
+    transparent 65%
+  );
+}
+
+/* papaya glow, top right */
+.livery-glow {
+  position: absolute;
+  top: -280px;
+  right: -300px;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(
+    circle,
+    rgba(254, 127, 45, 0.13),
+    transparent 65%
+  );
+}
+
+/* film grain */
+.livery-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(42px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Role ticker marquee ---- */
+.ticker {
+  --ticker-duration: 40s;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 15px 0 17px;
+  border-top: 1px solid rgba(254, 127, 45, 0.72);
+  border-bottom: 1px solid rgba(254, 127, 45, 0.72);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 61, 77, 0.48),
+      rgba(39, 39, 39, 0.92) 28%,
+      rgba(39, 39, 39, 0.92) 72%,
+      rgba(254, 127, 45, 0.1)
+    ),
+    #272727;
+  box-shadow:
+    inset 0 4px 0 rgba(254, 127, 45, 0.08),
+    inset 0 -4px 0 rgba(255, 233, 217, 0.04);
+}
+
+.ticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    112deg,
+    transparent 0 86px,
+    rgba(255, 233, 217, 0.035) 87px 88px,
+    transparent 89px 176px
+  );
+}
+
+.ticker::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #272727 0,
+    rgba(39, 39, 39, 0.82) 2%,
+    transparent 8%,
+    transparent 92%,
+    rgba(39, 39, 39, 0.82) 98%,
+    #272727 100%
+  );
+}
+
+.ticker-track {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ticker-scroll var(--ticker-duration) linear infinite;
+}
+
+.ticker-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.ticker-item {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  min-height: 76px;
+  white-space: nowrap;
+}
+
+.ticker-label {
+  font-family: "OTTERO-Regular", Helvetica;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: 0.015em;
+  color: #ffe9d9;
+  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.ticker-item:nth-child(even) .ticker-label {
+  color: #fe7f2d;
+}
+
+.ticker-star {
+  margin: 0 34px;
+  font-size: 24px;
+  line-height: 1;
+  color: #fe7f2d;
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 0 10px rgba(254, 127, 45, 0.28));
+}
+
+@keyframes ticker-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .ticker-item {
+    min-height: 52px;
+  }
+  .ticker-label {
+    font-size: 26px;
+  }
+  .ticker-star {
+    margin: 0 20px;
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* ---- Hero: drifting outlined PORTFOLIO rows ---- */
+.drift-a {
+  animation: drift-a 16s ease-in-out infinite alternate;
+}
+
+.drift-b {
+  animation: drift-b 21s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  to {
+    transform: translateX(-70px);
+  }
+}
+
+@keyframes drift-b {
+  to {
+    transform: translateX(70px);
+  }
+}
+
+/* ---- Photo hover effects ---- */
+#photography-perspective img:hover,
+#visual-communication img:hover,
+#build-ambition img:hover,
+#developer-origin img:hover,
+#photography-reflection img:hover {
+  transform: translateY(-5px) scale(1.04);
+  filter: brightness(1.12);
+  transition-duration: 0.3s;
+  z-index: 5;
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .ticker-track,
+  .drift-a,
+  .drift-b {
+    animation: none !important;
+  }
+}
+
+/* ---- Editorial eyebrow labels ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "OTTERO-Regular", Helvetica;
+  font-size: 15px;
+  letter-spacing: 5px;
+  color: #fe7f2d;
+  white-space: nowrap;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 46px;
+  height: 2px;
+  background: #fe7f2d;
+}
+
+.eyebrow-center::after {
+  content: "";
+  width: 46px;
+  height: 2px;
+  background: #fe7f2d;
+}
+
+::selection {
+  background: #fe7f2d;
+  color: #272727;
+}

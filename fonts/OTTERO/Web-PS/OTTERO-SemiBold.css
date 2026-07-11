@@ -1,0 +1,9 @@
+/* Webfont: OTTERO-SemiBold */@font-face {
+    font-family: 'tgl30sansserifthinSemBd';
+    src: url('OTTERO-SemiBold.woff2') format('woff2'), /* Modern Browsers */
+         url('OTTERO-SemiBold.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

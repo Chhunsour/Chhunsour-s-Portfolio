@@ -1,0 +1,9 @@
+/* Webfont: OTTERO-ExtraBold */@font-face {
+    font-family: 'tgl30sansserifthinExtBd';
+    src: url('OTTERO-ExtraBold.woff2') format('woff2'), /* Modern Browsers */
+         url('OTTERO-ExtraBold.otf') format('opentype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
