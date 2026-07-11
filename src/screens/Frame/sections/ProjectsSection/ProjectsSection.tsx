@@ -80,7 +80,7 @@ export const ProjectsSection = (): JSX.Element => {
             <li>{t("projects.workflow.four")}</li>
           </ul>
         </div>
-        <div className="mt-10 flex flex-col gap-8 desk:mt-16 desk:gap-12">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 desk:mt-14 desk:gap-7">
           <Browser
             src="/img/projects/workflow-dashboard.webp"
             alt="Website Department Workflow dashboard"
