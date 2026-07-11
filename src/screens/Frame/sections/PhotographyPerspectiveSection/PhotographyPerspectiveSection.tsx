@@ -1,3 +1,5 @@
+import { useI18n } from "../../../../i18n";
+
 const leftColumnImages = [
   { src: "/img/rectangle-4328.webp", alt: "Photography collage tile 1" },
   { src: "/img/rectangle-4329.webp", alt: "Photography collage tile 2" },
@@ -61,22 +63,25 @@ const FallColumn = ({
 const SeeMoreLink = (): JSX.Element => {
   const { t } = useI18n();
   return (
-  <a
-    href="https://www.pinterest.com/Dennvor/"
-    target="_blank"
-    rel="noreferrer"
-    aria-label="See more photography on Pinterest"
-    className="block"
-  >
-    <p className="[font-family:'Rafles-Regular',Helvetica] font-normal text-transparent text-[24px] desk:text-[33px] tracking-[0] leading-[1.3] desk:leading-[31.5px]">
-      <span className="text-[#fe7f2d]">{t("selected.more")}</span>
-      <span className="[font-family:'WisnuMan-Regular',Helvetica] text-white">
-        : <br />
-      </span>
-      <span className="[font-family:'WisnuMan-Regular',Helvetica] text-[#ffe9d9] underline">
-        {t("selected.pinterest")}
-      </span>
-    </p>
+    <a
+      href="https://www.pinterest.com/Dennvor/"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="See my poster work on Pinterest"
+      className="group flex items-center gap-3 sm:gap-4"
+    >
+      <img
+        className="h-11 w-11 shrink-0 object-cover transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12 desk:h-[52px] desk:w-[52px]"
+        alt=""
+        src="/img/image-58.webp"
+        aria-hidden="true"
+      />
+      <p className="[font-family:'Rafles-Regular',Helvetica] text-[18px] font-normal leading-[1.15] tracking-[0] text-transparent sm:text-[20px] desk:text-[23px]">
+        <span className="text-[#fe7f2d]">{t("selected.more")}: </span>
+        <span className="[font-family:'WisnuMan-Regular',Helvetica] text-[#ffe9d9] underline decoration-[#ffe9d9]/60 underline-offset-4 transition-colors duration-300 group-hover:text-[#fe7f2d]">
+          {t("selected.pinterest")}
+        </span>
+      </p>
     </a>
   );
 };
@@ -186,17 +191,10 @@ export const PhotographyPerspectiveSection = (): JSX.Element => {
             <span className="text-[#ffe9d9]/90">{t("selected.body.after")}</span>
           </p>
         </div>
-        <img
-          className="absolute top-[580px] left-[888px] w-[74px] h-[74px] aspect-[1] object-cover"
-          alt=""
-          src="/img/image-58.webp"
-          aria-hidden="true"
-        />
-        <div className="absolute top-[586px] left-[967px]">
+        <div className="absolute left-[888px] top-[592px] w-[470px]">
           <SeeMoreLink />
         </div>
       </div>
     </section>
   );
 };
-import { useI18n } from "../../../../i18n";

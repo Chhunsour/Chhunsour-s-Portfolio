@@ -44,7 +44,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "selected.body.accent": "UI/UX",
     "selected.body.after": ", and web work.",
     "selected.more": "See more",
-    "selected.pinterest": "View photography on Pinterest",
+    "selected.pinterest": "View my posters on Pinterest",
     "photo.label": "PHOTOGRAPHY",
     "photo.heading.before": "Then I picked up a ",
     "photo.heading.accent": "camera",
@@ -53,6 +53,8 @@ const translations: Record<Locale, Record<string, string>> = {
     "photo.note": "Light, timing, and small details became part of how I approach every frame—and every interface.",
     "photo.lens": "BEHIND THE LENS",
     "photo.location": "PHNOM PENH",
+    "photo.selected": "SELECTED FRAMES",
+    "photo.swipe": "SWIPE TO EXPLORE →",
     "development.label": "DEVELOPMENT",
     "development.heading.before": "I didn't want to stop at ",
     "development.heading.design": "designing",
@@ -103,6 +105,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "projects.workflow.two": "— Follow-ups on posts, updates, and progress",
     "projects.workflow.three": "— Auto-generated monthly PDF reports",
     "projects.workflow.four": "— A complete CMS for konstructz.com",
+    "projects.workflow.swipe": "SWIPE TO VIEW BOTH SCREENS",
     "projects.konstructz.body": "Designed pixel by pixel in Figma, then hand-coded into a live storefront. Products, prices, and blog posts are managed through my own Workflow CMS.",
     "projects.konstructz.one": "— Designed in Figma and coded by hand",
     "projects.konstructz.two": "— Products, prices, and blogs from my own CMS",
@@ -171,7 +174,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "selected.body.accent": "UI/UX",
     "selected.body.after": " និងការងារវេបសាយរបស់ខ្ញុំ។",
     "selected.more": "មើលបន្ថែម",
-    "selected.pinterest": "មើលស្នាដៃថតរូបនៅ Pinterest",
+    "selected.pinterest": "មើលស្នាដៃប៉ូស្ទ័ររបស់ខ្ញុំនៅ Pinterest",
     "photo.label": "ការថតរូប",
     "photo.heading.before": "ក្រោយមក ខ្ញុំក៏ចាប់កាន់ ",
     "photo.heading.accent": "កាមេរ៉ា",
@@ -180,6 +183,8 @@ const translations: Record<Locale, Record<string, string>> = {
     "photo.note": "ពន្លឺ ពេលវេលា និងចំណុចតូចៗ បានផ្លាស់ប្តូររបៀបដែលខ្ញុំគិតទាំងការថតរូប និងការរចនាផ្ទៃប្រើប្រាស់។",
     "photo.lens": "នៅពីក្រោយកាមេរ៉ា",
     "photo.location": "ភ្នំពេញ",
+    "photo.selected": "រូបថតជ្រើសរើស",
+    "photo.swipe": "អូសដើម្បីមើលបន្ថែម →",
     "development.label": "ការអភិវឌ្ឍ",
     "development.heading.before": "ខ្ញុំមិនចង់ត្រឹមតែ ",
     "development.heading.design": "រចនា",
@@ -230,6 +235,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "projects.workflow.two": "— តាមដានការបង្ហោះ អាប់ដេត និងវឌ្ឍនភាព",
     "projects.workflow.three": "— បង្កើតរបាយការណ៍ PDF ប្រចាំខែដោយស្វ័យប្រវត្តិ",
     "projects.workflow.four": "— CMS ពេញលេញសម្រាប់ konstructz.com",
+    "projects.workflow.swipe": "អូសដើម្បីមើលអេក្រង់ទាំងពីរ",
     "projects.konstructz.body": "រចនាលម្អិតក្នុង Figma រួចសរសេរកូដដោយដៃទៅជាហាងអនឡាញពិត។ ផលិតផល តម្លៃ និងអត្ថបទប្លុក ត្រូវបានគ្រប់គ្រងតាម Workflow CMS ដែលខ្ញុំបង្កើតផ្ទាល់។",
     "projects.konstructz.one": "— រចនាក្នុង Figma និងសរសេរកូដដោយដៃ",
     "projects.konstructz.two": "— ផលិតផល តម្លៃ និងប្លុកពី CMS ផ្ទាល់ខ្លួន",
@@ -298,7 +304,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "selected.body.accent": "UI/UX",
     "selected.body.after": " 和网页作品。",
     "selected.more": "查看更多",
-    "selected.pinterest": "在 Pinterest 查看摄影作品",
+    "selected.pinterest": "在 Pinterest 查看我的海报作品",
     "photo.label": "摄影",
     "photo.heading.before": "后来，我拿起了 ",
     "photo.heading.accent": "相机",
@@ -307,6 +313,8 @@ const translations: Record<Locale, Record<string, string>> = {
     "photo.note": "光线、时机和细节，开始影响我处理每一张照片，也影响我设计每一个界面。",
     "photo.lens": "镜头背后",
     "photo.location": "金边",
+    "photo.selected": "精选照片",
+    "photo.swipe": "滑动浏览 →",
     "development.label": "开发",
     "development.heading.before": "我不想只停留在 ",
     "development.heading.design": "设计",
@@ -357,6 +365,7 @@ const translations: Record<Locale, Record<string, string>> = {
     "projects.workflow.two": "— 跟进发布、更新与工作进度",
     "projects.workflow.three": "— 自动生成月度 PDF 报告",
     "projects.workflow.four": "— 内置 konstructz.com 的完整 CMS",
+    "projects.workflow.swipe": "滑动查看两个界面",
     "projects.konstructz.body": "先在 Figma 中逐像素设计，再手写代码完成线上商店。产品、价格与博客内容均由我自己的 Workflow CMS 管理。",
     "projects.konstructz.one": "— Figma 设计，手写代码实现",
     "projects.konstructz.two": "— 使用自己的 CMS 管理产品、价格与博客",
@@ -413,19 +422,16 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.dataset.locale = locale;
   }, [locale]);
 
-  // fade the page out, swap language, fade back in
+  // swap instantly; the new text settles in with a quick rise
   const changeLocale = (next: Locale) => {
     if (next === locale) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setLocale(next);
-      return;
-    }
+    setLocale(next);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const root = document.documentElement;
-    root.classList.add("locale-switching");
-    window.setTimeout(() => {
-      setLocale(next);
-      window.setTimeout(() => root.classList.remove("locale-switching"), 80);
-    }, 240);
+    root.classList.remove("locale-settle");
+    void root.offsetWidth; // restart the animation on rapid switching
+    root.classList.add("locale-settle");
+    window.setTimeout(() => root.classList.remove("locale-settle"), 500);
   };
 
   const value = useMemo(
