@@ -96,33 +96,33 @@ export const DeveloperOriginSection = (): JSX.Element => {
             src="/img/image-53.webp"
           />
         </div>
-        <p className="absolute left-[630px] top-[370px] w-[610px] [font-family:'WisnuMan-Regular',Helvetica] text-[30px] font-normal leading-[1.55] tracking-[0]">
+        <p className="absolute left-[630px] top-[358px] w-[610px] [font-family:'WisnuMan-Regular',Helvetica] text-[30px] font-normal leading-[1.55] tracking-[0]">
           {bodyParts.map((part, index) => (
             <span key={`body-part-${index}`} className={part.className}>
               {part.text}
             </span>
           ))}
         </p>
-        <p className="absolute left-[630px] top-[590px] w-[540px] [font-family:'WisnuMan-Regular',Helvetica] text-[22px] font-normal leading-[1.55] tracking-[0] text-[#ffe9d9]/55">
+        <p className="absolute left-[630px] top-[578px] w-[540px] [font-family:'WisnuMan-Regular',Helvetica] text-[22px] font-normal leading-[1.55] tracking-[0] text-[#ffe9d9]/55">
           {t("origin.note")}
         </p>
         <a
           href="#photography-perspective"
-          className="absolute left-[630px] top-[688px] block"
+          className="absolute left-[630px] top-[684px] block"
         >
-          <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[18px] font-normal leading-[normal] tracking-[0] text-[#ffe9d9]/50">
+          <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[19px] font-normal leading-[normal] tracking-[0] text-[#ffe9d9]/60">
             {t("origin.pieces")}{" "}
             <span className="text-[#fe7f2d]">↓</span>
           </p>
-          <div className="mt-4 flex items-start gap-5">
+          <div className="mt-3 flex items-start gap-5">
             <img
-              className="h-[160px] w-auto"
+              className="h-[150px] w-auto border border-[#ffe9d9]/15"
               alt="Early design work"
               src="/img/no-mockup-1-4-1.webp"
               loading="lazy"
             />
             <img
-              className="h-[160px] w-auto"
+              className="h-[150px] w-auto border border-[#ffe9d9]/15"
               alt="Early menu design"
               src="/img/3-menu-quality-2.webp"
               loading="lazy"
