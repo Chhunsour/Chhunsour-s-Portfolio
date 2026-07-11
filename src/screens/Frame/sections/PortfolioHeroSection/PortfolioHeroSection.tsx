@@ -84,13 +84,13 @@ export const PortfolioHeroSection = (): JSX.Element => {
             src="/img/untitled-6-1.webp"
           />
         </div>
-        <ul className="mx-auto mt-9 grid w-full max-w-[420px] list-none grid-cols-2 gap-x-4 gap-y-4 p-0 sm:max-w-[520px]">
+        <ul className="mx-auto mt-9 grid w-full max-w-[420px] list-none grid-cols-2 gap-x-3 gap-y-4 p-0 sm:max-w-[520px]">
           {roles.map((roleKey) => (
-            <li key={roleKey} className="flex items-center gap-2.5">
-              <span aria-hidden="true" className="text-xs text-[#fe7f2d]">
+            <li key={roleKey} className="flex items-center gap-2">
+              <span aria-hidden="true" className="text-[11px] text-[#fe7f2d]">
                 ✦
               </span>
-              <span className="[font-family:'OTTERO-Regular',Helvetica] text-[13px] font-normal tracking-[2px] text-[#ffe9d9] sm:text-base">
+              <span className="whitespace-nowrap [font-family:'OTTERO-Regular',Helvetica] text-[11px] font-normal tracking-[1.5px] text-[#ffe9d9] sm:text-sm sm:tracking-[2px]">
                 {t(roleKey)}
               </span>
             </li>

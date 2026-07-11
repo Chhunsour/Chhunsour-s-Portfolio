@@ -1,5 +1,13 @@
 import { useI18n } from "../../../../i18n";
 
+const posterShelf = [
+  "/img/hotpot-at-italy-1.webp",
+  "/img/1-cover-copy-2.webp",
+  "/img/no-mockup-1-4-1.webp",
+  "/img/1-4-1.webp",
+  "/img/3-menu-quality-2.webp",
+];
+
 const toolIcons = [
   { src: "/img/image-32.webp", alt: "Adobe Photoshop", name: "PHOTOSHOP" },
   { src: "/img/image-31.webp", alt: "Adobe Illustrator", name: "ILLUSTRATOR" },
@@ -42,7 +50,24 @@ export const VisualCommunicationSection = (): JSX.Element => {
           </p>
         </div>
 
-        <div className="mt-16 border-y border-[#ffe9d9]/15 py-8 desk:mt-24 desk:py-10">
+        <div className="poster-strip mt-14 overflow-hidden desk:mt-16" aria-hidden="true">
+          <div
+            className="ticker-track flex items-center"
+            style={{ animationDuration: "44s" }}
+          >
+            {[...posterShelf, ...posterShelf].map((src, index) => (
+              <img
+                key={index}
+                className="mr-6 h-[120px] w-auto max-w-none border border-[#ffe9d9]/12 opacity-85 transition-opacity duration-300 hover:opacity-100 sm:h-[150px] desk:h-[170px]"
+                alt=""
+                src={src}
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-14 border-y border-[#ffe9d9]/15 py-8 desk:mt-16 desk:py-10">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="[font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[4px] text-[#ffe9d9]/45 sm:text-sm">
               {t("visual.toolkit")}

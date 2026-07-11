@@ -292,6 +292,7 @@ export const Frame = (): JSX.Element => {
     // Reveal the meaningful outer block once; nested media inherits the motion.
     const els = all.filter((el) => {
       if (el.closest("[aria-hidden='true']")) return false;
+      if (el.matches("h1, h2, h3")) return true;
       return !all.some(
         (other) =>
           other !== el &&
