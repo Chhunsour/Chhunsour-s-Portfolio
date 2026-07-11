@@ -33,21 +33,6 @@ const RoleLine = ({ className }: { className: string }): JSX.Element => {
   );
 };
 
-const ScrollCue = ({ className }: { className: string }): JSX.Element => {
-  const { t } = useI18n();
-  return (
-  <div
-    aria-hidden="true"
-    className={`flex flex-col items-center gap-3 ${className}`}
-  >
-    <span className="[font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[4px] text-[#ffe9d9]/40">
-      {t("global.scroll")}
-    </span>
-    <span className="scroll-cue-line" />
-    </div>
-  );
-};
-
 export const PortfolioHeroSection = (): JSX.Element => {
   const { t } = useI18n();
   return (
@@ -76,6 +61,11 @@ export const PortfolioHeroSection = (): JSX.Element => {
             className="relative aspect-[5/4] w-full object-cover object-[center_22%]"
             alt="Portfolio portrait"
             src="/img/untitled-6-1.webp"
+            width={868}
+            height={976}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
           />
         </div>
         <div
@@ -96,7 +86,6 @@ export const PortfolioHeroSection = (): JSX.Element => {
             </li>
           ))}
         </ul>
-        <ScrollCue className="mt-9 self-center" />
       </div>
 
       {/* ---- desktop (1440px canvas) ---- */}
@@ -127,10 +116,14 @@ export const PortfolioHeroSection = (): JSX.Element => {
             className="relative aspect-[0.89] h-[488px] w-[434px] object-cover"
             alt="Portfolio portrait"
             src="/img/untitled-6-1.webp"
+            width={868}
+            height={976}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
           />
         </div>
         <RoleLine className="absolute left-[57px] top-[832px]" />
-        <ScrollCue className="absolute bottom-8 left-1/2 -translate-x-1/2" />
       </div>
     </section>
   );

@@ -56,6 +56,10 @@ export const DeveloperOriginSection = (): JSX.Element => {
             className="relative w-full aspect-[0.86] object-cover"
             alt="Portrait representing the start in graphic design"
             src="/img/image-53.webp"
+            width={465}
+            height={540}
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[20px] font-normal leading-[1.6] sm:text-[24px]">
@@ -94,6 +98,10 @@ export const DeveloperOriginSection = (): JSX.Element => {
             className="relative h-[500px] w-[430px] object-cover"
             alt="Portrait representing the start in graphic design"
             src="/img/image-53.webp"
+            width={465}
+            height={540}
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <p className="absolute left-[630px] top-[358px] w-[610px] [font-family:'WisnuMan-Regular',Helvetica] text-[30px] font-normal leading-[1.55] tracking-[0]">
@@ -119,13 +127,19 @@ export const DeveloperOriginSection = (): JSX.Element => {
               className="h-[150px] w-auto border border-[#ffe9d9]/15"
               alt="Early design work"
               src="/img/no-mockup-1-4-1.webp"
+              width={1100}
+              height={620}
               loading="lazy"
+              decoding="async"
             />
             <img
               className="h-[150px] w-auto border border-[#ffe9d9]/15"
               alt="Early menu design"
               src="/img/3-menu-quality-2.webp"
+              width={1100}
+              height={784}
               loading="lazy"
+              decoding="async"
             />
           </div>
         </a>
