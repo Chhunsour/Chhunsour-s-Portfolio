@@ -413,10 +413,25 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.dataset.locale = locale;
   }, [locale]);
 
+  // fade the page out, swap language, fade back in
+  const changeLocale = (next: Locale) => {
+    if (next === locale) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setLocale(next);
+      return;
+    }
+    const root = document.documentElement;
+    root.classList.add("locale-switching");
+    window.setTimeout(() => {
+      setLocale(next);
+      window.setTimeout(() => root.classList.remove("locale-switching"), 80);
+    }, 240);
+  };
+
   const value = useMemo(
     () => ({
       locale,
-      setLocale,
+      setLocale: changeLocale,
       t: (key: string) => translations[locale][key] ?? translations.en[key] ?? key,
     }),
     [locale],
@@ -452,7 +467,7 @@ export const LanguageSwitcher = () => {
           title={option.title}
           aria-pressed={locale === option.value}
           onClick={() => setLocale(option.value)}
-          className={`min-h-11 min-w-9 px-2 py-2 text-center text-[11px] leading-none transition-colors duration-200 sm:min-h-0 sm:min-w-11 sm:px-3 sm:text-xs ${
+          className={`min-h-11 min-w-9 px-2 py-2 text-center text-[11px] leading-none transition-all duration-200 active:scale-90 sm:min-h-0 sm:min-w-11 sm:px-3 sm:text-xs ${
             locale === option.value
               ? "bg-[#fe7f2d] text-[#272727]"
               : "text-[#ffe9d9]/65 hover:text-[#ffe9d9]"

@@ -765,6 +765,40 @@ html[data-locale="zh"] #contact-heading span {
   }
 }
 
+/* ---- Cycling browser showcase (projects section) ---- */
+/* 18s cycle / 3 slides = 6s each; slide delays are set inline as i * 6s */
+.cycle-item {
+  opacity: 0;
+  animation: cycle-fade 18s infinite;
+}
+
+@keyframes cycle-fade {
+  0% {
+    opacity: 0;
+  }
+  3%,
+  33% {
+    opacity: 1;
+  }
+  36%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cycle:hover .cycle-item {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cycle-item {
+    animation: none;
+  }
+  .cycle-item:first-child {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 767px) {
   .ticker-item {
     min-height: 52px;
@@ -918,5 +952,29 @@ html[data-locale="zh"] #contact-heading span {
     transform: none !important;
     filter: none !important;
     clip-path: none !important;
+  }
+}
+
+/* brand word stays in Mogin in every language */
+html[data-locale="km"] .latin-display,
+html[data-locale="zh"] .latin-display {
+  font-family: "Mogin-Regular", Helvetica !important;
+  letter-spacing: 0 !important;
+}
+
+/* ---- language switch transition ---- */
+body {
+  transition: opacity 0.24s ease, filter 0.24s ease;
+}
+
+html.locale-switching body {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.locale-switching body {
+    opacity: 1;
+    filter: none;
   }
 }
