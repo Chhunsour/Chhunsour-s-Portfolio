@@ -56,35 +56,35 @@ export const PortfolioHeroSection = (): JSX.Element => {
       className="relative w-full overflow-hidden desk:h-[1024px] desk:w-[1440px]"
     >
       {/* ---- mobile / tablet (below 1440px) ---- */}
-      <div className="flex min-h-[100svh] flex-col justify-center px-5 pb-12 pt-24 sm:px-10 desk:hidden">
-        <p className="eyebrow mb-5">CHHUNSOUR · 2026</p>
-        <h1 className="latin-display whitespace-nowrap [font-family:'Mogin-Regular',Helvetica] text-[13.5vw] font-normal leading-[1.02] text-[#fe7f2d] sm:text-[72px] md:text-[84px]">
+      <div className="mx-auto flex min-h-[100svh] w-full max-w-[560px] flex-col justify-center px-5 pb-10 pt-24 sm:px-10 desk:hidden">
+        <p className="eyebrow mb-4">CHHUNSOUR · 2026</p>
+        <h1 className="latin-display whitespace-nowrap [font-family:'Mogin-Regular',Helvetica] text-[13.5vw] font-normal leading-[1] text-[#fe7f2d] sm:text-[64px]">
           PORTFOLIO
         </h1>
-        {[
-          { drift: "drift-a", opacity: "opacity-50", travel: "[--drift:-14px]" },
-          { drift: "drift-b", opacity: "opacity-25", travel: "[--drift:14px]" },
-        ].map((row) => (
-          <div
-            key={row.drift}
-            aria-hidden="true"
-            className={`${row.drift} ${row.opacity} ${row.travel} latin-display whitespace-nowrap [font-family:'Mogin-Regular',Helvetica] text-[13.5vw] font-normal leading-[1.02] text-transparent [-webkit-text-stroke:1.5px_#ffe9d9] sm:text-[72px] md:text-[84px]`}
-          >
-            PORTFOLIO
-          </div>
-        ))}
-        <div className="relative -mt-[15vw] ml-auto w-[82%] max-w-[400px] sm:-mt-16 md:max-w-[440px]">
+        <div
+          aria-hidden="true"
+          className="drift-a latin-display whitespace-nowrap [font-family:'Mogin-Regular',Helvetica] text-[13.5vw] font-normal leading-[1] text-transparent opacity-50 [--drift:-14px] [-webkit-text-stroke:1.5px_#ffe9d9] sm:text-[64px]"
+        >
+          PORTFOLIO
+        </div>
+        <div className="relative mt-5 sm:mt-6">
           <div
             aria-hidden="true"
             className="absolute left-3 top-3 h-full w-full border-2 border-[#fe7f2d]/60"
           />
           <img
-            className="relative aspect-[0.89] w-full object-cover"
+            className="relative aspect-[5/4] w-full object-cover object-[center_22%]"
             alt="Portfolio portrait"
             src="/img/untitled-6-1.webp"
           />
         </div>
-        <ul className="mx-auto mt-9 grid w-full max-w-[420px] list-none grid-cols-2 gap-x-3 gap-y-4 p-0 sm:max-w-[520px]">
+        <div
+          aria-hidden="true"
+          className="drift-b mt-4 latin-display whitespace-nowrap [font-family:'Mogin-Regular',Helvetica] text-[13.5vw] font-normal leading-[1] text-transparent opacity-25 [--drift:14px] [-webkit-text-stroke:1.5px_#ffe9d9] sm:text-[64px]"
+        >
+          PORTFOLIO
+        </div>
+        <ul className="mt-7 grid w-full list-none grid-cols-2 gap-x-3 gap-y-4 p-0">
           {roles.map((roleKey) => (
             <li key={roleKey} className="flex items-center gap-2">
               <span aria-hidden="true" className="text-[11px] text-[#fe7f2d]">
@@ -96,7 +96,7 @@ export const PortfolioHeroSection = (): JSX.Element => {
             </li>
           ))}
         </ul>
-        <ScrollCue className="mt-10 self-center" />
+        <ScrollCue className="mt-9 self-center" />
       </div>
 
       {/* ---- desktop (1440px canvas) ---- */}
