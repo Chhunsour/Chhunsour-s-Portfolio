@@ -33,6 +33,44 @@ const Browser = ({
   </div>
 );
 
+/* ponytail: slide timing (i * 6s) is coupled to the 18s cycle-fade keyframes — update both together */
+const CycleBrowser = ({
+  slides,
+}: {
+  slides: { src: string; alt: string; url: string }[];
+}): JSX.Element => (
+  <div className="cycle overflow-hidden rounded-lg border border-[#ffe9d9]/15 bg-[#1e1e1e] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+    <div className="flex items-center gap-2 border-b border-[#ffe9d9]/10 px-5 py-3">
+      <span className="h-3 w-3 rounded-full bg-[#fe7f2d]" />
+      <span className="h-3 w-3 rounded-full bg-[#ffe9d9]/30" />
+      <span className="h-3 w-3 rounded-full bg-[#ffe9d9]/30" />
+      <span className="ml-4 grid rounded bg-[#272727] px-4 py-1 font-mono text-[12px] text-[#ffe9d9]/50">
+        {slides.map((slide, i) => (
+          <span
+            key={slide.url}
+            className="cycle-item col-start-1 row-start-1 truncate"
+            style={{ animationDelay: `${i * 6}s` }}
+          >
+            {slide.url}
+          </span>
+        ))}
+      </span>
+    </div>
+    <div className="grid">
+      {slides.map((slide, i) => (
+        <img
+          key={slide.src}
+          className="cycle-item col-start-1 row-start-1 block h-full w-full object-cover object-top"
+          alt={slide.alt}
+          src={slide.src}
+          loading="lazy"
+          style={{ animationDelay: `${i * 6}s` }}
+        />
+      ))}
+    </div>
+  </div>
+);
+
 export const ProjectsSection = (): JSX.Element => {
   const { t } = useI18n();
   return (
@@ -125,10 +163,24 @@ export const ProjectsSection = (): JSX.Element => {
           </ul>
         </div>
         <div className="relative mt-10 desk:mt-16">
-          <Browser
-            src="/img/projects/konstructz-desktop.webp"
-            alt="Konstructz e-commerce website on desktop"
-            url="konstructz.com"
+          <CycleBrowser
+            slides={[
+              {
+                src: "/img/projects/konstructz-desktop.webp",
+                alt: "Konstructz e-commerce website on desktop",
+                url: "konstructz.com",
+              },
+              {
+                src: "/img/projects/workflow-cms-product.webp",
+                alt: "Editing a Konstructz product inside the Workflow CMS",
+                url: "workflow — product editor",
+              },
+              {
+                src: "/img/projects/workflow-cms-blog.webp",
+                alt: "Writing a Konstructz blog post inside the Workflow CMS",
+                url: "workflow — blog editor",
+              },
+            ]}
           />
           <img
             className="absolute -bottom-8 right-3 w-[110px] rounded-[16px] border-4 border-[#101010] shadow-[0_30px_80px_rgba(0,0,0,0.7)] sm:w-[150px] desk:-bottom-14 desk:right-12 desk:w-[220px] desk:rounded-[30px] desk:border-[6px]"
@@ -137,21 +189,9 @@ export const ProjectsSection = (): JSX.Element => {
             loading="lazy"
           />
         </div>
-        <p className="mt-14 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[4px] text-[#ffe9d9]/45 desk:mt-28">
+        <p className="mt-14 max-w-[70%] [font-family:'OTTERO-Regular',Helvetica] text-sm leading-[2] tracking-[4px] text-[#ffe9d9]/45 desk:mt-24 desk:max-w-none">
           {t("projects.behind")}
         </p>
-        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 desk:gap-10">
-          <Browser
-            src="/img/projects/workflow-cms-product.webp"
-            alt="Editing a Konstructz product inside the Workflow CMS"
-            url="workflow — product editor"
-          />
-          <Browser
-            src="/img/projects/workflow-cms-blog.webp"
-            alt="Writing a Konstructz blog post inside the Workflow CMS"
-            url="workflow — blog editor"
-          />
-        </div>
       </div>
 
       {/* ── Project 03: Darila Official ───────────────────────────── */}
