@@ -1,7 +1,7 @@
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { Fragment, useEffect, useRef } from "react";
-import { BuildAmbitionSection } from "./sections/BuildAmbitionSection";
+import { LanguageSwitcher, useI18n } from "../../i18n";
 import { ContactSection } from "./sections/ContactSection";
 import { DevelopmentEraSection } from "./sections/DevelopmentEraSection";
 import { DevelopmentJourneySection } from "./sections/DevelopmentJourneySection";
@@ -20,7 +20,6 @@ const sections = [
   { id: "visual-communication", Component: VisualCommunicationSection },
   { id: "photography-perspective", Component: PhotographyPerspectiveSection },
   { id: "photography-reflection", Component: PhotographyReflectionSection },
-  { id: "build-ambition", Component: BuildAmbitionSection },
   { id: "full-production", Component: FullProductionSection },
   { id: "development-era", Component: DevelopmentEraSection },
   { id: "development-journey", Component: DevelopmentJourneySection },
@@ -29,12 +28,7 @@ const sections = [
   { id: "contact", Component: ContactSection },
 ];
 
-const tickerItems = [
-  "UX/UI DESIGNER",
-  "GRAPHIC DESIGNER",
-  "SOFTWARE DEVELOPER",
-  "PHOTOGRAPHER",
-];
+const tickerItemKeys = ["role.ux", "role.graphic", "role.software", "role.photo"];
 
 // sum-of-waves terrain field; each term's phase moves at its own speed,
 // so contour cells continuously merge and split
@@ -53,12 +47,40 @@ const TOPO_TERMS = [
   [2, 3, 0.18, 3.8, 0.07],
 ];
 
+// Edge indexes: 0 top, 1 right, 2 bottom, 3 left. Keeping this lookup
+// outside the render loop avoids rebuilding it for every contour cell.
+const MARCHING_SEGMENTS: Record<number, [number, number][]> = {
+  1: [[3, 2]],
+  2: [[2, 1]],
+  3: [[3, 1]],
+  4: [[0, 1]],
+  5: [[3, 0], [2, 1]],
+  6: [[0, 2]],
+  7: [[3, 0]],
+  8: [[0, 3]],
+  9: [[0, 2]],
+  10: [[0, 1], [2, 3]],
+  11: [[0, 1]],
+  12: [[1, 3]],
+  13: [[1, 2]],
+  14: [[2, 3]],
+};
+
 export const Frame = (): JSX.Element => {
   const topoRef = useRef<HTMLCanvasElement>(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ autoRaf: true, anchors: true });
+    // Native touch scrolling is already smooth and cheaper on mobile.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const lenis = new Lenis({
+      autoRaf: true,
+      anchors: true,
+      smoothWheel: true,
+      lerp: 0.085,
+      wheelMultiplier: 0.85,
+    });
     return () => lenis.destroy();
   }, []);
 
@@ -67,16 +89,27 @@ export const Frame = (): JSX.Element => {
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    const CELL = 10;
-    const LEVELS = 7;
+    let cell = window.innerWidth < 768 ? 18 : 16;
+    const LEVELS = 6;
     const RANGE = 2.2; // fixed field range keeps line density calm
     const TAU = Math.PI * 2;
+    let viewWidth = window.innerWidth;
+    let viewHeight = window.innerHeight;
+    let cols = Math.ceil(viewWidth / cell);
+    let rows = Math.ceil(viewHeight / cell);
+    let vals = new Float32Array((cols + 1) * (rows + 1));
 
     const resize = () => {
       // render at device resolution so lines are crisp on Retina
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
+      viewWidth = window.innerWidth;
+      viewHeight = window.innerHeight;
+      cell = viewWidth < 768 ? 18 : 16;
+      cols = Math.ceil(viewWidth / cell);
+      rows = Math.ceil(viewHeight / cell);
+      vals = new Float32Array((cols + 1) * (rows + 1));
+      canvas.width = viewWidth * dpr;
+      canvas.height = viewHeight * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
@@ -88,37 +121,31 @@ export const Frame = (): JSX.Element => {
     let offX = 0;
     let offY = 0;
     const onMove = (e: MouseEvent) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+      mouse.x = (e.clientX / viewWidth) * 2 - 1;
+      mouse.y = (e.clientY / viewHeight) * 2 - 1;
       mouse.px = e.clientX;
       mouse.py = e.clientY;
     };
     window.addEventListener("mousemove", onMove);
 
     const draw = (t: number) => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const cols = Math.ceil(w / CELL);
-      const rows = Math.ceil(h / CELL);
-
-      const vals = new Float32Array((cols + 1) * (rows + 1));
       for (let r = 0; r <= rows; r++) {
         for (let c = 0; c <= cols; c++) {
-          const x = c * CELL + offX;
-          const y = r * CELL + offY;
+          const x = c * cell + offX;
+          const y = r * cell + offY;
           let v = 0;
           for (const [nx, ny, amp, ph, sp] of TOPO_TERMS) {
             v += amp * Math.sin(TAU * ((nx * x) / 1600 + (ny * y) / 1200) + ph + sp * 2.5 * t);
           }
           // gentle rise under the cursor so contours bend toward it
-          const dx = c * CELL - mouse.px;
-          const dy = r * CELL - mouse.py;
+          const dx = c * cell - mouse.px;
+          const dy = r * cell - mouse.py;
           v += 0.25 * Math.exp(-(dx * dx + dy * dy) / 245000);
           vals[r * (cols + 1) + c] = v;
         }
       }
 
-      ctx.clearRect(0, 0, w, h);
+      ctx.clearRect(0, 0, viewWidth, viewHeight);
       for (let l = 0; l < LEVELS; l++) {
         const level = -RANGE + ((l + 0.5) / LEVELS) * RANGE * 2;
         const major = l % 4 === 0;
@@ -139,21 +166,18 @@ export const Frame = (): JSX.Element => {
             if (br > level) idx |= 2;
             if (bl > level) idx |= 1;
             if (idx === 0 || idx === 15) continue;
-            const x0 = c * CELL;
-            const y0 = r * CELL;
+            const x0 = c * cell;
+            const y0 = r * cell;
             // interpolated crossing points on each cell edge
-            const top: [number, number] = [x0 + (CELL * (level - tl)) / (tr - tl), y0];
-            const right: [number, number] = [x0 + CELL, y0 + (CELL * (level - tr)) / (br - tr)];
-            const bottom: [number, number] = [x0 + (CELL * (level - bl)) / (br - bl), y0 + CELL];
-            const left: [number, number] = [x0, y0 + (CELL * (level - tl)) / (bl - tl)];
-            const SEGS: Record<number, [number, number][][]> = {
-              1: [[left, bottom]], 2: [[bottom, right]], 3: [[left, right]],
-              4: [[top, right]], 5: [[left, top], [bottom, right]], 6: [[top, bottom]],
-              7: [[left, top]], 8: [[top, left]], 9: [[top, bottom]],
-              10: [[top, right], [bottom, left]], 11: [[top, right]],
-              12: [[right, left]], 13: [[right, bottom]], 14: [[bottom, left]],
-            };
-            for (const [a, b] of SEGS[idx]) {
+            const points: [number, number][] = [
+              [x0 + (cell * (level - tl)) / (tr - tl), y0],
+              [x0 + cell, y0 + (cell * (level - tr)) / (br - tr)],
+              [x0 + (cell * (level - bl)) / (br - bl), y0 + cell],
+              [x0, y0 + (cell * (level - tl)) / (bl - tl)],
+            ];
+            for (const [aIndex, bIndex] of MARCHING_SEGMENTS[idx]) {
+              const a = points[aIndex];
+              const b = points[bIndex];
               ctx.moveTo(a[0], a[1]);
               ctx.lineTo(b[0], b[1]);
             }
@@ -167,7 +191,7 @@ export const Frame = (): JSX.Element => {
     let last = 0;
     const loop = (now: number) => {
       raf = requestAnimationFrame(loop);
-      if (now - last < 33) return; // ~30fps is plenty for a background
+      if (now - last < 42) return; // ~24fps keeps the background light
       const dt = Math.min((now - last) / 1000, 0.1);
       last = now;
       // ease the drift direction toward the cursor
@@ -224,11 +248,11 @@ export const Frame = (): JSX.Element => {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4 sm:px-8 desk:px-12 desk:py-6">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-gradient-to-b from-[#272727] from-45% via-[#272727]/75 to-transparent px-5 pb-6 pt-4 sm:px-8 desk:bg-none desk:px-12 desk:py-6">
         <a
           href="#portfolio-hero"
           aria-label="Back to top"
-          className="relative block h-[38px] w-[51px] transition-transform duration-300 hover:scale-110"
+          className="pointer-events-auto relative block h-[38px] w-[51px] transition-transform duration-300 hover:scale-110"
         >
           <img
             className="absolute left-[13px] top-0 h-[38px] w-[37px]"
@@ -243,12 +267,15 @@ export const Frame = (): JSX.Element => {
             src="/img/vector-637.svg"
           />
         </a>
-        <a
-          href="mailto:sengchhunsour@gmail.com"
-          className="bg-[#fe7f2d] px-5 py-3 sm:px-7 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#272727] transition-all duration-300 hover:scale-105 hover:bg-[#ffe9d9] active:scale-95"
-        >
-          LET&apos;S TALK
-        </a>
+        <div className="pointer-events-auto flex items-center gap-2 sm:gap-3">
+          <LanguageSwitcher />
+          <a
+            href="mailto:sengchhunsour@gmail.com"
+            className="hidden bg-[#fe7f2d] px-5 py-3 text-sm tracking-[3px] text-[#272727] transition-all duration-300 hover:scale-105 hover:bg-[#ffe9d9] active:scale-95 sm:block [font-family:'OTTERO-Regular',Helvetica]"
+          >
+            {t("global.talk")}
+          </a>
+        </div>
       </header>
       <main
         className="relative bg-[#272727] w-full flex flex-col"
@@ -262,7 +289,12 @@ export const Frame = (): JSX.Element => {
       </div>
       {sections.map(({ id, Component }, index) => (
         <Fragment key={id}>
-          <section id={id} className="relative z-[1] mx-auto w-full desk:w-[1440px]">
+          <section
+            id={id}
+            className={`relative z-[1] mx-auto w-full ${
+              id === "photography-reflection" ? "desk:w-full" : "desk:w-[1440px]"
+            }`}
+          >
             <Component />
           </section>
           {index === 0 && (
@@ -270,9 +302,9 @@ export const Frame = (): JSX.Element => {
               <div className="ticker-track">
                 {[0, 1].map((group) => (
                   <div className="ticker-group" key={`ticker-group-${group}`}>
-                    {tickerItems.map((item) => (
-                      <span key={`${group}-${item}`} className="ticker-item">
-                        <span className="ticker-label">{item}</span>
+                    {tickerItemKeys.map((itemKey) => (
+                      <span key={`${group}-${itemKey}`} className="ticker-item">
+                        <span className="ticker-label">{t(itemKey)}</span>
                         <span className="ticker-star">✦</span>
                       </span>
                     ))}

@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Cal+Sans:400");
 
+@font-face {
+  font-family: "Kantumruy Pro";
+  src: url("/fonts/KantumruyPro.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans SC Portfolio";
+  src: url("/fonts/NotoSansSC-Portfolio.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -437,6 +453,86 @@ body {
   overflow-x: clip;
 }
 
+.font-kantumruy {
+  font-family: "Kantumruy Pro", sans-serif;
+}
+
+html[data-locale="km"] body,
+html[data-locale="km"] :is(h1, h2, h3, p, a, button, li, span, figcaption) {
+  font-family: "Kantumruy Pro", sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-locale="zh"] body,
+html[data-locale="zh"] :is(h1, h2, h3, p, a, button, li, span, figcaption) {
+  font-family: "Noto Sans SC Portfolio", "Noto Sans SC", sans-serif !important;
+  letter-spacing: 0.02em !important;
+}
+
+html[data-locale="km"] :is(h1, h2, h3) {
+  line-height: 1.42 !important;
+}
+
+html[data-locale="km"] :is(p, li) {
+  line-height: 1.75 !important;
+}
+
+html[data-locale="zh"] :is(h1, h2, h3) {
+  line-height: 1.25 !important;
+}
+
+html[data-locale="zh"] :is(p, li) {
+  line-height: 1.7 !important;
+}
+
+html[data-locale] pre,
+html[data-locale] pre * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  letter-spacing: normal !important;
+  line-height: inherit !important;
+}
+
+html[data-locale="km"] .eyebrow,
+html[data-locale="zh"] .eyebrow {
+  letter-spacing: 0.12em !important;
+}
+
+html[data-locale="km"] #contact-heading span,
+html[data-locale="zh"] #contact-heading span {
+  color: #fe7f2d !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+@media (max-width: 767px) {
+  main > section {
+    scroll-margin-top: 76px;
+  }
+
+  html[data-locale="km"] main h2 {
+    font-size: clamp(32px, 9vw, 42px) !important;
+  }
+
+  html[data-locale="zh"] main h2 {
+    font-size: clamp(34px, 9.5vw, 46px) !important;
+  }
+
+  html[data-locale="km"] main h3,
+  html[data-locale="zh"] main h3 {
+    font-size: clamp(25px, 7vw, 34px) !important;
+  }
+
+  html[data-locale="km"] #contact-heading,
+  html[data-locale="zh"] #contact-heading {
+    font-size: clamp(46px, 13vw, 68px) !important;
+  }
+
+  html[data-locale="km"] .eyebrow,
+  html[data-locale="zh"] .eyebrow {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
 /* ---- Livery background (fixed, behind everything) ---- */
 .livery {
   position: fixed;
@@ -630,6 +726,34 @@ body {
   }
 }
 
+/* ---- Waterfall poster columns (desktop graphic-design section) ---- */
+.fall {
+  overflow: hidden;
+}
+
+/* one shared duration keeps every column phase-locked */
+.fall-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: fall-scroll 45s linear infinite;
+}
+
+@keyframes fall-scroll {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall-track {
+    animation: none;
+  }
+}
+
 @media (max-width: 767px) {
   .ticker-item {
     min-height: 52px;
@@ -674,8 +798,7 @@ body {
 #photography-perspective img:hover,
 #visual-communication img:hover,
 #build-ambition img:hover,
-#developer-origin img:hover,
-#photography-reflection img:hover {
+#developer-origin img:hover {
   transform: translateY(-5px) scale(1.04);
   filter: brightness(1.12);
   transition-duration: 0.3s;
@@ -712,20 +835,77 @@ body {
 }
 
 .eyebrow::before {
-  content: "";
-  width: 46px;
-  height: 2px;
-  background: #fe7f2d;
+  content: "✦";
+  font-size: 14px;
 }
 
 .eyebrow-center::after {
-  content: "";
-  width: 46px;
-  height: 2px;
-  background: #fe7f2d;
+  content: "✦";
+  font-size: 14px;
 }
 
 ::selection {
   background: #fe7f2d;
   color: #272727;
+}
+
+/* ---- hero scroll cue ---- */
+.scroll-cue-line {
+  width: 2px;
+  height: 34px;
+  background: linear-gradient(to bottom, #fe7f2d, transparent);
+  animation: scroll-cue 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-line {
+    animation: none;
+  }
+}
+
+/* ---- Pinned photography story ---- */
+@media (prefers-reduced-motion: reduce) {
+  .photography-story {
+    height: auto;
+  }
+
+  .photography-story-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .photography-story-narrative,
+  .photography-story-gallery {
+    position: relative;
+    inset: auto;
+    min-height: 100svh;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .photography-story-gallery > div > div {
+    transform: none !important;
+  }
+
+  .photography-story-gallery [data-story-image] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+  }
 }

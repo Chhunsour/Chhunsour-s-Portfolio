@@ -1,138 +1,85 @@
-const workflowSteps = [
-  {
-    label: "Plan Structure",
-    left: "left-[164px]",
-    top: "top-[577px]",
-  },
-  {
-    label: "Design UX/UI",
-    left: "left-[518px]",
-    top: "top-[577px]",
-  },
-  {
-    label: "Front-End",
-    left: "left-[834px]",
-    top: "top-[577px]",
-  },
-  {
-    label: "Back-End",
-    left: "left-[1103px]",
-    top: "top-[577px]",
-  },
-];
-
-const arrowImages = [
-  {
-    src: "/img/arrow-8.svg",
-    alt: "",
-    className: "absolute top-[581px] left-[465px] w-7 h-[22px]",
-  },
-  {
-    src: "/img/arrow-8.svg",
-    alt: "",
-    className: "absolute top-[581px] left-[779px] w-7 h-[22px]",
-  },
-  {
-    src: "/img/arrow-9.svg",
-    alt: "",
-    className: "absolute top-[776px] left-[709px] w-[22px] h-7",
-  },
-  {
-    src: "/img/arrow-8.svg",
-    alt: "",
-    className: "absolute top-[581px] left-[1050px] w-7 h-[22px]",
-  },
-];
+import { useI18n } from "../../../../i18n";
 
 export const FullProductionSection = (): JSX.Element => {
+  const { t } = useI18n();
+  const workflowSteps = [
+    { title: t("development.plan"), description: t("development.planNote") },
+    { title: t("development.design"), description: t("development.designNote") },
+    { title: t("development.frontend"), description: t("development.frontendNote") },
+    { title: t("development.backend"), description: t("development.backendNote") },
+  ];
+
   return (
     <section
       aria-labelledby="full-production-section-heading"
-      className="relative w-full overflow-hidden desk:h-[1024px] desk:w-[1440px]"
+      className="relative w-full overflow-hidden px-5 py-24 sm:px-10 sm:py-28 desk:min-h-[1024px] desk:w-[1440px] desk:px-[110px] desk:py-[132px]"
     >
-      {/* ---- mobile / tablet: vertical workflow ---- */}
-      <div className="flex flex-col items-center gap-8 px-5 py-16 text-center sm:px-10 desk:hidden">
-        <p className="eyebrow eyebrow-center">05 — DEVELOPMENT</p>
-        <h2 className="[font-family:'WisnuMan-Regular',Helvetica] text-[36px] font-normal leading-[1.2] text-transparent sm:text-[50px] md:max-w-[680px]">
-          <span className="text-[#ffe9d9]">But I wanted to do more than </span>
-          <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-            design
-          </span>
-          <span className="text-[#ffe9d9]"> the screen. I wanted to </span>
-          <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-            build
-          </span>
-          <span className="text-[#ffe9d9]"> it.</span>
-        </h2>
-        <div className="flex max-w-[560px] flex-wrap items-center justify-center gap-x-4 gap-y-3">
+      <div className="mx-auto w-full max-w-[1220px]">
+        <p className="eyebrow">{t("development.label")}</p>
+
+        <div className="mt-9 grid gap-8 desk:mt-12 desk:grid-cols-[minmax(0,780px)_1fr] desk:items-end desk:gap-[90px]">
+          <h2
+            id="full-production-section-heading"
+            className="[font-family:'WisnuMan-Regular',Helvetica] text-[46px] font-normal leading-[1.06] tracking-[-0.025em] text-[#ffe9d9] sm:text-[62px] desk:text-[76px]"
+          >
+            {t("development.heading.before")}
+            <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+              {t("development.heading.design")}
+            </span>{" "}
+            {t("development.heading.middle")}
+            <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+              {t("development.heading.build")}
+            </span>{" "}
+            {t("development.heading.after")}
+          </h2>
+
+          <p className="border-l border-[#fe7f2d]/70 pl-6 [font-family:'WisnuMan-Regular',Helvetica] text-[19px] font-normal leading-[1.6] text-[#ffe9d9]/70 sm:text-[22px] desk:mb-2">
+            {t("development.note")}
+          </p>
+        </div>
+
+        <ol className="mt-14 grid list-none border-y border-[#ffe9d9]/15 p-0 sm:grid-cols-2 desk:mt-20 desk:grid-cols-4">
           {workflowSteps.map((step, index) => (
-            <div key={`m-${step.label}`} className="flex items-center gap-4">
-              {index > 0 && (
-                <img
-                  className="h-[16px] w-5"
-                  alt=""
+            <li
+              key={step.title}
+              className={`group relative min-h-[210px] px-1 py-8 sm:px-7 desk:min-h-[250px] desk:px-8 desk:py-10 ${
+                index % 2 === 1 ? "sm:border-l sm:border-[#ffe9d9]/15" : ""
+              } ${index > 0 ? "desk:border-l desk:border-[#ffe9d9]/15" : ""}`}
+            >
+              <div className="flex items-center gap-3">
+                <span
                   aria-hidden="true"
-                  src="/img/arrow-8.svg"
+                  className="h-2 w-2 bg-[#fe7f2d] transition-transform duration-300 group-hover:rotate-45 group-hover:scale-125"
                 />
-              )}
-              <div className="[font-family:'WisnuMan-Regular',Helvetica] text-[22px] font-normal text-[#ffe9d9] sm:text-[26px]">
-                {step.label}
+                <h3 className="[font-family:'WisnuMan-Regular',Helvetica] text-[30px] font-normal leading-none text-[#ffe9d9] desk:text-[34px]">
+                  {step.title}
+                </h3>
               </div>
-            </div>
+
+              <p className="mt-6 max-w-[230px] [font-family:'WisnuMan-Regular',Helvetica] text-[17px] font-normal leading-[1.55] text-[#ffe9d9]/60 desk:text-[19px]">
+                {step.description}
+              </p>
+
+              {index < workflowSteps.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-8 right-7 hidden text-[24px] text-[#fe7f2d]/65 transition-transform duration-300 group-hover:translate-x-1 desk:block"
+                >
+                  →
+                </span>
+              )}
+            </li>
           ))}
+        </ol>
+
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between desk:mt-14">
+          <p className="[font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[4px] text-[#ffe9d9]/45 sm:text-sm">
+            {t("development.process")}
+          </p>
+          <p className="[font-family:'Rafles-Regular',Helvetica] text-[36px] font-normal leading-none text-[#fe7f2d] sm:text-[44px] desk:text-[52px]">
+            {t("development.production")}
+          </p>
         </div>
-        <p className="[font-family:'Rafles-Regular',Helvetica] text-[44px] font-normal text-[#fe7f2d] sm:text-[56px]">
-          Full Production
-        </p>
-      </div>
-
-      {/* ---- desktop (1440px canvas, unchanged) ---- */}
-      <div className="hidden desk:block">
-      <div className="absolute top-[96px] left-44 w-[1089px] flex justify-center">
-        <p className="eyebrow eyebrow-center">05 — DEVELOPMENT</p>
-      </div>
-      <h2
-        id="full-production-section-heading"
-        className="absolute top-[141px] left-44 w-[1089px] [font-family:'WisnuMan-Regular',Helvetica] font-normal text-transparent text-[90px] text-center tracking-[0] leading-[normal]"
-      >
-        <span className="text-[#ffe9d9]">But I wanted to do more than </span>
-        <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-          design
-        </span>
-        <span className="text-[#ffe9d9]"> the screen. I wanted to </span>
-        <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-          build
-        </span>
-        <span className="text-[#ffe9d9]"> it.</span>
-      </h2>
-      {arrowImages.map((arrow, index) => (
-        <img
-          key={`${arrow.src}-${index}`}
-          className={arrow.className}
-          alt={arrow.alt}
-          aria-hidden="true"
-          src={arrow.src}
-        />
-      ))}
-
-      {workflowSteps.map((step) => (
-        <div
-          key={step.label}
-          className={`absolute ${step.top} ${step.left} [font-family:'WisnuMan-Regular',Helvetica] font-normal text-[#ffe9d9] text-[42px] text-center tracking-[0] leading-[normal] whitespace-nowrap`}
-        >
-          {step.label}
-        </div>
-      ))}
-
-      <p className="absolute top-[856px] left-[448px] [font-family:'Rafles-Regular',Helvetica] font-normal text-[#fe7f2d] text-7xl text-center tracking-[0] leading-[normal] whitespace-nowrap">
-        Full Production
-      </p>
-      <img
-        className="absolute top-[593px] left-[105px] w-[1222px] h-[186px]"
-        alt=""
-        aria-hidden="true"
-        src="/img/vector-639.svg"
-      />
       </div>
     </section>
   );

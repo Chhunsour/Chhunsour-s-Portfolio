@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "../../../../i18n";
 
 const slides = [
   {
-    title: "",
-    note: "",
+    titleKey: "",
+    noteKey: "",
     detail: "",
     file: "",
     code: [] as string[],
   },
   {
-    title: "Frontend Development",
-    note: "Making my designs actually work in the browser.",
+    titleKey: "journey.frontend",
+    noteKey: "journey.frontendNote",
     detail: "STRUCTURE · STYLE · INTERACTION",
     file: "index.html",
     code: [
@@ -23,8 +24,8 @@ const slides = [
     ],
   },
   {
-    title: "Responsive Websites",
-    note: "One design, every screen size.",
+    titleKey: "journey.responsive",
+    noteKey: "journey.responsiveNote",
     detail: "DESKTOP · TABLET · MOBILE",
     file: "styles.css",
     code: [
@@ -38,8 +39,8 @@ const slides = [
     ],
   },
   {
-    title: "Interactive Web Apps",
-    note: "Interfaces that respond, update, and remember.",
+    titleKey: "journey.apps",
+    noteKey: "journey.appsNote",
     detail: "STATE · MOTION · REAL-TIME UI",
     file: "app.tsx",
     code: [
@@ -53,8 +54,8 @@ const slides = [
     ],
   },
   {
-    title: "Backend & Databases",
-    note: "What happens behind the interface stopped being a mystery.",
+    titleKey: "journey.backend",
+    noteKey: "journey.backendNote",
     detail: "SERVERS · DATA · LOGIC",
     file: "terminal",
     code: [
@@ -66,8 +67,8 @@ const slides = [
     ],
   },
   {
-    title: "Authentication & APIs",
-    note: "Real users, real data, connected systems.",
+    titleKey: "journey.auth",
+    noteKey: "journey.authNote",
     detail: "ACCOUNTS · SECURITY · INTEGRATIONS",
     file: "api",
     code: [
@@ -79,8 +80,8 @@ const slides = [
     ],
   },
   {
-    title: "Full-Stack Systems",
-    note: "Not just pages anymore — complete products, design to database.",
+    titleKey: "journey.fullstack",
+    noteKey: "journey.fullstackNote",
     detail: "END TO END",
     file: "production",
     code: [
@@ -101,11 +102,14 @@ const lineColor = (line: string): string => {
 };
 
 export const DevelopmentJourneySection = (): JSX.Element => {
+  const { t } = useI18n();
   const wrapRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       const el = wrapRef.current;
       if (!el) return;
       const total = el.offsetHeight - window.innerHeight;
@@ -118,9 +122,15 @@ export const DevelopmentJourneySection = (): JSX.Element => {
         Math.min(slides.length - 1, Math.floor(progress * slides.length)),
       );
     };
-    onScroll();
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
@@ -128,8 +138,8 @@ export const DevelopmentJourneySection = (): JSX.Element => {
       {/* tall track: scrolling through it drives the pinned showcase */}
       <div ref={wrapRef} className="relative h-[400vh] desk:h-[600vh]">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-          <p className="eyebrow absolute left-5 top-10 sm:left-10 md:left-12 desk:left-[110px] desk:top-16">
-            07 — THE JOURNEY
+          <p className="eyebrow absolute left-5 top-[92px] sm:left-10 md:left-12 desk:left-[110px] desk:top-16">
+            {t("journey.label")}
           </p>
 
           {/* progress rail */}
@@ -155,21 +165,21 @@ export const DevelopmentJourneySection = (): JSX.Element => {
               {index === 0 ? (
                 <h2 className="w-full max-w-[860px] [font-family:'WisnuMan-Regular',Helvetica] text-[40px] font-normal leading-[1.1] tracking-[0] sm:text-[54px] desk:text-[72px]">
                   <span className="text-[#ffe9d9]">
-                    At first, I just wanted my{" "}
+                    {t("journey.intro.before")}
                   </span>
                   <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-                    designs
+                    {t("journey.intro.accent")}
                   </span>
-                  <span className="text-[#ffe9d9]"> to work in the browser.</span>
+                  <span className="text-[#ffe9d9]">{t("journey.intro.after")}</span>
                 </h2>
               ) : (
                 <div className="flex flex-col gap-8 desk:flex-row desk:items-center desk:justify-between desk:gap-16">
                   <div className="w-full desk:w-[560px] desk:shrink-0">
                     <h3 className="[font-family:'WisnuMan-Regular',Helvetica] text-[32px] font-normal leading-[1.1] tracking-[0] text-[#ffe9d9] sm:text-[42px] desk:text-[58px]">
-                      {slide.title}
+                      {t(slide.titleKey)}
                     </h3>
                     <p className="mt-4 [font-family:'WisnuMan-Regular',Helvetica] text-[18px] font-normal leading-[1.5] tracking-[0] text-[#ffe9d9]/80 sm:text-[20px] desk:mt-8 desk:text-[25px]">
-                      {slide.note}
+                      {t(slide.noteKey)}
                     </p>
                     <p className="mt-5 [font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[4px] text-[#fe7f2d]/70 sm:text-sm desk:mt-10 desk:tracking-[5px]">
                       {slide.detail}
@@ -204,10 +214,10 @@ export const DevelopmentJourneySection = (): JSX.Element => {
             }`}
           >
             <span className="text-[#ffe9d9]">
-              I wasn&apos;t building pages anymore. I was building{" "}
+              {t("journey.closing.before")}
             </span>
             <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-              complete products.
+              {t("journey.closing.accent")}
             </span>
           </p>
 
@@ -216,7 +226,7 @@ export const DevelopmentJourneySection = (): JSX.Element => {
               active === slides.length - 1 ? "opacity-0" : "opacity-100"
             }`}
           >
-            KEEP SCROLLING
+            {t("global.keepScrolling")}
           </p>
         </div>
       </div>

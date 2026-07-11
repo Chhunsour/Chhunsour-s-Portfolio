@@ -17,31 +17,30 @@ const codeLines = [
 ];
 
 export const DevelopmentEraSection = (): JSX.Element => {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="development-era-heading"
       className="relative flex w-full flex-col items-stretch gap-10 overflow-hidden px-5 py-16 sm:px-10 desk:w-[1440px] desk:flex-row desk:items-center desk:gap-20 desk:px-[110px] desk:py-36"
     >
       <div className="w-full desk:w-[560px] desk:shrink-0">
-        <p className="eyebrow">06 — THE NEXT CHAPTER</p>
+        <p className="eyebrow">{t("era.label")}</p>
         <h2
           id="development-era-heading"
           className="mt-8 [font-family:'WisnuMan-Regular',Helvetica] text-[40px] font-normal leading-[1.1] tracking-[0] sm:text-[52px] desk:mt-10 desk:text-[66px]"
         >
-          <span className="text-[#ffe9d9]">So I learned to turn </span>
+          <span className="text-[#ffe9d9]">{t("era.heading.before")}</span>
           <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-            ideas
+            {t("era.heading.ideas")}
           </span>
-          <span className="text-[#ffe9d9]"> into </span>
+          <span className="text-[#ffe9d9]">{t("era.heading.middle")}</span>
           <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-            working products
+            {t("era.heading.products")}
           </span>
-          <span className="text-[#ffe9d9]">.</span>
+          <span className="text-[#ffe9d9]">{t("global.period")}</span>
         </h2>
         <p className="mt-8 [font-family:'WisnuMan-Regular',Helvetica] text-[20px] font-normal leading-[1.6] tracking-[0] text-[#ffe9d9]/90 sm:text-[24px] desk:mt-10 desk:text-[26px] desk:leading-[1.55]">
-          Design taught me what a screen should say. Development taught me how
-          to make it real — every pixel I once drew in Figma, I could now ship
-          to a browser.
+          {t("era.body")}
         </p>
       </div>
       <figure className="m-0 min-w-0 flex-1">
@@ -73,9 +72,10 @@ export const DevelopmentEraSection = (): JSX.Element => {
           </pre>
         </div>
         <figcaption className="mt-5 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#ffe9d9]/50">
-          REAL CODE — IT&apos;S DRAWING THE BACKGROUND OF THIS PAGE RIGHT NOW
+          {t("era.code")}
         </figcaption>
       </figure>
     </section>
   );
 };
+import { useI18n } from "../../../../i18n";

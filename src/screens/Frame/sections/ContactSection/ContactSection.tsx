@@ -22,31 +22,32 @@ const socialLinks = [
 ];
 
 export const ContactSection = (): JSX.Element => {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="contact-heading"
       className="relative flex w-full flex-col items-center gap-7 overflow-hidden px-5 pb-12 pt-20 sm:px-10 desk:w-[1440px] desk:gap-10 desk:pb-16 desk:pt-36"
     >
-      <p className="eyebrow eyebrow-center">10 — CONTACT</p>
+      <p className="eyebrow eyebrow-center">{t("contact.label")}</p>
       <h2
         id="contact-heading"
         className="text-center [font-family:'Mogin-Regular',Helvetica] text-[15vw] font-normal leading-[0.95] tracking-[0] text-[#ffe9d9] sm:text-[90px] desk:text-[130px]"
       >
-        LET&apos;S BUILD
+        {t("contact.heading.one")}
         <br />
         <span className="text-transparent [-webkit-text-stroke:2px_#fe7f2d]">
-          SOMETHING
+          {t("contact.heading.two")}
         </span>
       </h2>
       <p className="w-full max-w-[560px] text-center [font-family:'WisnuMan-Regular',Helvetica] text-[20px] font-normal leading-[1.5] tracking-[0] text-[#ffe9d9]/80 sm:text-[24px] desk:text-[26px]">
-        Have a project in mind — or just want to talk design, code, or cameras?
+        {t("contact.body")}
       </p>
       <div className="mt-4 flex flex-col items-center gap-8">
         <a
           href="mailto:sengchhunsour@gmail.com"
           className="bg-[#fe7f2d] px-10 py-5 [font-family:'OTTERO-Regular',Helvetica] text-lg text-[#272727] transition-all duration-300 hover:scale-105 hover:bg-[#ffe9d9] active:scale-95"
         >
-          SAY HELLO
+          {t("contact.hello")}
         </a>
         <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-8 gap-y-5 p-0 sm:gap-x-10">
           {socialLinks.map((link) => (
@@ -71,7 +72,7 @@ export const ContactSection = (): JSX.Element => {
         <p className="m-0 flex flex-wrap items-center justify-center gap-x-3 text-center [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[2px] text-[#ffe9d9]/60">
           <a
             href="tel:+85585688833"
-            className="transition-colors duration-300 hover:text-[#fe7f2d]"
+            className="inline-block py-2 transition-colors duration-300 hover:text-[#fe7f2d]"
           >
             085 688 833
           </a>
@@ -80,15 +81,16 @@ export const ContactSection = (): JSX.Element => {
           </span>
           <a
             href="mailto:sengchhunsour@gmail.com"
-            className="transition-colors duration-300 hover:text-[#fe7f2d]"
+            className="inline-block py-2 transition-colors duration-300 hover:text-[#fe7f2d]"
           >
             SENGCHHUNSOUR@GMAIL.COM
           </a>
         </p>
       </div>
       <p className="mt-10 text-center [font-family:'OTTERO-Regular',Helvetica] text-sm font-normal tracking-[3px] text-[#ffe9d9]/40 desk:mt-20">
-        © 2026 — DESIGNED &amp; BUILT BY DENNVOR
+        {t("contact.credit")}
       </p>
     </section>
   );
 };
+import { useI18n } from "../../../../i18n";

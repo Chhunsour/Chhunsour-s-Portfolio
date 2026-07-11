@@ -34,21 +34,22 @@ const Browser = ({
 );
 
 export const ProjectsSection = (): JSX.Element => {
+  const { t } = useI18n();
   return (
     <section
       aria-labelledby="projects-heading"
       className="relative w-full overflow-hidden px-5 py-16 sm:px-10 desk:w-[1440px] desk:px-[110px] desk:py-36"
     >
-      <p className="eyebrow">08 — REAL WORK</p>
+      <p className="eyebrow">{t("projects.label")}</p>
       <h2
         id="projects-heading"
         className="mt-8 w-full max-w-[1000px] [font-family:'WisnuMan-Regular',Helvetica] text-[40px] font-normal leading-[1.1] tracking-[0] sm:text-[52px] desk:mt-10 desk:text-[66px]"
       >
-        <span className="text-[#ffe9d9]">Learning was only the beginning. I needed to build </span>
+        <span className="text-[#ffe9d9]">{t("projects.heading.before")}</span>
         <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-          real things
+          {t("projects.heading.accent")}
         </span>
-        <span className="text-[#ffe9d9]">.</span>
+        <span className="text-[#ffe9d9]">{t("global.period")}</span>
       </h2>
 
       {/* ── Project 01: Website Department Workflow ───────────────── */}
@@ -70,16 +71,13 @@ export const ProjectsSection = (): JSX.Element => {
         </div>
         <div className="mt-8 flex flex-col gap-8 desk:mt-10 desk:flex-row desk:items-start desk:justify-between desk:gap-20">
           <p className="w-full [font-family:'WisnuMan-Regular',Helvetica] text-[19px] leading-[1.6] text-[#ffe9d9]/85 desk:w-[620px] desk:text-[22px] desk:leading-[1.55]">
-            I led a website team — so I built the system that ran it. Tasks
-            for every member, follow-ups on blog posts and updates, and
-            monthly PDF work reports generated for the team and the head
-            office.
+            {t("projects.workflow.body")}
           </p>
           <ul className="m-0 list-none space-y-3 p-0 [font-family:'WisnuMan-Regular',Helvetica] text-[17px] leading-[1.5] text-[#ffe9d9]/65 desk:text-[19px]">
-            <li>— Trello-style task boards for the whole team</li>
-            <li>— Follow-ups on posting, updates &amp; progress</li>
-            <li>— Auto-generated monthly PDF reports</li>
-            <li>— A full CMS for konstructz.com, built in</li>
+            <li>{t("projects.workflow.one")}</li>
+            <li>{t("projects.workflow.two")}</li>
+            <li>{t("projects.workflow.three")}</li>
+            <li>{t("projects.workflow.four")}</li>
           </ul>
         </div>
         <div className="mt-10 flex flex-col gap-8 desk:mt-16 desk:gap-12">
@@ -113,20 +111,17 @@ export const ProjectsSection = (): JSX.Element => {
             rel="noreferrer"
             className="mb-2 shrink-0 border border-[#fe7f2d] px-7 py-4 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#fe7f2d] transition-all duration-300 hover:bg-[#fe7f2d] hover:text-[#272727] active:scale-95"
           >
-            VISIT KONSTRUCTZ.COM
+            {t("projects.visit")} KONSTRUCTZ.COM
           </a>
         </div>
         <div className="mt-8 flex flex-col gap-8 desk:mt-10 desk:flex-row desk:items-start desk:justify-between desk:gap-20">
           <p className="w-full [font-family:'WisnuMan-Regular',Helvetica] text-[19px] leading-[1.6] text-[#ffe9d9]/85 desk:w-[620px] desk:text-[22px] desk:leading-[1.55]">
-            Designed pixel by pixel in Figma, then hand-coded into a live
-            storefront. Every product, price, and blog post is managed
-            through the Workflow system — my own store, running on my own
-            CMS.
+            {t("projects.konstructz.body")}
           </p>
           <ul className="m-0 list-none space-y-3 p-0 [font-family:'WisnuMan-Regular',Helvetica] text-[17px] leading-[1.5] text-[#ffe9d9]/65 desk:text-[19px]">
-            <li>— Designed in Figma, coded by hand</li>
-            <li>— Products, prices &amp; blogs from my own CMS</li>
-            <li>— Live production store, desktop to mobile</li>
+            <li>{t("projects.konstructz.one")}</li>
+            <li>{t("projects.konstructz.two")}</li>
+            <li>{t("projects.konstructz.three")}</li>
           </ul>
         </div>
         <div className="relative mt-10 desk:mt-16">
@@ -143,8 +138,7 @@ export const ProjectsSection = (): JSX.Element => {
           />
         </div>
         <p className="mt-14 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[4px] text-[#ffe9d9]/45 desk:mt-28">
-          BEHIND THE SCENES — PRODUCTS &amp; BLOGS, MANAGED FROM MY WORKFLOW
-          CMS
+          {t("projects.behind")}
         </p>
         <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 desk:gap-10">
           <Browser
@@ -184,16 +178,14 @@ export const ProjectsSection = (): JSX.Element => {
             Darila Official
           </h3>
           <p className="mt-6 [font-family:'WisnuMan-Regular',Helvetica] text-[19px] leading-[1.6] text-[#ffe9d9]/85 desk:text-[22px] desk:leading-[1.55]">
-            An online store for the Cambodian market with{" "}
+            {t("projects.darila.body.before")}
             <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
               ABA PayWay
             </span>{" "}
-            — the country&apos;s most-used digital payment — integrated end to
-            end. Real customers, real checkouts.
+            {t("projects.darila.body.after")}
           </p>
           <p className="mt-6 [font-family:'WisnuMan-Regular',Helvetica] text-[17px] leading-[1.55] text-[#ffe9d9]/65 desk:text-[19px]">
-            The first successful live payment through that integration is
-            still one of my proudest moments as a developer.
+            {t("projects.darila.note")}
           </p>
           <a
             href="https://darilaofficial.com"
@@ -201,7 +193,7 @@ export const ProjectsSection = (): JSX.Element => {
             rel="noreferrer"
             className="mt-8 inline-block border border-[#fe7f2d] px-7 py-4 [font-family:'OTTERO-Regular',Helvetica] text-sm tracking-[3px] text-[#fe7f2d] transition-all duration-300 hover:bg-[#fe7f2d] hover:text-[#272727] active:scale-95"
           >
-            VISIT DARILAOFFICIAL.COM
+            {t("projects.visit")} DARILAOFFICIAL.COM
           </a>
         </div>
       </div>
@@ -209,15 +201,14 @@ export const ProjectsSection = (): JSX.Element => {
       {/* ── …and ten more ─────────────────────────────────────────── */}
       <div className="mt-16 desk:mt-52">
         <h3 className="[font-family:'WisnuMan-Regular',Helvetica] text-[40px] leading-[1.1] tracking-[0] sm:text-[52px] desk:text-[66px]">
-          <span className="text-[#ffe9d9]">…and </span>
+          <span className="text-[#ffe9d9]">{t("projects.more.before")}</span>
           <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
-            ten more
+            {t("projects.more.accent")}
           </span>
-          <span className="text-[#ffe9d9]"> in production.</span>
+          <span className="text-[#ffe9d9]">{t("projects.more.after")}</span>
         </h3>
         <p className="mt-6 w-full max-w-[720px] [font-family:'WisnuMan-Regular',Helvetica] text-[19px] leading-[1.6] text-[#ffe9d9]/85 desk:text-[22px] desk:leading-[1.55]">
-          E-commerce sites for the US heavy-machinery market — built,
-          launched, and maintained on WordPress.
+          {t("projects.more.body")}
         </p>
         <ul className="mt-10 grid list-none grid-cols-1 gap-x-10 gap-y-5 p-0 sm:grid-cols-2 lg:grid-cols-3 desk:mt-12">
           {wordpressSites.map((site) => (
@@ -244,3 +235,4 @@ export const ProjectsSection = (): JSX.Element => {
     </section>
   );
 };
+import { useI18n } from "../../../../i18n";
