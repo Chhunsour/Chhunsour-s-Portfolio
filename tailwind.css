@@ -447,10 +447,21 @@
    Portfolio polish: livery background, reveals, ticker, hovers
    ============================================================ */
 
+:root {
+  color-scheme: dark;
+}
+
 body {
   background-color: #272727;
   /* safety net: decorative drift/overlap must never create sideways scroll */
   overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* coherent keyboard focus ring, brand orange */
+:focus-visible {
+  outline: 2px solid #fe7f2d;
+  outline-offset: 3px;
 }
 
 .font-kantumruy {
