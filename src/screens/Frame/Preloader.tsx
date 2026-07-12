@@ -62,11 +62,7 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
   if (gone) return null;
 
   return (
-    <>
-      <div
-        className={`intro${exiting ? " is-exiting" : ""}`}
-        aria-hidden="true"
-      >
+    <div className={`intro${exiting ? " is-exiting" : ""}`} aria-hidden="true">
         <div className="intro-logo">
           <svg viewBox="0 0 68 52" width="118" height="90">
             <path
@@ -83,12 +79,7 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
             />
           </svg>
         </div>
-        <div className="intro-count">{count}</div>
-      </div>
-      <div
-        className={`intro-accent${exiting ? " is-exiting" : ""}`}
-        aria-hidden="true"
-      />
-    </>
+      <div className="intro-count">{count}</div>
+    </div>
   );
 };

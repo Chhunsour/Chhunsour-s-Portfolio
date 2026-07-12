@@ -639,49 +639,12 @@ html[data-locale="zh"] #contact-heading span {
   display: grid;
   place-items: center;
   background: #272727;
-  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
-  will-change: transform;
-}
-
-/* curved lip that trails the curtain on its way up */
-.intro::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: -5%;
-  width: 110%;
-  height: 9vh;
-  background: #272727;
-  border-radius: 0 0 50% 50%;
+  transition: opacity 0.6s ease 0.3s;
 }
 
 .intro.is-exiting {
-  transform: translateY(-109vh);
-}
-
-/* orange layer that chases the dark curtain up */
-.intro-accent {
-  position: fixed;
-  inset: 0;
-  z-index: 99;
-  background: #fe7f2d;
-  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.14s;
-  will-change: transform;
-}
-
-.intro-accent::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: -5%;
-  width: 110%;
-  height: 9vh;
-  background: #fe7f2d;
-  border-radius: 0 0 50% 50%;
-}
-
-.intro-accent.is-exiting {
-  transform: translateY(-109vh);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .intro-count {
@@ -702,14 +665,13 @@ html[data-locale="zh"] #contact-heading span {
 
 .intro-logo {
   animation: intro-breathe 1.8s ease-in-out 2s infinite;
-  transition:
-    opacity 0.45s ease,
-    transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.95s cubic-bezier(0.7, 0, 0.84, 0);
+  will-change: transform;
 }
 
+/* exit: the logo rushes at the viewer while the overlay fades away */
 .intro.is-exiting .intro-logo {
-  opacity: 0;
-  transform: translateY(-36px) scale(0.92);
+  transform: scale(32);
   animation: none;
 }
 
