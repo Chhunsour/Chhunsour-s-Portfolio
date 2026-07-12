@@ -639,7 +639,7 @@ html[data-locale="zh"] #contact-heading span {
   display: grid;
   place-items: center;
   align-content: center;
-  background: #fe7f2d;
+  background: #272727;
   transition: opacity 0.35s ease 0.75s;
 }
 
@@ -648,44 +648,46 @@ html[data-locale="zh"] #contact-heading span {
   pointer-events: none;
 }
 
-/* enter button, Lando-style: small dark text at the bottom */
+/* enter button: appears once loading is done */
 .intro-btn {
-  position: absolute;
-  bottom: clamp(1.5rem, 5vh, 3rem);
-  left: 50%;
-  background: none;
-  border: none;
+  margin-top: 3rem;
+  padding: 12px 26px;
+  background: #fe7f2d;
   color: #272727;
   font-family: "OTTERO-Regular", Helvetica;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   letter-spacing: 3px;
+  border: none;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, 10px);
+  transform: translateY(14px);
   transition:
     opacity 0.5s ease,
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    scale 0.3s ease;
 }
 
 .intro.is-ready .intro-btn {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(-50%, 0);
+  transform: none;
 }
 
 .intro.is-ready .intro-btn:hover {
-  opacity: 0.6;
+  background: #ffe9d9;
+  scale: 1.05;
 }
 
 .intro-count {
   position: absolute;
-  right: clamp(1.25rem, 4vw, 3rem);
-  bottom: clamp(1.25rem, 5vh, 2.75rem);
+  right: clamp(1.25rem, 5vw, 4rem);
+  bottom: clamp(0.5rem, 4vh, 2.5rem);
   font-family: "Mogin-Regular", Helvetica;
-  font-size: 2rem;
+  font-size: clamp(4.5rem, 11vw, 9rem);
   line-height: 1;
-  color: #272727;
+  color: #fe7f2d;
   font-variant-numeric: tabular-nums;
   transition: opacity 0.25s ease;
 }
@@ -709,9 +711,9 @@ html[data-locale="zh"] #contact-heading span {
 }
 
 .intro-path {
-  stroke: #272727;
+  stroke: #fe7f2d;
   stroke-width: 1;
-  fill: #272727;
+  fill: #fe7f2d;
   fill-opacity: 0;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;

@@ -68,7 +68,7 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
         className={`intro${ready ? " is-ready" : ""}${exiting ? " is-exiting" : ""}`}
       >
       <div className="intro-logo" aria-hidden="true">
-        <svg viewBox="0 0 68 52" width="82" height="63">
+        <svg viewBox="0 0 68 52" width="118" height="90">
           <path
             className="intro-path"
             pathLength={1}
