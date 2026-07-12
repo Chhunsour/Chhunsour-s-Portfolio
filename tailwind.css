@@ -640,7 +640,7 @@ html[data-locale="zh"] #contact-heading span {
   place-items: center;
   align-content: center;
   background: #272727;
-  transition: opacity 0.6s ease 0.3s;
+  transition: opacity 0.55s ease 0.1s;
 }
 
 .intro.is-exiting {
@@ -703,13 +703,12 @@ html[data-locale="zh"] #contact-heading span {
 
 .intro-logo {
   animation: intro-breathe 1.8s ease-in-out 2s infinite;
-  transition: transform 0.95s cubic-bezier(0.7, 0, 0.84, 0);
-  will-change: transform;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* exit: the logo rushes at the viewer while the overlay fades away */
+/* exit: logo settles back as the overlay fades away */
 .intro.is-exiting .intro-logo {
-  transform: scale(32);
+  transform: scale(0.85);
   animation: none;
 }
 
