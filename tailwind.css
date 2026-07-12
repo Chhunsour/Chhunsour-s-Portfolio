@@ -640,40 +640,12 @@ html[data-locale="zh"] #contact-heading span {
   place-items: center;
   align-content: center;
   background: #fe7f2d;
-  transition: opacity 0.12s linear 0.06s;
+  transition: opacity 0.35s ease 0.75s;
 }
 
 .intro.is-exiting {
   opacity: 0;
   pointer-events: none;
-}
-
-/* the solid sheet hands off to the wipe silhouette instantly */
-.intro.is-exiting > * {
-  visibility: hidden;
-}
-
-/* exit wipe: giant logo silhouette in the background color, shrinking away */
-.intro-wipe {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 118px;
-  height: 90px;
-  margin: -45px 0 0 -59px;
-  z-index: 101;
-  fill: #fe7f2d;
-  pointer-events: none;
-  animation: intro-wipe 0.4s cubic-bezier(0.45, 0, 0.55, 1) forwards;
-}
-
-@keyframes intro-wipe {
-  from {
-    scale: 24;
-  }
-  to {
-    scale: 0;
-  }
 }
 
 /* enter button, Lando-style: small dark text at the bottom */
@@ -715,10 +687,25 @@ html[data-locale="zh"] #contact-heading span {
   line-height: 1;
   color: #272727;
   font-variant-numeric: tabular-nums;
+  transition: opacity 0.25s ease;
+}
+
+.intro.is-exiting .intro-btn,
+.intro.is-exiting .intro-count {
+  opacity: 0;
 }
 
 .intro-logo {
   animation: intro-breathe 1.8s ease-in-out 2s infinite;
+  transition: transform 1.15s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+
+/* exit: zoom slowly into the logo; its ink is the site background,
+   so the landing is seamless */
+.intro.is-exiting .intro-logo {
+  transform: scale(30);
+  animation: none;
 }
 
 .intro-path {
