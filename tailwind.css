@@ -640,7 +640,7 @@ html[data-locale="zh"] #contact-heading span {
   place-items: center;
   align-content: center;
   background: #272727;
-  transition: opacity 0.55s ease 0.1s;
+  transition: opacity 0.35s ease 0.05s;
 }
 
 .intro.is-exiting {
@@ -704,8 +704,8 @@ html[data-locale="zh"] #contact-heading span {
 .intro-logo {
   animation: intro-breathe 1.8s ease-in-out 2s infinite;
   transition:
-    transform 0.7s cubic-bezier(0.7, 0, 0.84, 0),
-    opacity 0.5s ease 0.12s;
+    transform 0.45s cubic-bezier(0.55, 0, 1, 0.45),
+    opacity 0.32s ease 0.08s;
   will-change: transform, opacity;
 }
 

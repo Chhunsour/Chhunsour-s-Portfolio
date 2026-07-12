@@ -57,7 +57,7 @@ export const Preloader = ({ onDone }: { onDone: () => void }) => {
     document.documentElement.style.overflow = "";
     setExiting(true);
     onDone();
-    window.setTimeout(() => setGone(true), 700);
+    window.setTimeout(() => setGone(true), 500);
   };
 
   if (gone) return null;
