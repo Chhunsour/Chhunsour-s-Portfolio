@@ -2,7 +2,7 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { LanguageSwitcher, useI18n } from "../../i18n";
-import { introAlreadyPlayed, Preloader } from "./Preloader";
+import { introSkipped, Preloader } from "./Preloader";
 import { ContactSection } from "./sections/ContactSection";
 import { DevelopmentEraSection } from "./sections/DevelopmentEraSection";
 import { DevelopmentJourneySection } from "./sections/DevelopmentJourneySection";
@@ -84,7 +84,7 @@ export const Frame = (): JSX.Element => {
   const topoRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const { t } = useI18n();
-  const [showIntro] = useState(() => !introAlreadyPlayed());
+  const [showIntro] = useState(() => !introSkipped());
   const [introDone, setIntroDone] = useState(!showIntro);
 
   useEffect(() => {

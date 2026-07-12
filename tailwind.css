@@ -631,6 +631,47 @@ html[data-locale="zh"] #contact-heading span {
   transform: translateY(-109vh);
 }
 
+/* orange layer that chases the dark curtain up */
+.intro-accent {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: #fe7f2d;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1) 0.14s;
+  will-change: transform;
+}
+
+.intro-accent::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -5%;
+  width: 110%;
+  height: 9vh;
+  background: #fe7f2d;
+  border-radius: 0 0 50% 50%;
+}
+
+.intro-accent.is-exiting {
+  transform: translateY(-109vh);
+}
+
+.intro-count {
+  position: absolute;
+  right: clamp(1.25rem, 5vw, 4rem);
+  bottom: clamp(0.5rem, 4vh, 2.5rem);
+  font-family: "Mogin-Regular", Helvetica;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  line-height: 1;
+  color: #fe7f2d;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.4s ease;
+}
+
+.intro.is-exiting .intro-count {
+  opacity: 0;
+}
+
 .intro-logo {
   animation: intro-breathe 1.8s ease-in-out 2s infinite;
   transition:
