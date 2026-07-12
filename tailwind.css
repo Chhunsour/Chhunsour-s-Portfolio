@@ -609,13 +609,14 @@ html[data-locale="zh"] #contact-heading span {
 }
 
 ::-webkit-scrollbar-track {
-  background: #272727;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #fe7f2d;
+  background-clip: padding-box;
   border-radius: 999px;
-  border: 3px solid #272727;
+  border: 3px solid transparent;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -626,7 +627,7 @@ html[data-locale="zh"] #contact-heading span {
 @supports not selector(::-webkit-scrollbar) {
   html {
     scrollbar-width: thin;
-    scrollbar-color: #fe7f2d #272727;
+    scrollbar-color: #fe7f2d transparent;
   }
 }
 
