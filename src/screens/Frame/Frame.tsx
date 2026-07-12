@@ -1,7 +1,8 @@
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { LanguageSwitcher, useI18n } from "../../i18n";
+import { introAlreadyPlayed, Preloader } from "./Preloader";
 import { ContactSection } from "./sections/ContactSection";
 import { DevelopmentEraSection } from "./sections/DevelopmentEraSection";
 import { DevelopmentJourneySection } from "./sections/DevelopmentJourneySection";
@@ -83,6 +84,8 @@ export const Frame = (): JSX.Element => {
   const topoRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const { t } = useI18n();
+  const [showIntro] = useState(() => !introAlreadyPlayed());
+  const [introDone, setIntroDone] = useState(!showIntro);
 
   useEffect(() => {
     let frame = 0;
@@ -297,6 +300,8 @@ export const Frame = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    // hold the scroll reveals until the intro curtain starts lifting
+    if (!introDone) return;
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
@@ -471,10 +476,11 @@ export const Frame = (): JSX.Element => {
         heading.querySelector("[data-heading-mask]")?.remove();
       });
     };
-  }, []);
+  }, [introDone]);
 
   return (
     <>
+      {showIntro && <Preloader onDone={() => setIntroDone(true)} />}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-px bg-[#ffe9d9]/15"
