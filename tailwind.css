@@ -639,8 +639,8 @@ html[data-locale="zh"] #contact-heading span {
   display: grid;
   place-items: center;
   align-content: center;
-  background: #272727;
-  transition: opacity 0.35s ease 0.05s;
+  background: #fe7f2d;
+  transition: opacity 0.12s linear 0.06s;
 }
 
 .intro.is-exiting {
@@ -648,78 +648,83 @@ html[data-locale="zh"] #contact-heading span {
   pointer-events: none;
 }
 
-/* enter button, Lando-style: appears once loading is done */
+/* the solid sheet hands off to the wipe silhouette instantly */
+.intro.is-exiting > * {
+  visibility: hidden;
+}
+
+/* exit wipe: giant logo silhouette in the background color, shrinking away */
+.intro-wipe {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 118px;
+  height: 90px;
+  margin: -45px 0 0 -59px;
+  z-index: 101;
+  fill: #fe7f2d;
+  pointer-events: none;
+  animation: intro-wipe 0.4s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+@keyframes intro-wipe {
+  from {
+    scale: 24;
+  }
+  to {
+    scale: 0;
+  }
+}
+
+/* enter button, Lando-style: small dark text at the bottom */
 .intro-btn {
-  margin-top: 3rem;
-  padding: 12px 26px;
-  background: #fe7f2d;
+  position: absolute;
+  bottom: clamp(1.5rem, 5vh, 3rem);
+  left: 50%;
+  background: none;
+  border: none;
   color: #272727;
   font-family: "OTTERO-Regular", Helvetica;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   letter-spacing: 3px;
-  border: none;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(14px);
+  transform: translate(-50%, 10px);
   transition:
     opacity 0.5s ease,
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.3s ease,
-    scale 0.3s ease;
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .intro.is-ready .intro-btn {
   opacity: 1;
   pointer-events: auto;
-  transform: none;
+  transform: translate(-50%, 0);
 }
 
-.intro-btn:hover {
-  background: #ffe9d9;
-  scale: 1.05;
-}
-
-.intro.is-exiting .intro-btn {
-  opacity: 0;
-  pointer-events: none;
+.intro.is-ready .intro-btn:hover {
+  opacity: 0.6;
 }
 
 .intro-count {
   position: absolute;
-  right: clamp(1.25rem, 5vw, 4rem);
-  bottom: clamp(0.5rem, 4vh, 2.5rem);
+  right: clamp(1.25rem, 4vw, 3rem);
+  bottom: clamp(1.25rem, 5vh, 2.75rem);
   font-family: "Mogin-Regular", Helvetica;
-  font-size: clamp(4.5rem, 11vw, 9rem);
+  font-size: 2rem;
   line-height: 1;
-  color: #fe7f2d;
+  color: #272727;
   font-variant-numeric: tabular-nums;
-  transition: opacity 0.4s ease;
-}
-
-.intro.is-exiting .intro-count {
-  opacity: 0;
 }
 
 .intro-logo {
   animation: intro-breathe 1.8s ease-in-out 2s infinite;
-  transition:
-    transform 0.45s cubic-bezier(0.55, 0, 1, 0.45),
-    opacity 0.32s ease 0.08s;
-  will-change: transform, opacity;
-}
-
-/* exit: logo zooms toward the viewer, dissolving as it grows */
-.intro.is-exiting .intro-logo {
-  transform: scale(6);
-  opacity: 0;
-  animation: none;
 }
 
 .intro-path {
-  stroke: #fe7f2d;
+  stroke: #272727;
   stroke-width: 1;
-  fill: #fe7f2d;
+  fill: #272727;
   fill-opacity: 0;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
