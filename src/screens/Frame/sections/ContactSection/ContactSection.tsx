@@ -3,8 +3,13 @@ import { useI18n } from "../../../../i18n";
 const socialLinks = [
   {
     label: "GITHUB",
-    href: "https://github.com/Denvor369",
+    href: "https://github.com/Chhunsour",
     icon: "/img/icons/github.svg",
+  },
+  {
+    label: "LINKEDIN",
+    href: "https://www.linkedin.com/in/seng-chhunsour-3486703ab/",
+    icon: "/img/icons/linkedin.svg",
   },
   {
     label: "TELEGRAM",
@@ -18,13 +23,14 @@ const socialLinks = [
   },
   {
     label: "PINTEREST",
-    href: "https://www.pinterest.com/Dennvor/",
+    href: "https://www.pinterest.com/chhunsour/",
     icon: "/img/icons/pinterest.svg",
   },
 ];
 
 export const ContactSection = (): JSX.Element => {
   const { t } = useI18n();
+
   const backToTop = () => {
     window.scrollTo({
       top: 0,
@@ -98,25 +104,22 @@ export const ContactSection = (): JSX.Element => {
           </a>
         </p>
       </div>
-      <p className="mt-10 text-center [font-family:'OTTERO-Regular',Helvetica] text-sm font-normal tracking-[3px] text-[#ffe9d9]/40 desk:mt-20">
-        {t("contact.credit")}
-      </p>
-      <button
-        type="button"
-        onClick={backToTop}
-        className="group mt-2 flex items-center gap-4 border border-[#ffe9d9]/20 px-6 py-4 text-[#ffe9d9]/70 transition-all duration-300 hover:border-[#fe7f2d]/70 hover:text-[#fe7f2d] active:scale-95 desk:mt-4"
-        aria-label={t("contact.backTop")}
-      >
-        <span
-          aria-hidden="true"
-          className="text-xl transition-transform duration-300 group-hover:-translate-y-1"
+
+      {/* Bottom Footer Row with Credit & Back to Top Button */}
+      <div className="mt-10 flex w-full max-w-[1200px] flex-col items-center justify-between gap-4 border-t border-[#ffe9d9]/10 pt-6 sm:flex-row desk:mt-20">
+        <p className="m-0 [font-family:'OTTERO-Regular',Helvetica] text-sm font-normal tracking-[3px] text-[#ffe9d9]/40">
+          {t("contact.credit")}
+        </p>
+        <button
+          onClick={backToTop}
+          type="button"
+          aria-label="Scroll back to top of page"
+          className="group flex cursor-pointer items-center gap-2 [font-family:'OTTERO-Regular',Helvetica] text-sm font-normal tracking-[3px] text-[#ffe9d9]/60 transition-colors duration-300 hover:text-[#fe7f2d]"
         >
-          ↑
-        </span>
-        <span className="[font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[3px] sm:text-sm">
-          {t("contact.backTop")}
-        </span>
-      </button>
+          <span>{t("contact.backTop")}</span>
+          <span className="inline-block transition-transform duration-300 group-hover:-translate-y-1 text-[#fe7f2d]">↑</span>
+        </button>
+      </div>
     </section>
   );
 };

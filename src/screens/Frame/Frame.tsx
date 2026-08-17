@@ -309,7 +309,11 @@ export const Frame = (): JSX.Element => {
       document.querySelectorAll<HTMLElement>(
         "main :is(h1, h2, h3, p, figure, a, li, img)",
       ),
-    ).filter((el) => !el.closest(".photography-story"));
+    ).filter(
+      (el) =>
+        !el.closest(".photography-story") &&
+        !el.closest(".lando-horizontal-section"),
+    );
 
     // Reveal the meaningful outer block once; nested media inherits the motion.
     const els = all.filter((el) => {
@@ -533,6 +537,7 @@ export const Frame = (): JSX.Element => {
         <Fragment key={id}>
           <section
             id={id}
+            data-section-id={id}
             className={`relative z-[1] mx-auto w-full ${
               id === "photography-reflection" ? "desk:w-full" : "desk:w-[1440px]"
             }`}
@@ -542,12 +547,12 @@ export const Frame = (): JSX.Element => {
           {index === 0 && (
             <div className="ticker" aria-hidden="true">
               <div className="ticker-track">
-                {[0, 1].map((group) => (
+                {[0, 1, 2, 3].map((group) => (
                   <div className="ticker-group" key={`ticker-group-${group}`}>
                     {tickerItemKeys.map((itemKey) => (
                       <span key={`${group}-${itemKey}`} className="ticker-item">
                         <span className="ticker-label">{t(itemKey)}</span>
-                        <span className="ticker-star">✦</span>
+                        <span className="ticker-sep" aria-hidden="true">—</span>
                       </span>
                     ))}
                   </div>

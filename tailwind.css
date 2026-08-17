@@ -837,42 +837,17 @@ main > .ticker:not(.motion-active) .ticker-track {
   }
 }
 
-/* ---- Role ticker marquee ---- */
+/* ---- Pure Minimalist Typographic Marquee ---- */
 .ticker {
-  --ticker-duration: 40s;
+  --ticker-duration: 48s;
   position: relative;
   z-index: 1;
   overflow: hidden;
   isolation: isolate;
-  padding: 15px 0 17px;
-  border-top: 1px solid rgba(254, 127, 45, 0.72);
-  border-bottom: 1px solid rgba(254, 127, 45, 0.72);
-  background:
-    linear-gradient(
-      90deg,
-      rgba(35, 61, 77, 0.48),
-      rgba(39, 39, 39, 0.92) 28%,
-      rgba(39, 39, 39, 0.92) 72%,
-      rgba(254, 127, 45, 0.1)
-    ),
-    #272727;
-  box-shadow:
-    inset 0 4px 0 rgba(254, 127, 45, 0.08),
-    inset 0 -4px 0 rgba(255, 233, 217, 0.04);
-}
-
-.ticker::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: repeating-linear-gradient(
-    112deg,
-    transparent 0 86px,
-    rgba(255, 233, 217, 0.035) 87px 88px,
-    transparent 89px 176px
-  );
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 233, 217, 0.06);
+  border-bottom: 1px solid rgba(255, 233, 217, 0.06);
+  background: rgba(39, 39, 39, 0.3);
 }
 
 .ticker::after {
@@ -883,11 +858,9 @@ main > .ticker:not(.motion-active) .ticker-track {
   pointer-events: none;
   background: linear-gradient(
     90deg,
-    #272727 0,
-    rgba(39, 39, 39, 0.82) 2%,
-    transparent 8%,
-    transparent 92%,
-    rgba(39, 39, 39, 0.82) 98%,
+    #272727 0%,
+    transparent 12%,
+    transparent 88%,
     #272727 100%
   );
 }
@@ -901,6 +874,10 @@ main > .ticker:not(.motion-active) .ticker-track {
   animation: ticker-scroll var(--ticker-duration) linear infinite;
 }
 
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
 .ticker-group {
   display: flex;
   flex-shrink: 0;
@@ -911,30 +888,30 @@ main > .ticker:not(.motion-active) .ticker-track {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  min-height: 76px;
   white-space: nowrap;
 }
 
 .ticker-label {
-  font-family: "OTTERO-Regular", Helvetica;
-  font-size: 42px;
+  font-family: "Mona Sans Variable", "WisnuMan-Regular", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Kantumruy Pro", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 233, 217, 0.72);
+  transition: color 0.3s ease;
+}
+
+.ticker-label:hover {
   color: #ffe9d9;
-  text-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
 }
 
-.ticker-item:nth-child(even) .ticker-label {
-  color: #fe7f2d;
-}
-
-.ticker-star {
-  margin: 0 34px;
-  font-size: 24px;
-  line-height: 1;
-  color: #fe7f2d;
-  -webkit-text-stroke: 0;
-  filter: drop-shadow(0 0 10px rgba(254, 127, 45, 0.28));
+.ticker-sep {
+  margin: 0 36px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(254, 127, 45, 0.6);
+  user-select: none;
 }
 
 @keyframes ticker-scroll {
@@ -1035,15 +1012,15 @@ main > .ticker:not(.motion-active) .ticker-track {
 }
 
 @media (max-width: 767px) {
-  .ticker-item {
-    min-height: 52px;
+  .ticker {
+    padding: 13px 0;
   }
   .ticker-label {
-    font-size: 26px;
+    font-size: 13px;
+    letter-spacing: 0.16em;
   }
-  .ticker-star {
-    margin: 0 20px;
-    font-size: 16px;
+  .ticker-sep {
+    margin: 0 22px;
   }
 }
 
@@ -1246,3 +1223,97 @@ html.locale-settle :is(h1, h2, h3, p, li, a, button) {
     background: rgba(255, 233, 217, 0.12);
   }
 }
+
+/* ========================================================
+   LANDO-STYLE EDITORIAL HORIZONTAL GALLERY (PORTFOLIO THEME)
+   ======================================================== */
+.font-brier {
+  font-family: "Brier", "WisnuMan-Regular", Georgia, serif;
+}
+
+.font-mona {
+  font-family: "OTTERO-Regular", "Mona Sans Variable", sans-serif;
+}
+
+.portfolio-horizontal-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: transparent;
+  color: #ffe9d9;
+}
+
+.portfolio-eyebrow {
+  font-family: "OTTERO-Regular", "Mona Sans Variable", sans-serif;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: #fe7f2d;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.portfolio-serif-quote {
+  font-family: "Brier", "WisnuMan-Regular", Georgia, serif;
+  color: #ffe9d9;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.portfolio-serif-quote .highlight {
+  color: #fe7f2d;
+  font-family: "Rafles-Regular", "Brier", Georgia, serif;
+}
+
+.portfolio-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 0.8px solid rgba(254, 127, 45, 0.6);
+  border-radius: 4px;
+  background: rgba(39, 39, 39, 0.85);
+  backdrop-filter: blur(10px);
+  height: 2.1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.portfolio-pill-number {
+  padding: 0 0.85rem;
+  font-family: "OTTERO-Regular", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fe7f2d;
+  border-right: 0.8px solid rgba(254, 127, 45, 0.4);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-pill-label {
+  padding: 0 0.75rem;
+  font-family: "OTTERO-Regular", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: #ffe9d9;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-img-card {
+  width: fit-content;
+  max-width: 100%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+  will-change: transform;
+}
+
+.portfolio-img-card:hover {
+  transform: scale(1.025) translateY(-2px);
+  border-color: rgba(254, 127, 45, 0.5);
+  box-shadow: 0 20px 40px -15px rgba(254, 127, 45, 0.2);
+}
+
+

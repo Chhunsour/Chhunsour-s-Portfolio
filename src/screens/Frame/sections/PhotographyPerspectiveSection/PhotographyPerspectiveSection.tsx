@@ -64,7 +64,7 @@ const SeeMoreLink = (): JSX.Element => {
   const { t } = useI18n();
   return (
     <a
-      href="https://www.pinterest.com/Dennvor/"
+      href="https://www.pinterest.com/chhunsour/"
       target="_blank"
       rel="noreferrer"
       aria-label="See my poster work on Pinterest"

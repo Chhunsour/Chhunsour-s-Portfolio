@@ -1,340 +1,590 @@
 import { useEffect, useRef } from "react";
 import { useI18n } from "../../../../i18n";
 
-const topImages = [
-  { src: "/img/img-1244-1.webp", alt: "Beauty campaign portrait" },
-  { src: "/img/img-1245-1.webp", alt: "Beauty product portrait" },
-  { src: "/img/img-1247-1.webp", alt: "Studio beauty portrait" },
-  { src: "/img/img-7660-1.webp", alt: "Sunscreen campaign portrait" },
-  { src: "/img/img-8401-1.webp", alt: "Studio product portrait" },
-  { src: "/img/img-8941-1.webp", alt: "Beauty campaign photograph" },
-  { src: "/img/img-8941-2.webp", alt: "Beauty campaign detail" },
-];
-
-const bottomImages = [
-  { src: "/img/dsc09995-2-1.webp", alt: "Event photograph" },
-  { src: "/img/dsc09921-1.webp", alt: "Birthday event portrait" },
-  { src: "/img/dsc09871-1.webp", alt: "Birthday campaign photograph" },
-  { src: "/img/dsc00374-1.webp", alt: "Night automotive portrait" },
-  { src: "/img/dsc00023-1.webp", alt: "Family event portrait" },
-  { src: "/img/dsc00106-2-1.webp", alt: "Family celebration photograph" },
-  { src: "/img/dsc09823-2-1.webp", alt: "Event photograph detail" },
-];
-
-const mobileGalleryImages = [...topImages, ...bottomImages];
-
-const smoothstep = (start: number, end: number, value: number) => {
-  const progress = Math.min(1, Math.max(0, (value - start) / (end - start)));
-  return progress * progress * (3 - 2 * progress);
-};
-
-const centerOutRevealOrder = [5, 3, 1, 0, 2, 4, 6];
-
-const GalleryRow = ({
-  images,
-  label,
-  sequenceOffset,
-}: {
-  images: typeof topImages;
-  label: string;
-  sequenceOffset: number;
-}): JSX.Element => (
-  <div
-    className="grid w-full grid-cols-7 gap-3 will-change-transform sm:gap-5 desk:gap-8"
-    role="list"
-    aria-label={label}
-  >
-    {images.map((image, index) => (
-      <img
-        key={image.src}
-        className="aspect-[2/3] w-full object-cover will-change-[opacity,transform,clip-path]"
-        alt={image.alt}
-        src={image.src}
-        loading="lazy"
-        decoding="async"
-        role="listitem"
-        data-story-image
-        data-story-sequence={
-          centerOutRevealOrder[index] * 2 + sequenceOffset
-        }
-        style={{ transition: "none", transformOrigin: "center" }}
-      />
-    ))}
-  </div>
-);
-
 export const PhotographyReflectionSection = (): JSX.Element => {
   const { t } = useI18n();
-  const sectionRef = useRef<HTMLElement>(null);
-  const narrativeRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
+  // High-Performance Desktop Horizontal Scroll Controller with Intentional Pause & Smooth Easing
   useEffect(() => {
-    const section = sectionRef.current;
-    const narrative = narrativeRef.current;
-    const gallery = galleryRef.current;
-    if (!section || !narrative || !gallery) return;
+    const container = containerRef.current;
+    const track = trackRef.current;
+    const progressBar = progressBarRef.current;
+    if (!container || !track) return;
 
-    const galleryImages = Array.from(
-      gallery.querySelectorAll<HTMLImageElement>("[data-story-image]"),
-    ).sort(
-      (a, b) =>
-        Number(a.dataset.storySequence) - Number(b.dataset.storySequence),
+    let rafId = 0;
+    let totalScroll = 0;
+    let maxTranslate = 0;
+    let isDesktop = window.innerWidth >= 1024;
+
+    const columns = Array.from(
+      track.querySelectorAll<HTMLElement>("[data-gallery-col]"),
     );
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-    const imageProgress = galleryImages.map(() => -1);
-    let frame = 0;
-    let active = true;
+    // Initial pause window: Allows reading the narrative comfortably before horizontal motion starts
+    const PAUSE_THRESHOLD = 0.14;
 
-    const update = () => {
-      frame = 0;
-      if (reducedMotion.matches) return;
+    const updateMetrics = () => {
+      isDesktop = window.innerWidth >= 1024;
+      if (!isDesktop) return;
 
-      const rect = section.getBoundingClientRect();
-      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-      const progress = Math.min(1, Math.max(0, -rect.top / travel));
-      const narrativeExit = smoothstep(0.18, 0.46, progress);
-      const galleryEnter = smoothstep(0.28, 0.42, progress);
-
-      narrative.style.opacity = `${1 - narrativeExit}`;
-      narrative.style.transform = `translate3d(0, ${-48 * narrativeExit}px, 0) scale(${1 - 0.018 * narrativeExit})`;
-      narrative.style.pointerEvents = narrativeExit > 0.7 ? "none" : "auto";
-
-      gallery.style.opacity = `${galleryEnter}`;
-      gallery.style.transform = "none";
-      gallery.style.pointerEvents = progress > 0.72 ? "auto" : "none";
-
-      galleryImages.forEach((image, index) => {
-        const start = 0.28 + index * 0.03;
-        const imageEnter = smoothstep(start, start + 0.22, progress);
-        const aperture = 49 * (1 - imageEnter);
-        const scale = 1.08 - 0.08 * imageEnter;
-
-        if (Math.abs(imageProgress[index] - imageEnter) < 0.003) return;
-        imageProgress[index] = imageEnter;
-
-        image.style.opacity = `${imageEnter}`;
-        image.style.clipPath = `inset(${aperture}% ${aperture}% ${aperture}% ${aperture}% round ${16 * (1 - imageEnter)}px)`;
-        image.style.transform = `scale(${scale})`;
-      });
+      totalScroll = Math.max(container.offsetHeight - window.innerHeight, 1);
+      maxTranslate = Math.max(track.scrollWidth - window.innerWidth + 240, 0);
     };
 
-    const requestUpdate = () => {
-      if (active && !frame) frame = requestAnimationFrame(update);
+    updateMetrics();
+
+    const onScroll = () => {
+      if (!isDesktop) return;
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          rafId = 0;
+          const rect = container.getBoundingClientRect();
+          const progress = Math.min(1, Math.max(0, -rect.top / totalScroll));
+
+          // 1. Initial Pause on Narrative: Hold stationary for the first 14% of scroll
+          let easedProgress = 0;
+          if (progress > PAUSE_THRESHOLD) {
+            const rawT = (progress - PAUSE_THRESHOLD) / (1 - PAUSE_THRESHOLD);
+            // Smooth ease-out polynomial curve for a silky start and deceleration
+            easedProgress = 1 - Math.pow(1 - rawT, 1.8);
+          }
+
+          const currentTranslate = easedProgress * maxTranslate;
+          track.style.transform = `translate3d(-${currentTranslate.toFixed(2)}px, 0, 0)`;
+
+          if (progressBar) {
+            progressBar.style.transform = `scaleX(${progress})`;
+          }
+
+          // 2. Smooth Fade-In and Upward Glide for upcoming gallery columns as they scroll into view
+          const windowWidth = window.innerWidth;
+          columns.forEach((col, index) => {
+            if (index === 0) {
+              // Slide 1 (Narrative hero) is always 100% visible
+              col.style.opacity = "1";
+              col.style.transform = "translate3d(0, 0, 0) scale(1)";
+              return;
+            }
+
+            const colLeft = col.offsetLeft - currentTranslate;
+            const revealThreshold = windowWidth * 0.94;
+
+            if (colLeft < revealThreshold) {
+              col.style.opacity = "1";
+              col.style.transform = "translate3d(0, 0, 0) scale(1)";
+            } else {
+              col.style.opacity = "0";
+              col.style.transform = "translate3d(0, 36px, 0) scale(0.95)";
+            }
+          });
+        });
+      }
     };
 
-    const visibilityObserver = new IntersectionObserver(
-      ([entry]) => {
-        active = entry.isIntersecting;
-        if (active) requestUpdate();
-      },
-      { rootMargin: "100% 0px" },
-    );
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", () => {
+      updateMetrics();
+      onScroll();
+    });
 
-    update();
-    visibilityObserver.observe(section);
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    reducedMotion.addEventListener("change", requestUpdate);
+    onScroll();
 
     return () => {
-      cancelAnimationFrame(frame);
-      visibilityObserver.disconnect();
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-      reducedMotion.removeEventListener("change", requestUpdate);
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateMetrics);
     };
   }, []);
 
   return (
-    <>
-      <section
-        aria-labelledby="photography-reflection-title-mobile"
-        className="relative overflow-hidden px-5 py-16 sm:px-10 sm:py-20 desk:hidden"
-      >
-        <p className="eyebrow">{t("photo.label")}</p>
-
-        <div className="mt-7 grid grid-cols-[minmax(0,1fr)_108px] items-end gap-5 sm:grid-cols-[minmax(0,1fr)_150px] sm:gap-8">
-          <div>
-            <h2
-              id="photography-reflection-title-mobile"
-              className="[font-family:'WisnuMan-Regular',Helvetica] text-[39px] font-normal leading-[1.03] tracking-[-0.025em] text-[#ffe9d9] sm:text-[54px]"
-            >
-              {t("photo.heading.before")}
-              <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
-                {t("photo.heading.accent")}
-              </span>
-              {t("global.period")}
-            </h2>
-          </div>
-
-          <figure className="m-0">
-            <img
-              className="aspect-[4/5] w-full object-cover"
-              alt="Sour holding a camera and composing a photograph"
-              src="/img/untitled-67-1.webp"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        </div>
-
-        <div className="mt-7 border-l border-[#fe7f2d]/70 pl-5">
-          <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[27px] font-normal leading-[1.15] tracking-[-0.015em] text-[#ffe9d9] sm:text-[34px]">
-            {t("photo.reflection.before")}
-            <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
-              {t("photo.reflection.accent")}
-            </span>
-            {t("global.period")}
-          </p>
-          <p className="mt-3 [font-family:'WisnuMan-Regular',Helvetica] text-[16px] leading-[1.5] text-[#ffe9d9]/60 sm:text-[18px]">
-            {t("photo.note")}
+    <div
+      ref={containerRef}
+      className="portfolio-horizontal-section relative w-screen overflow-visible bg-[#272727] text-[#ffe9d9] desk:h-[550vh]"
+      data-testid="portfolio-horizontal-gallery"
+    >
+      {/* Sticky Viewport: Locks the screen while scrolling down translates track horizontally */}
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
+        {/* Top-Left Section Tag */}
+        <div className="pointer-events-none absolute left-6 top-6 z-20 hidden sm:block desk:left-14 desk:top-8">
+          <p className="eyebrow flex items-center gap-2 text-xs desk:text-sm">
+            <span className="text-[#fe7f2d]">✦</span>
+            <span>{t("photo.label")}</span>
           </p>
         </div>
 
-        <div className="mt-10 flex items-end justify-between gap-5">
-          <p className="[font-family:'OTTERO-Regular',Helvetica] text-[10px] tracking-[2.5px] text-[#fe7f2d]">
-            {t("photo.selected")}
-          </p>
-          <p className="[font-family:'OTTERO-Regular',Helvetica] text-[9px] tracking-[2px] text-[#ffe9d9]/35">
-            {t("photo.swipe")}
-          </p>
-        </div>
-
+        {/* ========================================================
+            DESKTOP PINNED HORIZONTAL TRACK (With Intentional Pause & Smooth Glide)
+            ======================================================== */}
         <div
-          className="mobile-photo-rail -mx-5 mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-4 sm:-mx-10 sm:gap-4 sm:px-10"
-          role="list"
-          aria-label="Selected photography gallery"
+          ref={trackRef}
+          className="hidden h-full items-center gap-32 pl-[8vw] pr-[24vw] will-change-transform desk:flex desk:gap-40 [backface-visibility:hidden]"
+          style={{ transform: "translate3d(0, 0, 0)" }}
         >
-          {mobileGalleryImages.map((image, index) => (
-            <figure
-              key={image.src}
-              className={`m-0 min-w-[42vw] snap-center sm:min-w-[30vw] ${
-                index === 0 ? "ml-0" : ""
-              }`}
-              role="listitem"
-            >
-              <img
-                className="aspect-[2/3] w-full object-cover"
-                alt={image.alt}
-                src={image.src}
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-          ))}
-        </div>
-      </section>
+          {/* ---- Column 1: Full Photography Narrative Hero (Index 0) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[86vh] w-[88vw] max-w-[1300px] shrink-0 items-center justify-between gap-16 pr-12"
+          >
+            {/* Left Narrative Text */}
+            <div className="max-w-[700px]">
+              <h2
+                id="photography-narrative-title"
+                className="[font-family:'WisnuMan-Regular',Helvetica] text-[48px] font-normal leading-[1.03] tracking-[-0.025em] text-[#ffe9d9] md:text-[64px] desk:text-[84px]"
+              >
+                {t("photo.heading.before")}
+                <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+                  {t("photo.heading.accent")}
+                </span>
+                {t("global.period")}
+              </h2>
 
-      <section
-        ref={sectionRef}
-        aria-labelledby="photography-reflection-title"
-        className="photography-story relative hidden h-[300svh] w-full desk:block"
-      >
-      <div className="photography-story-sticky sticky top-0 h-[100svh] w-full overflow-hidden">
-        <div
-          ref={narrativeRef}
-          className="photography-story-narrative absolute inset-0 flex items-center px-5 py-20 will-change-[opacity,transform] sm:px-10 desk:px-[110px]"
-        >
-          <div className="mx-auto w-full max-w-[1220px]">
-            <p className="eyebrow">{t("photo.label")}</p>
+              <div className="mt-8 flex items-stretch gap-5 desk:mt-12">
+                <span
+                  aria-hidden="true"
+                  className="w-0.5 shrink-0 bg-gradient-to-b from-[#fe7f2d] to-[#fe7f2d]/10"
+                />
+                <div>
+                  <p className="max-w-[580px] [font-family:'WisnuMan-Regular',Helvetica] text-[30px] font-normal leading-[1.12] tracking-[-0.015em] text-[#ffe9d9] md:text-[38px] desk:text-[46px]">
+                    {t("photo.reflection.before")}
+                    <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+                      {t("photo.reflection.accent")}
+                    </span>
+                    {t("global.period")}
+                  </p>
+                  <p className="mt-5 max-w-[520px] [font-family:'WisnuMan-Regular',Helvetica] text-[17px] font-normal leading-[1.6] text-[#ffe9d9]/65 desk:text-[21px]">
+                    {t("photo.note")}
+                  </p>
+                </div>
+              </div>
+            </div>
 
-            <div className="mt-7 grid items-center gap-7 md:mt-8 md:grid-cols-[minmax(0,0.9fr)_minmax(300px,0.75fr)] md:gap-12 desk:mt-10 desk:grid-cols-[minmax(0,1fr)_500px] desk:gap-[108px]">
-              <div>
-                <h2
-                  id="photography-reflection-title"
-                  className="max-w-[690px] [font-family:'WisnuMan-Regular',Helvetica] text-[42px] font-normal leading-[1.04] tracking-[-0.025em] text-[#ffe9d9] sm:text-[56px] md:text-[58px] desk:text-[82px]"
-                >
-                  {t("photo.heading.before")}
-                  <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
-                    {t("photo.heading.accent")}
-                  </span>
-                  {t("global.period")}
-                </h2>
-
-                <div className="mt-6 flex items-stretch gap-4 sm:mt-8 sm:gap-6 desk:mt-12">
-                  <span
-                    aria-hidden="true"
-                    className="w-px shrink-0 bg-gradient-to-b from-[#fe7f2d] to-[#fe7f2d]/10"
+            {/* Right Card: Sour holding camera */}
+            <figure className="group m-0 w-fit shrink-0 opacity-100">
+              <div className="relative w-fit">
+                <div
+                  aria-hidden="true"
+                  className="absolute -bottom-4 -right-4 h-full w-full border border-[#fe7f2d]/60"
+                />
+                <div className="relative w-fit overflow-hidden rounded-sm bg-[#fe7f2d]/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)]">
+                  <img
+                    className="aspect-[8/9] h-[50vh] w-auto object-cover transition duration-700 group-hover:scale-[1.025]"
+                    alt="Sour holding a camera and composing a photograph"
+                    src="/img/untitled-67-1.webp"
+                    loading="eager"
+                    decoding="async"
                   />
-                  <div>
-                    <p className="max-w-[570px] [font-family:'WisnuMan-Regular',Helvetica] text-[27px] font-normal leading-[1.13] tracking-[-0.015em] text-[#ffe9d9] sm:text-[34px] md:text-[34px] desk:text-[46px]">
-                      {t("photo.reflection.before")}
-                      <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
-                        {t("photo.reflection.accent")}
-                      </span>
-                      {t("global.period")}
-                    </p>
-                    <p className="mt-4 hidden max-w-[500px] [font-family:'WisnuMan-Regular',Helvetica] text-[18px] font-normal leading-[1.55] text-[#ffe9d9]/65 sm:block desk:mt-5 desk:text-[21px]">
-                      {t("photo.note")}
-                    </p>
-                  </div>
                 </div>
               </div>
 
-              <figure className="group m-0 w-full max-w-[270px] justify-self-center sm:max-w-[320px] md:max-w-none md:justify-self-end">
-                <div className="relative">
-                  <div
-                    aria-hidden="true"
-                    className="absolute -bottom-3 -right-3 h-full w-full border border-[#fe7f2d]/55 sm:-bottom-4 sm:-right-4"
-                  />
-                  <div className="relative overflow-hidden bg-[#fe7f2d]/10">
-                    <img
-                      className="aspect-[8/9] w-full object-cover transition duration-700 group-hover:scale-[1.025] group-hover:brightness-105"
-                      alt="Sour holding a camera and composing a photograph"
-                      src="/img/untitled-67-1.webp"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
+              <figcaption className="mt-5 flex items-center justify-between gap-3 [font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[3px] text-[#ffe9d9]/60">
+                <span>{t("photo.lens")}</span>
+                <span className="h-px flex-1 bg-[#ffe9d9]/20" aria-hidden="true" />
+                <span>{t("photo.location")}</span>
+              </figcaption>
+            </figure>
+          </div>
 
-                <figcaption className="mt-5 flex items-center justify-between gap-3 [font-family:'OTTERO-Regular',Helvetica] text-[9px] tracking-[2px] text-[#ffe9d9]/55 sm:text-[10px] desk:mt-6 desk:text-xs desk:tracking-[3px]">
-                  <span>{t("photo.lens")}</span>
-                  <span
-                    className="h-px flex-1 bg-[#ffe9d9]/15"
-                    aria-hidden="true"
-                  />
-                  <span>{t("photo.location")}</span>
-                </figcaption>
-              </figure>
+          {/* ---- Column 2: Studio Beauty Pair (Staggered Dynamic Spacing) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-between py-2 opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            {/* Studio Beauty - Top Left */}
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow">STUDIO BEAUTY · 2025</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/img-1244-1.webp"
+                  alt="Beauty campaign portrait"
+                  className="aspect-[2/3] h-[36vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            {/* Beauty Editorial - Bottom Right Offset */}
+            <div className="group relative w-fit pl-20">
+              <span className="portfolio-eyebrow">BEAUTY EDITORIAL · 2025</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/img-1245-1.webp"
+                  alt="Beauty product portrait"
+                  className="aspect-[2/3] h-[34vh] w-auto object-cover grayscale-[15%] contrast-105 transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Column 3: Automotive Centerpiece (Hero Showcase) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-between py-2 opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            {/* Serif Callout Quote */}
+            <div className="w-[500px] pt-1 desk:w-[560px]">
+              <p className="portfolio-serif-quote text-[34px] sm:text-[38px] desk:text-[42px]">
+                {t("photo.reflection.before")}
+                <span className="highlight text-[#fe7f2d]"> {t("photo.reflection.accent")}</span>
+                {t("global.period")} {t("photo.note")}
+              </p>
+              <div className="mt-5 flex items-center gap-3">
+                <span className="h-0.5 w-16 bg-gradient-to-r from-[#fe7f2d] to-transparent" />
+                <span className="font-mona text-xs tracking-[3px] text-[#fe7f2d] desk:text-sm">
+                  CHHUNSOUR · VISUAL ARCHIVE
+                </span>
+              </div>
+            </div>
+
+            {/* Night Automotive Hero Image */}
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow">NIGHT AUTOMOTIVE · 2026</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-lg border border-[#fe7f2d]/50 shadow-[0_25px_60px_rgba(0,0,0,0.7)]">
+                <img
+                  src="/img/dsc00374-1.webp"
+                  alt="Night automotive portrait with orange sports car"
+                  className="aspect-[2/3] h-[50vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Column 4: Sunscreen & Beauty Campaign Pair (Staggered Spacing) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-between py-2 opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            {/* Sunscreen Campaign - Top Left */}
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow">SUNSCREEN CAMPAIGN · 2025</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/img-7660-1.webp"
+                  alt="Sunscreen campaign portrait"
+                  className="aspect-[2/3] h-[35vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            {/* Beauty Campaign - Bottom Right Offset */}
+            <div className="group relative w-fit pl-20">
+              <span className="portfolio-eyebrow">BEAUTY CAMPAIGN · 2025</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/img-8941-1.webp"
+                  alt="Beauty campaign photograph"
+                  className="aspect-[2/3] h-[35vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Column 5: Standout Studio Product (Dramatic Tall Centerpiece) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-center opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow flex items-center gap-2">
+                <span>STUDIO PRODUCT · 2025</span>
+                <span className="text-[#ffe9d9]/40">·</span>
+                <span className="text-[#ffe9d9]/60">EDITORIAL FEATURE</span>
+              </span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/25 shadow-2xl">
+                <img
+                  src="/img/img-8401-1.webp"
+                  alt="Studio product portrait"
+                  className="aspect-[2/3] h-[76vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Column 6: Celebration & Campaign Detail (Staggered Spacing) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-between py-2 opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            {/* Birthday Celebration - Top Left */}
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow">CELEBRATION · 2026</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/dsc09921-1.webp"
+                  alt="Birthday celebration portrait"
+                  className="aspect-[2/3] h-[36vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            {/* Campaign Detail - Bottom Right Offset */}
+            <div className="group relative w-fit pl-20">
+              <span className="portfolio-eyebrow">CAMPAIGN DETAIL · 2026</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/dsc09871-1.webp"
+                  alt="Campaign detail portrait"
+                  className="aspect-[2/3] h-[34vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Column 7: Event Photography & Closing Quote ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-between py-2 opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            {/* Event Atmosphere */}
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow">EVENT ATMOSPHERE · 2026</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-lg border border-[#ffe9d9]/25 shadow-2xl">
+                <img
+                  src="/img/dsc09995-2-1.webp"
+                  alt="Event photography"
+                  className="aspect-[2/3] h-[48vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            {/* Second Quote Callout */}
+            <div className="w-[460px] border-l-2 border-[#fe7f2d]/80 pb-4 pl-6 desk:w-[500px]">
+              <p className="font-brier text-[23px] leading-snug text-[#ffe9d9] desk:text-[27px]">
+                Every shot is a balance of light, composition, and authentic human emotion—captured
+                in the right fraction of a second.
+              </p>
+              <div className="mt-4 flex items-center gap-2 font-mona text-xs tracking-[2.5px] text-[#fe7f2d]">
+                <span>SELECTED WORKS</span>
+                <span className="text-[#ffe9d9]/40">·</span>
+                <span className="text-[#ffe9d9]/60">2024 — 2026</span>
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Column 8: Family Portrait & Studio Elegance (Staggered Spacing) ---- */}
+          <div
+            data-gallery-col
+            className="flex h-[88vh] shrink-0 flex-col justify-between py-2 opacity-0 transition-all duration-700 ease-out"
+            style={{ transform: "translate3d(0, 36px, 0) scale(0.95)" }}
+          >
+            {/* Family Celebration - Top Left */}
+            <div className="group relative w-fit">
+              <span className="portfolio-eyebrow">FAMILY CELEBRATION · 2026</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/dsc00023-1.webp"
+                  alt="Family celebration photograph"
+                  className="aspect-[2/3] h-[36vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            {/* Studio Elegance - Bottom Right Offset */}
+            <div className="group relative w-fit pl-20">
+              <span className="portfolio-eyebrow">STUDIO ELEGANCE · 2025</span>
+              <div className="portfolio-img-card w-fit overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-xl">
+                <img
+                  src="/img/img-1247-1.webp"
+                  alt="Studio beauty portrait"
+                  className="aspect-[2/3] h-[34vh] w-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        <div
-          ref={galleryRef}
-          className="photography-story-gallery pointer-events-none absolute inset-0 flex flex-col justify-center gap-3 overflow-hidden opacity-0 will-change-[opacity,transform] sm:gap-5 desk:gap-[41px]"
-          aria-label="Selected photography gallery"
-        >
-          <div className="w-full px-3 sm:px-5 desk:px-8">
-            <GalleryRow
-              images={topImages}
-              label="Beauty campaign photography"
-              sequenceOffset={0}
-            />
+        {/* ========================================================
+            MOBILE / TABLET TOUCH RAIL (below 1024px)
+            ======================================================== */}
+        <div className="flex h-full w-full flex-col justify-center px-5 pt-16 pb-8 desk:hidden">
+          {/* Mobile Heading */}
+          <div className="mb-4">
+            <p className="eyebrow mb-1.5">{t("photo.label")}</p>
+            <p className="font-brier text-xl sm:text-2xl font-normal leading-tight text-[#ffe9d9]">
+              {t("photo.heading.before")}
+              <span className="text-[#fe7f2d]"> {t("photo.heading.accent")}</span>
+              {t("global.period")}
+            </p>
           </div>
-          <div className="w-full px-3 sm:px-5 desk:px-8">
-            <GalleryRow
-              images={bottomImages}
-              label="Event photography"
-              sequenceOffset={1}
-            />
+
+          <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 scrollbar-none">
+            {/* Slide 1: Studio Beauty */}
+            <div className="min-w-[70vw] shrink-0 snap-center sm:min-w-[42vw]">
+              <span className="portfolio-eyebrow">STUDIO BEAUTY · 2025</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/img-1244-1.webp"
+                  alt="Studio beauty"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 2: Night Automotive (Hero) */}
+            <div className="min-w-[70vw] shrink-0 snap-center sm:min-w-[42vw]">
+              <span className="portfolio-eyebrow">NIGHT AUTOMOTIVE · 2026</span>
+              <div className="overflow-hidden rounded-lg border border-[#fe7f2d]/40 shadow-xl">
+                <img
+                  src="/img/dsc00374-1.webp"
+                  alt="Night automotive"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 3: Sunscreen Campaign */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">SUNSCREEN CAMPAIGN · 2025</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/img-7660-1.webp"
+                  alt="Sunscreen campaign"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 4: Beauty Campaign */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">BEAUTY CAMPAIGN · 2025</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/img-8941-1.webp"
+                  alt="Beauty campaign"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 5: Beauty Editorial */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">BEAUTY EDITORIAL · 2025</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/img-1245-1.webp"
+                  alt="Beauty editorial"
+                  className="aspect-[2/3] w-full object-cover grayscale-[15%]"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 6: Studio Product */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">STUDIO PRODUCT · 2025</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/img-8401-1.webp"
+                  alt="Studio product"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 7: Birthday Celebration */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">CELEBRATION · 2026</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/dsc09921-1.webp"
+                  alt="Celebration"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 8: Event Atmosphere */}
+            <div className="min-w-[70vw] shrink-0 snap-center sm:min-w-[42vw]">
+              <span className="portfolio-eyebrow">EVENT ATMOSPHERE · 2026</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/dsc09995-2-1.webp"
+                  alt="Event atmosphere"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 9: Family Celebration */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">FAMILY CELEBRATION · 2026</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/dsc00023-1.webp"
+                  alt="Family celebration"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            {/* Slide 10: Studio Elegance */}
+            <div className="min-w-[65vw] shrink-0 snap-center sm:min-w-[38vw]">
+              <span className="portfolio-eyebrow">STUDIO ELEGANCE · 2025</span>
+              <div className="overflow-hidden rounded-md border border-[#ffe9d9]/20 shadow-lg">
+                <img
+                  src="/img/img-1247-1.webp"
+                  alt="Studio beauty"
+                  className="aspect-[2/3] w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 [font-family:'OTTERO-Regular',Helvetica] text-[9px] tracking-[3px] text-[#ffe9d9]/35 sm:bottom-8 sm:text-[10px]"
-        >
-          <span>{t("global.keepScrolling")}</span>
-          <span className="h-7 w-px bg-gradient-to-b from-[#fe7f2d] to-transparent" />
+        {/* Bottom Progress Bar & Indicator */}
+        <div className="pointer-events-none absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between text-[10px] [font-family:'OTTERO-Regular',Helvetica] tracking-[2.5px] text-[#ffe9d9]/60 desk:bottom-6 desk:left-14 desk:right-14">
+          <div className="flex items-center gap-2 uppercase">
+            <span className="inline-block h-2 w-2 rounded-full bg-[#fe7f2d] shadow-[0_0_10px_#fe7f2d] animate-pulse" />
+            <span>{t("global.keepScrolling")} — {t("photo.selected")}</span>
+          </div>
+          <div className="hidden h-1 w-36 overflow-hidden rounded-full bg-[#ffe9d9]/15 sm:block">
+            <div
+              ref={progressBarRef}
+              className="h-full w-full origin-left scale-x-0 bg-gradient-to-r from-[#fe7f2d] to-[#ffe9d9] will-change-transform"
+              style={{ transform: "scaleX(0)" }}
+            />
+          </div>
         </div>
       </div>
-      </section>
-    </>
+    </div>
   );
 };
