@@ -1,22 +1,22 @@
 import { useEffect, useRef } from "react";
 import { useI18n } from "../../../../i18n";
 
-interface PhotoCardData {
+interface PhotoItem {
   src: string;
   alt: string;
   category: string;
   year: string;
-  tag?: string;
+  series: string;
   featured?: boolean;
 }
 
-const mobilePhotos: PhotoCardData[] = [
+const galleryPhotos: PhotoItem[] = [
   {
     src: "/img/dsc00374-1.webp",
     alt: "Night automotive portrait with orange sports car",
     category: "NIGHT AUTOMOTIVE",
     year: "2026",
-    tag: "HERO",
+    series: "01",
     featured: true,
   },
   {
@@ -24,61 +24,70 @@ const mobilePhotos: PhotoCardData[] = [
     alt: "Studio product portrait",
     category: "STUDIO PRODUCT",
     year: "2025",
-    tag: "EDITORIAL",
+    series: "02",
   },
   {
     src: "/img/img-1244-1.webp",
     alt: "Beauty campaign portrait",
     category: "STUDIO BEAUTY",
     year: "2025",
+    series: "03",
   },
   {
     src: "/img/img-7660-1.webp",
     alt: "Sunscreen campaign portrait",
     category: "SUNSCREEN CAMPAIGN",
     year: "2025",
+    series: "04",
   },
   {
     src: "/img/dsc09995-2-1.webp",
     alt: "Event atmosphere photography",
     category: "EVENT ATMOSPHERE",
     year: "2026",
+    series: "05",
   },
   {
     src: "/img/img-1245-1.webp",
     alt: "Beauty product portrait",
     category: "BEAUTY EDITORIAL",
     year: "2025",
+    series: "06",
   },
   {
     src: "/img/dsc09921-1.webp",
     alt: "Birthday celebration portrait",
     category: "CELEBRATION",
     year: "2026",
+    series: "07",
   },
   {
     src: "/img/img-8941-1.webp",
     alt: "Beauty campaign photograph",
     category: "BEAUTY CAMPAIGN",
     year: "2025",
+    series: "08",
   },
   {
     src: "/img/dsc00023-1.webp",
     alt: "Family celebration photograph",
     category: "FAMILY CELEBRATION",
     year: "2026",
+    series: "09",
   },
   {
     src: "/img/img-1247-1.webp",
     alt: "Studio beauty portrait",
     category: "STUDIO ELEGANCE",
     year: "2025",
+    series: "10",
   },
   {
     src: "/img/dsc09871-1.webp",
     alt: "Campaign detail portrait",
     category: "CAMPAIGN DETAIL",
     year: "2026",
+    series: "11",
   },
 ];
 
@@ -526,178 +535,123 @@ export const PhotographyReflectionSection = (): JSX.Element => {
       </div>
 
       {/* ========================================================
-          MOBILE / TABLET REDESIGNED PHOTOGRAPHY SECTION (<1440px)
+          MOBILE / TABLET EDITORIAL PHOTOGRAPHY EXPERIENCE (<1440px)
           ======================================================== */}
-      <div
+      <section
         aria-labelledby="mobile-photography-title"
-        className="relative w-full overflow-hidden bg-[#272727] py-14 px-5 text-[#ffe9d9] sm:px-8 sm:py-20 md:px-12 desk:hidden"
+        className="relative w-full overflow-hidden px-5 py-16 text-[#ffe9d9] sm:px-10 sm:py-24 md:mx-auto md:max-w-[820px] desk:hidden"
       >
-        {/* Subtle Ambient Glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 left-1/2 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-[#fe7f2d]/10 blur-[90px]"
-        />
-
-        {/* 1. Header & Primary Narrative */}
-        <div className="relative mx-auto max-w-[640px]">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#fe7f2d]/30 bg-[#fe7f2d]/10 px-3.5 py-1.5 backdrop-blur-md">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#fe7f2d] animate-pulse" />
-            <span className="[font-family:'OTTERO-Regular',Helvetica] text-[11px] uppercase tracking-[2.5px] text-[#fe7f2d]">
-              {t("photo.label")}
-            </span>
-          </div>
+        {/* 1. Header & Narrative */}
+        <div className="flex flex-col gap-6">
+          <p className="eyebrow">{t("photo.label")}</p>
 
           <h2
             id="mobile-photography-title"
-            className="mt-4 [font-family:'WisnuMan-Regular',Helvetica] text-[34px] font-normal leading-[1.1] tracking-[-0.02em] text-[#ffe9d9] xs:text-[38px] sm:text-[46px]"
+            className="[font-family:'WisnuMan-Regular',Helvetica] text-[40px] font-normal leading-[1.12] tracking-[-0.02em] text-[#ffe9d9] sm:text-[54px]"
           >
             {t("photo.heading.before")}
-            <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
+            <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
               {t("photo.heading.accent")}
             </span>
             {t("global.period")}
           </h2>
 
-          {/* Featured Behind The Lens Portrait */}
-          <figure className="relative mt-7 overflow-hidden rounded-xl border border-[#fe7f2d]/40 bg-[#1e1e1e] shadow-[0_16px_36px_rgba(0,0,0,0.6)]">
-            <div className="relative w-full overflow-hidden">
+          {/* Authentic Offset Frame: Sour holding camera */}
+          <figure className="relative mt-2 w-full max-w-[340px] sm:max-w-[400px]">
+            <div
+              aria-hidden="true"
+              className="absolute left-3 top-3 h-full w-full border-2 border-[#fe7f2d]/60"
+            />
+            <div className="relative overflow-hidden bg-[#1e1e1e]">
               <img
                 src="/img/untitled-67-1.webp"
                 alt="Sour holding a camera and composing a photograph"
-                className="w-full max-h-[380px] object-cover object-center"
+                className="aspect-[4/5] w-full object-cover"
                 loading="eager"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] via-[#1e1e1e]/20 to-transparent" />
             </div>
-
-            <figcaption className="flex items-center justify-between border-t border-[#ffe9d9]/10 bg-[#1e1e1e]/95 px-4 py-3 [font-family:'OTTERO-Regular',Helvetica] text-[11px] tracking-[2.5px] text-[#ffe9d9]/70 sm:text-xs">
-              <span className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#fe7f2d]" />
-                {t("photo.lens")}
-              </span>
-              <span className="h-px flex-1 mx-3 bg-[#ffe9d9]/15" aria-hidden="true" />
-              <span className="text-[#fe7f2d]">{t("photo.location")}</span>
+            <figcaption className="mt-4 flex items-center justify-between [font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[3px] text-[#ffe9d9]/60">
+              <span>{t("photo.lens")}</span>
+              <span className="h-px flex-1 mx-4 bg-[#ffe9d9]/20" aria-hidden="true" />
+              <span>{t("photo.location")}</span>
             </figcaption>
           </figure>
 
-          {/* 2. Reflection & Philosophy Callout Box */}
-          <div className="relative mt-6 overflow-hidden rounded-xl border border-[#ffe9d9]/15 bg-gradient-to-br from-[#ffe9d9]/[0.08] to-[#1e1e1e]/60 p-5 backdrop-blur-md sm:p-6">
-            <div className="flex items-stretch gap-4">
-              <span
-                aria-hidden="true"
-                className="w-1 shrink-0 rounded-full bg-gradient-to-b from-[#fe7f2d] via-[#fe7f2d]/50 to-transparent"
-              />
-              <div>
-                <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[22px] font-normal leading-[1.2] tracking-[-0.01em] text-[#ffe9d9] sm:text-[26px]">
-                  {t("photo.reflection.before")}
-                  <span className="[font-family:'Rafles-Regular',Helvetica] tracking-[0] text-[#fe7f2d]">
-                    {t("photo.reflection.accent")}
-                  </span>
-                  {t("global.period")}
-                </p>
-                <p className="mt-3 [font-family:'WisnuMan-Regular',Helvetica] text-[15px] font-normal leading-[1.6] text-[#ffe9d9]/75 sm:text-[16px]">
-                  {t("photo.note")}
-                </p>
-              </div>
+          {/* 2. The Core Philosophy & Reflection */}
+          <div className="mt-6 flex items-stretch gap-4 sm:gap-6">
+            <span
+              aria-hidden="true"
+              className="w-0.5 shrink-0 bg-gradient-to-b from-[#fe7f2d] to-[#fe7f2d]/10"
+            />
+            <div>
+              <p className="[font-family:'WisnuMan-Regular',Helvetica] text-[24px] font-normal leading-[1.25] tracking-[-0.015em] text-[#ffe9d9] sm:text-[32px]">
+                {t("photo.reflection.before")}
+                <span className="[font-family:'Rafles-Regular',Helvetica] text-[#fe7f2d]">
+                  {t("photo.reflection.accent")}
+                </span>
+                {t("global.period")}
+              </p>
+              <p className="mt-4 [font-family:'WisnuMan-Regular',Helvetica] text-[17px] font-normal leading-[1.65] text-[#ffe9d9]/70 sm:text-[20px]">
+                {t("photo.note")}
+              </p>
             </div>
           </div>
         </div>
 
-        {/* 3. Horizontal Touch Gallery Header */}
-        <div className="mx-auto mt-12 max-w-[640px]">
-          <div className="flex items-center justify-between border-b border-[#ffe9d9]/15 pb-2.5">
-            <div className="flex items-center gap-2 [font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[2.5px] text-[#ffe9d9]/70">
-              <span className="text-[#fe7f2d]">✦</span>
-              <span>{t("photo.selected")}</span>
-            </div>
-            <span className="flex items-center gap-1.5 [font-family:'OTTERO-Regular',Helvetica] text-[10px] tracking-[2px] text-[#fe7f2d]">
-              <span>{t("photo.swipe")}</span>
-            </span>
-          </div>
+        {/* 3. Exhibition Gallery Header */}
+        <div className="mt-16 flex items-center justify-between border-b border-[#ffe9d9]/15 pb-3">
+          <p className="[font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[3px] text-[#fe7f2d]">
+            {t("photo.selected")}
+          </p>
+          <span className="[font-family:'OTTERO-Regular',Helvetica] text-[11px] tracking-[2px] text-[#ffe9d9]/50">
+            {t("photo.swipe")}
+          </span>
         </div>
 
-        {/* 4. Smooth Horizontal Snap Touch Rail */}
-        <div className="relative mt-5 -mx-5 px-5 sm:-mx-8 sm:px-8 md:-mx-12 md:px-12">
-          <div className="flex snap-x snap-mandatory gap-3.5 overflow-x-auto pb-4 pt-1 scrollbar-none [touch-action:pan-x]">
-            {mobilePhotos.map((photo, idx) => (
+        {/* 4. Tactile Horizontal Gallery Showcase */}
+        <div className="relative mt-6 -mx-5 px-5 sm:-mx-10 sm:px-10">
+          <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-6 scrollbar-none [touch-action:pan-x]">
+            {galleryPhotos.map((photo, idx) => (
               <div
-                key={`mobile-rail-${idx}`}
-                className="group relative w-[240px] xs:w-[260px] shrink-0 snap-start"
+                key={`photo-card-${idx}`}
+                className="group relative w-[270px] xs:w-[290px] sm:w-[320px] shrink-0 snap-start"
               >
-                <div className="mb-2 flex items-center justify-between text-[10px] [font-family:'OTTERO-Regular',Helvetica] tracking-[2px]">
-                  <span className="text-[#fe7f2d] truncate max-w-[170px]">{photo.category}</span>
-                  <span className="text-[#ffe9d9]/50">{photo.year}</span>
+                {/* Meta Header */}
+                <div className="mb-2.5 flex items-center justify-between [font-family:'OTTERO-Regular',Helvetica] text-[10px] tracking-[2px]">
+                  <span className="text-[#fe7f2d] truncate max-w-[190px]">
+                    {photo.series} // {photo.category}
+                  </span>
+                  <span className="text-[#ffe9d9]/40">{photo.year}</span>
                 </div>
 
-                <div
-                  className={`relative aspect-[3/4] w-full overflow-hidden rounded-lg border bg-[#1e1e1e] transition-all duration-300 ${
-                    photo.featured
-                      ? "border-[#fe7f2d]/60 shadow-[0_12px_28px_rgba(254,127,45,0.2)]"
-                      : "border-[#ffe9d9]/20 shadow-lg"
-                  }`}
-                >
+                {/* Image Surface */}
+                <div className="relative aspect-[2/3] w-full overflow-hidden bg-[#1a1a1a] shadow-lg border border-[#ffe9d9]/15 transition-transform duration-500 group-hover:border-[#fe7f2d]/50">
                   <img
                     src={photo.src}
                     alt={photo.alt}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
                   />
-                  {photo.tag && (
-                    <div className="absolute right-2.5 top-2.5 rounded bg-[#fe7f2d]/90 px-2 py-0.5 [font-family:'OTTERO-Regular',Helvetica] text-[9px] font-bold tracking-[1.5px] text-[#272727] shadow">
-                      {photo.tag}
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* 5. Editorial Atmosphere Statement */}
-        <div className="mx-auto mt-10 max-w-[640px] rounded-xl border-l-2 border-[#fe7f2d] bg-[#1a1a1a]/70 p-5 sm:p-6">
-          <p className="font-brier text-[18px] leading-snug text-[#ffe9d9] sm:text-[22px]">
-            Every shot is a balance of light, composition, and authentic human emotion—captured
-            in the right fraction of a second.
+        {/* 5. Editorial Statement Callout */}
+        <div className="mt-14 max-w-[620px] border-l-2 border-[#fe7f2d]/70 pl-5 sm:pl-7">
+          <p className="font-brier text-[20px] font-normal leading-snug text-[#ffe9d9] sm:text-[24px]">
+            "Every shot is a balance of light, composition, and authentic human emotion—captured
+            in the right fraction of a second."
           </p>
-          <div className="mt-3.5 flex items-center gap-2 font-mona text-[11px] tracking-[2.5px] text-[#fe7f2d]">
-            <span>SELECTED ARCHIVE</span>
-            <span className="text-[#ffe9d9]/40">·</span>
-            <span className="text-[#ffe9d9]/60">2024 — 2026</span>
+          <div className="mt-4 flex items-center gap-3 [font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[3px] text-[#fe7f2d]">
+            <span className="h-0.5 w-8 bg-gradient-to-r from-[#fe7f2d] to-transparent" />
+            <span>CHHUNSOUR · VISUAL ARCHIVE</span>
           </div>
         </div>
-
-        {/* 6. Curated 2-Column Responsive Masonry Grid */}
-        <div className="mx-auto mt-10 max-w-[640px]">
-          <div className="mb-4 flex items-center gap-2 [font-family:'OTTERO-Regular',Helvetica] text-xs tracking-[2.5px] text-[#ffe9d9]/60">
-            <span className="text-[#fe7f2d]">✦</span>
-            <span>FEATURED HIGHLIGHTS</span>
-          </div>
-
-          <div className="columns-2 gap-3 space-y-3 sm:gap-4 sm:space-y-4">
-            {mobilePhotos.slice(0, 6).map((photo, i) => (
-              <div
-                key={`grid-photo-${i}`}
-                className="group relative break-inside-avoid overflow-hidden rounded-lg border border-[#ffe9d9]/15 bg-[#1e1e1e] shadow-md transition-all duration-300 hover:border-[#fe7f2d]/50"
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-transparent to-transparent p-2.5 opacity-90 transition-opacity duration-300">
-                  <span className="[font-family:'OTTERO-Regular',Helvetica] text-[9px] tracking-[1.5px] text-[#ffe9d9]">
-                    {photo.category}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </section>
     </>
   );
 };
