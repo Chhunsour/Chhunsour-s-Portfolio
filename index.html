@@ -1,69 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>Chhunsour Seng — Designer & Developer Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Portfolio of Chhunsour Seng — UX/UI designer, graphic designer, software developer, and photographer based in Cambodia."/>
-<meta name="theme-color" content="#272727"/>
-<meta name="color-scheme" content="dark"/>
-<meta property="og:title" content="Chhunsour Seng — Designer & Developer Portfolio"/>
-<meta property="og:description" content="UX/UI design, graphic design, full-stack development, and photography — from first sketch to shipped product."/>
-<meta property="og:type" content="website"/>
-<meta property="og:image" content="/og-image.jpg"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="/og-image.jpg"/>
-<link rel="preload" as="image" href="/img/untitled-6-1.webp"/>
-<link rel="preload" as="font" type="font/woff2" href="/fonts/Mogin.woff2" crossorigin/>
-<link rel="preload" as="font" type="font/woff2" href="/fonts/OTTERO-Regular.woff2" crossorigin/>
-<link rel="preload" as="font" type="font/woff" href="/fonts/WisnuMan.woff" crossorigin/>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-<style>
-    @font-face {
-        font-family: "Mogin-Regular";
-        src: url("/fonts/Mogin.woff2") format("woff2");
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: "OTTERO-Regular";
-        src: url("/fonts/OTTERO-Regular.woff2") format("woff2");
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: "WisnuMan-Regular";
-        src: url("/fonts/WisnuMan.woff") format("woff");
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: "Rafles-Regular";
-        src: url("/fonts/Rafles.woff2") format("woff2");
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: "Brier";
-        src: url("/fonts/Brier-Bold.woff2") format("woff2");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: "Mona Sans Variable";
-        src: url("/fonts/MonaSans-Variable.woff2") format("woff2");
-        font-weight: 200 900;
-        font-style: normal;
-        font-display: swap;
-    }
-    
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="Chhunsour Seng's portfolio is being updated. Please check back soon." />
+    <meta property="og:title" content="Chhunsour Seng — Portfolio in Progress" />
+    <meta property="og:description" content="A new version of this portfolio is on its way." />
+    <meta property="og:type" content="website" />
+    <title>Chhunsour Seng — Portfolio in Progress</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; margin: 0; }
+      body {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(24px, 4vw, 56px);
+        background: #080808;
+        color: #f5f3ef;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      header, footer { display: flex; align-items: center; justify-content: space-between; }
+      header { font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+      .mark { width: 7px; height: 7px; border-radius: 50%; background: #f5f3ef; }
+      main { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 720px; }
+      .eyebrow, footer { color: #8f8f8f; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; }
+      .eyebrow { margin: 0 0 28px; }
+      h1 { max-width: 700px; margin: 0; font-size: clamp(48px, 9vw, 112px); font-weight: 500; letter-spacing: -.075em; line-height: .96; }
+      .detail { max-width: 390px; margin: 30px 0 0; color: #aaa; font-size: clamp(14px, 1.5vw, 16px); line-height: 1.6; }
+      footer { border-top: 1px solid #282828; padding-top: 20px; }
     </style>
-<link href="tailwind.css" rel="stylesheet">
-</head>
-<body>
-<div id="app"></div>
-<script type="module" src="./src/index.tsx"></script>
-</body>
+  </head>
+  <body>
+    <header><span>Chhunsour Seng</span><span class="mark" aria-hidden="true"></span></header>
+    <main>
+      <p class="eyebrow">Portfolio update in progress</p>
+      <h1>In the works.</h1>
+      <p class="detail">I'm making a few changes to this space. Please check back soon.</p>
+    </main>
+    <footer><span>Designer &amp; Developer</span><span>Coming soon</span></footer>
+  </body>
 </html>
